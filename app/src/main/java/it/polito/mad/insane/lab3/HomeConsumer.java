@@ -48,9 +48,10 @@ public class HomeConsumer extends AppCompatActivity {
 //            return true;
 //        }
 
-        if(id == R.id.activity_renato_michele){
-//            Intent intent = new Intent(HomeConsumer.this, Prova.class);
-//            startActivity(intent);
+        if(id == R.id.activity_renato_michele)
+        {
+            Intent intent = new Intent(HomeConsumer.this, RestaurantProfile.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
