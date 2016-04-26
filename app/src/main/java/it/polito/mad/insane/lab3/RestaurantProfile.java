@@ -175,7 +175,7 @@ public class RestaurantProfile extends AppCompatActivity {
 //                case x:
 //                    break;
 //            }
-            View rootView = inflater.inflate(R.layout.fragment_restaurant_profile, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_tab1, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
