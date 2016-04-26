@@ -1,5 +1,6 @@
 package it.polito.mad.insane.lab3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -46,6 +47,11 @@ public class HomeConsumer extends AppCompatActivity {
 //        if (id == R.id.action_settings) {
 //            return true;
 //        }
+
+        if(id == R.id.activity_renato_michele){
+//            Intent intent = new Intent(HomeConsumer.this, Prova.class);
+//            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }
