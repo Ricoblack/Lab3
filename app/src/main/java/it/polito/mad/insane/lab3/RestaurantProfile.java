@@ -1,5 +1,6 @@
 package it.polito.mad.insane.lab3;
 
+import android.animation.ObjectAnimator;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,6 +19,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -38,6 +41,8 @@ public class RestaurantProfile extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
+    private static boolean expandable = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -174,13 +179,50 @@ public class RestaurantProfile extends AppCompatActivity {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//            switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
-//                case x:
-//                    break;
-//            }
-            View rootView = inflater.inflate(R.layout.fragment_tab1, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
+                case 1:
+                    View rootView = inflater.inflate(R.layout.fragment_tab1, container, false);
+                    TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+                    textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+                    return rootView;
+                case 2:
+                    rootView = inflater.inflate(R.layout.fragment_tab2, container, false);
+                    textView = (TextView) rootView.findViewById(R.id.tab2_section_label);
+                    textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+                    return rootView;
+                case 3:
+//                    rootView = reviewLayout(inflater, container);
+                    rootView = inflater.inflate(R.layout.fragment_tab3, container, false);
+                    textView = (TextView) rootView.findViewById(R.id.extendable_text);
+                    textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+                    return rootView;
+                default:
+                    return null;
+            }
+        }
+
+        private View reviewLayout(LayoutInflater inflater, ViewGroup container) {
+            View rootView = inflater.inflate(R.layout.fragment_tab3, container, false);
+            final TextView textView = (TextView) rootView.findViewById(R.id.extendable_text);
+            textView.setText(getString(R.string.lorem_ipsum));
+            final Button btnSeeMore = (Button) rootView.findViewById(R.id.btn_see_more);
+
+            textView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    if(expandable) {
+                        expandable = false;
+                        if (textView.getLineCount() > 4) {
+                            btnSeeMore.setVisibility(View.VISIBLE);
+                            ObjectAnimator animation = ObjectAnimator.ofInt(textView, "maxLines", 4);
+                            animation.setDuration(0).start();
+                        }
+                    }
+                }
+            });
+
+
+
             return rootView;
         }
     }
