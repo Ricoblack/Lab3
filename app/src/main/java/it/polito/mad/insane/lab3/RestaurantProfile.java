@@ -68,15 +68,6 @@ public class RestaurantProfile extends AppCompatActivity {
         // Attach the view pager to the tab strip
         tabsStrip.setViewPager(mViewPager);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
     }
 
 
@@ -191,10 +182,10 @@ public class RestaurantProfile extends AppCompatActivity {
                     textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
                     return rootView;
                 case 3:
-//                    rootView = reviewLayout(inflater, container);
-                    rootView = inflater.inflate(R.layout.fragment_tab3, container, false);
-                    textView = (TextView) rootView.findViewById(R.id.extendable_text);
-                    textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+                    rootView = reviewLayout(inflater, container);
+//                    rootView = inflater.inflate(R.layout.fragment_tab3, container, false);
+//                    textView = (TextView) rootView.findViewById(R.id.extendable_text);
+//                    textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
                     return rootView;
                 default:
                     return null;
@@ -203,25 +194,33 @@ public class RestaurantProfile extends AppCompatActivity {
 
         private View reviewLayout(LayoutInflater inflater, ViewGroup container) {
             View rootView = inflater.inflate(R.layout.fragment_tab3, container, false);
-            final TextView textView = (TextView) rootView.findViewById(R.id.extendable_text);
-            textView.setText(getString(R.string.lorem_ipsum));
-            final Button btnSeeMore = (Button) rootView.findViewById(R.id.btn_see_more);
 
-            textView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    if(expandable) {
-                        expandable = false;
-                        if (textView.getLineCount() > 4) {
-                            btnSeeMore.setVisibility(View.VISIBLE);
-                            ObjectAnimator animation = ObjectAnimator.ofInt(textView, "maxLines", 4);
-                            animation.setDuration(0).start();
+
+            final TextView textView = (TextView) rootView.findViewById(R.id.home_extendable_text);
+            final TextView btnSeeMore = (TextView) rootView.findViewById(R.id.home_btn_see_more);
+
+
+            if (btnSeeMore != null) {
+                btnSeeMore.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+
+                        if (!expandable) {
+                            expandable = true;
+                            ObjectAnimator animation = ObjectAnimator.ofInt(textView, "maxLines", 3);
+                            animation.setDuration(200).start();
+                            btnSeeMore.setText("SEE MORE");
+//                        btnSeeMore.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_collapse));
+                        } else {
+                            expandable = false;
+                            ObjectAnimator animation = ObjectAnimator.ofInt(textView, "maxLines", 40);
+                            animation.setDuration(200).start();
+                            btnSeeMore.setText(R.string.see_less);
+//                        btnSeeMore.setImageDrawable(ContextCompat.getDrawable(getActivity(),R.drawable.ic_expand));
                         }
+
                     }
-                }
-            });
-
-
+                });
+            }
 
             return rootView;
         }

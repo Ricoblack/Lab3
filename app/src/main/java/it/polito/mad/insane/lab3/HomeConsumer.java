@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 public class HomeConsumer extends AppCompatActivity {
 
-    private static boolean expandable = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,47 +32,6 @@ public class HomeConsumer extends AppCompatActivity {
                 public void onClick(View view) {
                     Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
-                }
-            });
-        }
-
-        final TextView textView = (TextView) findViewById(R.id.home_extendable_text);
-        final Button btnSeeMore = (Button) findViewById(R.id.home_btn_see_more);
-
-//        textView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//            @Override
-//            public void onGlobalLayout() {
-//                if(expandable) {
-//                    expandable = false;
-//                    if (textView.getLineCount() > 4) {
-////                        if (btnSeeMore != null) {
-////                            btnSeeMore.setVisibility(View.VISIBLE);
-////                        }
-//                        ObjectAnimator animation = ObjectAnimator.ofInt(textView, "maxLines", 4);
-//                        animation.setDuration(0).start();
-//                    }
-//                }
-//            }
-//        });
-
-        if (btnSeeMore != null) {
-            btnSeeMore.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-
-                    if (!expandable) {
-                        expandable = true;
-                        ObjectAnimator animation = ObjectAnimator.ofInt(textView, "maxLines", 4);
-                        animation.setDuration(200).start();
-                        btnSeeMore.setText("SEE MORE");
-//                        btnSeeMore.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_collapse));
-                    } else {
-                        expandable = false;
-                        ObjectAnimator animation = ObjectAnimator.ofInt(textView, "maxLines", 40);
-                        animation.setDuration(200).start();
-                        btnSeeMore.setText("SEE LESS");
-//                        btnSeeMore.setImageDrawable(ContextCompat.getDrawable(getActivity(),R.drawable.ic_expand));
-                    }
-
                 }
             });
         }
