@@ -133,6 +133,19 @@ public class RestaurateurJsonManager {
         return obj;
     }
 
+    public List<Restaurant> getRestaurants(){
+        return this.getDbApp().getRestaurants();
+    }
+
+    public Restaurant getRestaurant(String restaurantID){
+        for(Restaurant r : this.getDbApp().getRestaurants())
+            if(r.getRestaurantID() == restaurantID)
+                return r;
+
+        return null;
+    }
+
+
 
     /**
      * Created by carlocaramia on 09/04/16.
@@ -150,7 +163,7 @@ public class RestaurateurJsonManager {
             this.bookings = null;
         }
 
-        public List<Restaurant> getRestaurant() {
+        public List<Restaurant> getRestaurants() {
             return restaurants;
         }
 

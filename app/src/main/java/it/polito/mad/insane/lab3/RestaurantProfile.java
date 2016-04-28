@@ -27,6 +27,8 @@ import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
 
+import java.util.List;
+
 public class RestaurantProfile extends AppCompatActivity {
 
     /**
@@ -48,6 +50,9 @@ public class RestaurantProfile extends AppCompatActivity {
     private ReviewsRecyclerAdapter reviewsAdapter = null;
     static private RestaurateurJsonManager manager = null;
 
+    //FIXME: come recuperiamo id ristorante? sharedPreferences?
+    private static String restaurantId = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -58,6 +63,7 @@ public class RestaurantProfile extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //FIXME: va messo qui o nel caricamento del layout dell'apposito fragment?
         setupReviewsRecyclerView();
 
 //        NestedScrollView scrollView = (NestedScrollView) findViewById (R.id.scrollView);
@@ -73,15 +79,16 @@ public class RestaurantProfile extends AppCompatActivity {
         // Give the PagerSlidingTabStrip the ViewPager
         PagerSlidingTabStrip tabsStrip = (PagerSlidingTabStrip) findViewById(R.id.restaurant_tabs);
         // Attach the view pager to the tab strip
-        tabsStrip.setViewPager(mViewPager);
-
+        if (tabsStrip != null) {
+            tabsStrip.setViewPager(mViewPager);
+        }
     }
 
     private void setupReviewsRecyclerView() {
         manager = RestaurateurJsonManager.getInstance(this);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.reviews_recycler_view);
-        // TODO: creare getter e setter nel manager
-//        reviewsAdapter = new ReviewsRecyclerAdapter(this, manager.getRestaurant().getReviews(), true);
+        //TODO recuperare id ristorante
+        reviewsAdapter = new ReviewsRecyclerAdapter(this, manager.getRestaurant(restaurantId).getReviews());
         if(recyclerView != null){
             recyclerView.setAdapter(reviewsAdapter);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -209,10 +216,8 @@ public class RestaurantProfile extends AppCompatActivity {
         private View reviewsLayout(LayoutInflater inflater, ViewGroup container) {
             View rootView = inflater.inflate(R.layout.fragment_tab3, container, false);
 
-
             final TextView textView = (TextView) rootView.findViewById(R.id.review_extendable_text);
             final TextView btnSeeMore = (TextView) rootView.findViewById(R.id.review_btn_see_more);
-
 
             if (btnSeeMore != null) {
                 btnSeeMore.setOnClickListener(new View.OnClickListener() {
@@ -233,6 +238,11 @@ public class RestaurantProfile extends AppCompatActivity {
                     }
                 });
             }
+
+            //TODO: implementare algoritmo per il calcolo del punteggio del ristorante
+            List<Review> reviews = manager.getRestaurant(restaurantId).getReviews();
+
+            //FIXME: calcolare il punteggio ogni volta che si aggiunge una recensione invece che tutto in una volta quando serve?
 
             return rootView;
         }

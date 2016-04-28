@@ -12,13 +12,13 @@ public class Restaurant {
     private List<Dish> dishes;
     private String restaurantID;
 
-
     public Restaurant(){}
 
-    public Restaurant(RestaurateurProfile profile, List<Review> reviews, List<Dish> dishes) {
+    public Restaurant(String restaurantID, RestaurateurProfile profile, List<Review> reviews, List<Dish> dishes) {
         this.profile = profile;
         this.reviews = reviews;
         this.dishes = dishes;
+        this.restaurantID = restaurantID;
     }
 
     public RestaurateurProfile getProfile() {

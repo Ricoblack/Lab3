@@ -40,6 +40,10 @@ public class Review implements Serializable{
 
     public void setScores(double[] scores) {
         this.scores = scores;
+        double sum = 0;
+        for(double d : scores)
+            sum += d;
+        this.finalScore = sum/scores.length;
     }
 
     public double getFinalScore() {
