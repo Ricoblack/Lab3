@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -82,6 +81,7 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
             this.title = (TextView) itemView.findViewById(R.id.review_title);
             this.expandableText = (TextView) itemView.findViewById(R.id.review_extendable_text);
             this.date = (TextView) itemView.findViewById(R.id.review_date);
+            //TODO: add the userPic instead of the left drawable of userName in the cardView
         }
 
         public void setData(Review current, int position){
@@ -89,28 +89,27 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
             this.date.setText(dateFormat.format(current.getDate()));
             this.expandableText.setText(current.getText());
             this.title.setText(current.getTitle());
+            //TODO: controllare come e' gestita la cosa nel DB
 //            this.userName.setText(users.getUser(current.getUserID())); /**da implementare**/
             String imgPath = current.getPhotoPath();
+            //FIXME capire bene la gestione delle immagini
             if(imgPath != null)
                 this.userPic.setImageURI(Uri.parse(imgPath));
             double score = roundToHalf(current.getFinalScore());
 
+            //TODO: da testare per bene
             if (score == 0.0)
                 score = 0.5;
-
-            //da testare per bene
             for(int i = stars.length; i >= 1; i--){
                 double i2 = (double) i;
-                if(i2 - 0.5 > score){
-                    this.stars[i].setVisibility(View.INVISIBLE);
-                    continue;
-                }
                 if (i2 == score)
                     break;
-                if(i2 -0.5 == score){
-//                        this.stars[i].setImageDrawable(R.drawable.half_star); // appena federico fa la mezza stella scommentare
+                if(i2 - 0.5 == score){
+                    //TODO: immagine mezza stella Federico
+//                        this.stars[i].setImageDrawable(R.drawable.half_star);
                         break;
                 }
+                this.stars[i].setVisibility(View.INVISIBLE);
             }
         }
 

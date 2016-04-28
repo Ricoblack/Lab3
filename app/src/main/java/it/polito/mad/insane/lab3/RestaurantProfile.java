@@ -46,7 +46,7 @@ public class RestaurantProfile extends AppCompatActivity {
 
     private static boolean expandable = true;
     private ReviewsRecyclerAdapter reviewsAdapter = null;
-//    static private JsonManager manager = null;
+    static private RestaurateurJsonManager manager = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -78,8 +78,10 @@ public class RestaurantProfile extends AppCompatActivity {
     }
 
     private void setupReviewsRecyclerView() {
+        manager = RestaurateurJsonManager.getInstance(this);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.reviews_recycler_view);
-//        reviewsAdapter = new ReviewsRecyclerAdapter(this, manager.getReviews(), true);
+        // TODO: creare getter e setter nel manager
+//        reviewsAdapter = new ReviewsRecyclerAdapter(this, manager.getRestaurant().getReviews(), true);
         if(recyclerView != null){
             recyclerView.setAdapter(reviewsAdapter);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -115,7 +117,6 @@ public class RestaurantProfile extends AppCompatActivity {
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
         final int PAGE_COUNT = 3;
-        private String tabTitles[] = new String[] { "Tab1", "Tab2", "Tab3"};
 
         public SectionsPagerAdapter(FragmentManager fm)
         {
@@ -140,14 +141,13 @@ public class RestaurantProfile extends AppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position)
         {
-//            return this.tabTitles[position];
             switch (position) {
                 case 0:
                     return getString(R.string.title_tab_menu);
                 case 1:
-                    return getString(R.string.title_tab_reviews);
-                case 2:
                     return getString(R.string.title_tab_info);
+                case 2:
+                    return getString(R.string.title_tab_reviews);
                 default:
                     return null;
             }
@@ -199,17 +199,14 @@ public class RestaurantProfile extends AppCompatActivity {
                     textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
                     return rootView;
                 case 3:
-                    rootView = reviewLayout(inflater, container);
-//                    rootView = inflater.inflate(R.layout.fragment_tab3, container, false);
-//                    textView = (TextView) rootView.findViewById(R.id.extendable_text);
-//                    textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+                    rootView = reviewsLayout(inflater, container);
                     return rootView;
                 default:
                     return null;
             }
         }
 
-        private View reviewLayout(LayoutInflater inflater, ViewGroup container) {
+        private View reviewsLayout(LayoutInflater inflater, ViewGroup container) {
             View rootView = inflater.inflate(R.layout.fragment_tab3, container, false);
 
 
@@ -225,14 +222,12 @@ public class RestaurantProfile extends AppCompatActivity {
                             expandable = true;
                             ObjectAnimator animation = ObjectAnimator.ofInt(textView, "maxLines", 3);
                             animation.setDuration(200).start();
-                            btnSeeMore.setText("SEE MORE");
-//                        btnSeeMore.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_collapse));
+                            btnSeeMore.setText(getString(R.string.see_more));
                         } else {
                             expandable = false;
                             ObjectAnimator animation = ObjectAnimator.ofInt(textView, "maxLines", 40);
                             animation.setDuration(200).start();
                             btnSeeMore.setText(R.string.see_less);
-//                        btnSeeMore.setImageDrawable(ContextCompat.getDrawable(getActivity(),R.drawable.ic_expand));
                         }
 
                     }
