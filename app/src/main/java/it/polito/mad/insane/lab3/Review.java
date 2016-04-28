@@ -14,6 +14,8 @@ public class Review implements Serializable{
     private String title;
     private String text;
     private String photoPath;
+    private String restaurantID;
+
 
 
     public int getUserID() {
@@ -70,5 +72,13 @@ public class Review implements Serializable{
 
     public void setPhotoPath(String photoPath) {
         this.photoPath = photoPath;
+    }
+
+    public String getRestaurantID() {
+        return restaurantID;
+    }
+
+    public void setRestaurantID(String restaurantID) {
+        this.restaurantID = restaurantID;
     }
 }
