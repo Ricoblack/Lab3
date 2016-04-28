@@ -22,10 +22,6 @@
             android:name=".RestaurantProfile"
             android:label="@string/title_activity_restaurant_profile"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MyScrollingActivity"
-            android:label="@string/title_activity_my_scrolling"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
