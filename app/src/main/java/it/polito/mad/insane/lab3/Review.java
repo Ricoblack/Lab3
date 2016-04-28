@@ -9,10 +9,11 @@ import java.util.Date;
 public class Review implements Serializable{
     private int userID;
     private Date date;
-    private float[] scores;
-    private float finalScore;
+    private double[] scores;
+    private double finalScore;
     private String title;
     private String text;
+    private String photoPath;
 
 
     public int getUserID() {
@@ -31,19 +32,19 @@ public class Review implements Serializable{
         this.date = date;
     }
 
-    public float[] getScores() {
+    public double[] getScores() {
         return scores;
     }
 
-    public void setScores(float[] scores) {
+    public void setScores(double[] scores) {
         this.scores = scores;
     }
 
-    public float getFinalScore() {
+    public double getFinalScore() {
         return finalScore;
     }
 
-    public void setFinalScore(float finalScore) {
+    public void setFinalScore(double finalScore) {
         this.finalScore = finalScore;
     }
 
@@ -61,5 +62,13 @@ public class Review implements Serializable{
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getPhotoPath() {
+        return photoPath;
+    }
+
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
     }
 }

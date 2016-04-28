@@ -101,4 +101,7 @@
     <string name="date_sample">dd/MM/yy</string>
     <string name="see_less">SEE LESS</string>
     <string name="review_title">\"Lorem ipsum\"</string>
+    <string name="title_tab_menu">Menu</string>
+    <string name="title_tab_reviews">Reviews</string>
+    <string name="title_tab_info">Info</string>
 </resources>

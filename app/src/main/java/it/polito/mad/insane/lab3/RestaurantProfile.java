@@ -6,6 +6,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
@@ -43,6 +45,8 @@ public class RestaurantProfile extends AppCompatActivity {
     private ViewPager mViewPager;
 
     private static boolean expandable = true;
+    private ReviewsRecyclerAdapter reviewsAdapter = null;
+//    static private JsonManager manager = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -52,6 +56,9 @@ public class RestaurantProfile extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        setupReviewsRecyclerView();
 
 //        NestedScrollView scrollView = (NestedScrollView) findViewById (R.id.scrollView);
 //        scrollView.setFillViewport (true);
@@ -68,6 +75,15 @@ public class RestaurantProfile extends AppCompatActivity {
         // Attach the view pager to the tab strip
         tabsStrip.setViewPager(mViewPager);
 
+    }
+
+    private void setupReviewsRecyclerView() {
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.reviews_recycler_view);
+//        reviewsAdapter = new ReviewsRecyclerAdapter(this, manager.getReviews(), true);
+        if(recyclerView != null){
+            recyclerView.setAdapter(reviewsAdapter);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+        }
     }
 
 
@@ -124,16 +140,17 @@ public class RestaurantProfile extends AppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position)
         {
-            return this.tabTitles[position];
-//            switch (position) {
-//                case 0:
-//                    return "SECTION 1";
-//                case 1:
-//                    return "SECTION 2";
-//                case 2:
-//                    return "SECTION 3";
-//            }
-//            return null;
+//            return this.tabTitles[position];
+            switch (position) {
+                case 0:
+                    return getString(R.string.title_tab_menu);
+                case 1:
+                    return getString(R.string.title_tab_reviews);
+                case 2:
+                    return getString(R.string.title_tab_info);
+                default:
+                    return null;
+            }
         }
     }
 
@@ -196,8 +213,8 @@ public class RestaurantProfile extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.fragment_tab3, container, false);
 
 
-            final TextView textView = (TextView) rootView.findViewById(R.id.home_extendable_text);
-            final TextView btnSeeMore = (TextView) rootView.findViewById(R.id.home_btn_see_more);
+            final TextView textView = (TextView) rootView.findViewById(R.id.review_extendable_text);
+            final TextView btnSeeMore = (TextView) rootView.findViewById(R.id.review_btn_see_more);
 
 
             if (btnSeeMore != null) {
