@@ -429,7 +429,9 @@ public class RestaurateurJsonManager {
 
 
             //CREAZIONE RISTORANTI
-            
+
+
+
             Restaurant restaurant1=new Restaurant("001", profile, null, dishes1);
             Restaurant restaurant2=new Restaurant("002",profile2,null,dishes2);
 
