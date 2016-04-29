@@ -13,8 +13,9 @@ public class Review implements Serializable{
     private double finalScore;
     private String title;
     private String text;
-    private String photoPath;
+    private String photoPath;  //FIXME: se lo lasciamo così nella creazione del db devo anche salvare l'immagine, non si fa prima a mettere il nome del drawable invece che il path?
     private String restaurantID;
+
 
 
 

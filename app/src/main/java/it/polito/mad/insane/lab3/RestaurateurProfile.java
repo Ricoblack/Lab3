@@ -7,6 +7,8 @@ import java.util.Date;
  */
 public class RestaurateurProfile {
 
+
+    //TODO: aggiungere immagine statica di sfondo direttamente come drawable?
     private String restaurantName;
     private String address;
     private String nearbyUniversity;
