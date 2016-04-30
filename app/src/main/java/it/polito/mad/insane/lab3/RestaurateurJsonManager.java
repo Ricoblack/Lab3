@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -197,6 +198,7 @@ public class RestaurateurJsonManager {
 
             Dish dish2 = new Dish("1","Marinara", "Occhio all'aglio!", null, 2.50, 200);
             dishes1.add(dish2);
+            dishes2.add(dish2);
 
             Dish dish3 = new Dish("2","Tonno", "Il gusto in una parola", null, 3.50, 300);
             dishes1.add(dish3);
@@ -272,27 +274,30 @@ public class RestaurateurJsonManager {
             Booking newBooking4 = new Booking();
             newBooking4.setID("4");
             ArrayList<Dish> elenco4=new ArrayList<Dish>();
-            elenco4.add(dishes1.get(2));
+            elenco4.add(dishes2.get(2));
             newBooking4.setDishes(elenco4);
             calendar = Calendar.getInstance();
             calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH)-2);
             calendar.set(Calendar.HOUR_OF_DAY, 17);
             newBooking4.setDate_time(calendar);
+            newBooking4.setRestaurantID("002");
             bookings.add(newBooking4);
 
             Booking newBooking5 = new Booking();
             newBooking5.setID("5");
             ArrayList<Dish> elenco5=new ArrayList<Dish>();
-            elenco5.add(dishes1.get(0));
-            elenco5.add(dishes1.get(1));
-            elenco5.add(dishes1.get(0));
+            elenco5.add(dishes2.get(0));
+            elenco5.add(dishes2.get(1));
+            elenco5.add(dishes2.get(0));
             newBooking5.setDishes(elenco5);
             calendar = Calendar.getInstance();
             calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH)-1);
             calendar.set(Calendar.HOUR_OF_DAY, 19);
             newBooking5.setDate_time(calendar);
+            newBooking5.setRestaurantID("002");
             bookings.add(newBooking5);
 
+            /*
             Booking newBooking6 = new Booking();
             newBooking6.setID("6");
             ArrayList<Dish> elenco6=new ArrayList<Dish>();
@@ -419,21 +424,42 @@ public class RestaurateurJsonManager {
             calendar.set(Calendar.HOUR_OF_DAY, 18);
             newBooking16.setDate_time(calendar);
             bookings.add(newBooking16);
-
+            */
 
             //CARICAMENTO REVIEWS
 
+            ArrayList<Review> reviews1=new ArrayList<Review>();
+            ArrayList<Review> reviews2=new ArrayList<Review>();
+
+            Review rev1=new Review();
+            rev1.setRestaurantID("001");
+            rev1.setDate(new Date());
+            rev1.setUserID(1);
+            rev1.setScores(new double[]{8.0,10.0,7.0});
+            rev1.setTitle("Splendido locale per studenti");
+            rev1.setText("Il cibo è ottimo e la presenza del wifi garantisce il possibile studio anche a pranzo, i prezzi sono ottimi, consigliato!");
+            reviews1.add(rev1);
 
 
-
+            Review rev2=new Review();
+            rev2.setRestaurantID("002");
+            rev2.setDate(new Date());
+            rev2.setUserID(2);
+            rev2.setScores(new double[]{7.0,9.5,8.0});
+            rev2.setTitle("Vicino alla facoltà di lettere");
+            //non setto apposta il testo
+            reviews2.add(rev2);
 
 
             //CREAZIONE RISTORANTI
 
+            this.restaurants=new ArrayList<Restaurant>();
 
+            Restaurant restaurant1=new Restaurant("001", profile, reviews1, dishes1);
+            Restaurant restaurant2=new Restaurant("002",profile2,reviews2,dishes2);
 
-            Restaurant restaurant1=new Restaurant("001", profile, null, dishes1);
-            Restaurant restaurant2=new Restaurant("002",profile2,null,dishes2);
+            this.restaurants.add(restaurant1);
+            this.restaurants.add(restaurant2);
 
         }
 

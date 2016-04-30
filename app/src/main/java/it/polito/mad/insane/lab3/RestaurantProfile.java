@@ -51,8 +51,8 @@ public class RestaurantProfile extends AppCompatActivity {
     static private RestaurateurJsonManager manager = null;
 
     //FIXME: come recuperiamo id ristorante? sharedPreferences?
-    private static String restaurantId = null;
-
+    //private static String restaurantId = null;
+    private static String restaurantId="001";
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
