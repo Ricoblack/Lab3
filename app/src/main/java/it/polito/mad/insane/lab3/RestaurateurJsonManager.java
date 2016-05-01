@@ -181,7 +181,6 @@ public class RestaurateurJsonManager {
 
         public void fillDbApp()
         {
-            //TODO: fill new db app
 
 
             //CARICAMENTO DATI RISTORANTI
