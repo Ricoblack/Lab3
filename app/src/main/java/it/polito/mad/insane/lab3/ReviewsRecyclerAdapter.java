@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -69,6 +70,7 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
         private TextView expandableText;
         private TextView btnSeeMore;
         private TextView date;
+        private boolean first = true;
         private boolean expandable = true;
 
         public ReviewsViewHolder(View itemView) {
@@ -92,6 +94,36 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
         public void setData(Review current, int position){
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             this.date.setText(dateFormat.format(current.getDate()));
+            this.expandableText.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    if(first){ // here we check if the text is longer than the textview space for the first time. If no, don't need
+                               // the button "see more"
+                        first = false;
+                        if(expandableText.getLineCount() < TextViewCompat.getMaxLines(expandableText))
+                            btnSeeMore.setVisibility(View.INVISIBLE);
+                    }
+                    else if(btnSeeMore.getVisibility() != View.INVISIBLE){ //if the text is expandable I set a listener to the button
+                        btnSeeMore.setOnClickListener(new View.OnClickListener() {
+                            public void onClick(View v) {
+                                if (!expandable) { // the textview is large, I want to compress it
+                                    expandable = true;
+                                    ObjectAnimator animation = ObjectAnimator.ofInt(expandableText, "maxLines", 3);
+                                    animation.setDuration(200).start();
+                                    btnSeeMore.setText(R.string.see_more);
+                                } else {
+                                    expandable = false; //the textview is compressed, I want to expand it
+                                    ObjectAnimator animation = ObjectAnimator.ofInt(expandableText, "maxLines", 40);
+                                    animation.setDuration(200).start();
+                                    btnSeeMore.setText(R.string.see_less);
+                                }
+
+                            }
+                        });
+                    }
+                }
+            });
+
             this.expandableText.setText(current.getText());
             this.title.setText(current.getTitle());
             //TODO: controllare come e' gestita la cosa nel DB
@@ -115,42 +147,6 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
                         break;
                 }
                 this.stars[i-1].setVisibility(View.INVISIBLE);
-            }
-
-            /** TODO In order to fix this issue apply the following lines:
-
-             yourTextView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-            if (yourTextView.getLineCount() > 1) {
-            mediaAtomLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-            }
-            }
-            });
-             **/
-            int line = this.expandableText.getLineCount(); // FIXME questo parametro e' uguale a 0
-            int max = TextViewCompat.getMaxLines(this.expandableText); //questo parametro e' uguale a 3
-            if (this.expandableText.getLineCount() > TextViewCompat.getMaxLines(this.expandableText)) {
-                this.btnSeeMore.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-
-                        if (!expandable) {
-                            expandable = true;
-                            ObjectAnimator animation = ObjectAnimator.ofInt(expandableText, "maxLines", 3);
-                            animation.setDuration(200).start();
-                            btnSeeMore.setText(R.string.see_more);
-                        } else {
-                            expandable = false;
-                            ObjectAnimator animation = ObjectAnimator.ofInt(expandableText, "maxLines", 40);
-                            animation.setDuration(200).start();
-                            btnSeeMore.setText(R.string.see_less);
-                        }
-
-                    }
-                });
-            }
-            else{
-                this.btnSeeMore.setVisibility(View.INVISIBLE);
             }
         }
 
