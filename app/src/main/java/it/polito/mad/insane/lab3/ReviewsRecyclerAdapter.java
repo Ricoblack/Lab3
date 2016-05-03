@@ -1,7 +1,9 @@
 package it.polito.mad.insane.lab3;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.net.Uri;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,10 +36,10 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
     @Override
     public ReviewsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create the view starting from XML layout file
-        View view = this.mInflater.inflate(R.layout.review_list_item,parent, false);
+        View view = this.mInflater.inflate(R.layout.review_list_item, parent, false);
 
-        ReviewsViewHolder result = new ReviewsViewHolder(view); // create the holder
-        return result;
+        ReviewsViewHolder holder = new ReviewsViewHolder(view); // create the holder
+        return holder;
     }
 
 
@@ -65,7 +67,9 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
         private ImageView[] stars;
         private TextView title;
         private TextView expandableText;
+        private TextView btnSeeMore;
         private TextView date;
+        private boolean expandable = true;
 
         public ReviewsViewHolder(View itemView) {
             super(itemView);
@@ -80,6 +84,7 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
             this.stars[4] = (ImageView) itemView.findViewById(R.id.star_five);
             this.title = (TextView) itemView.findViewById(R.id.review_title);
             this.expandableText = (TextView) itemView.findViewById(R.id.review_extendable_text);
+            this.btnSeeMore = (TextView) itemView.findViewById(R.id.review_btn_see_more);
             this.date = (TextView) itemView.findViewById(R.id.review_date);
             //TODO: add the userPic instead of the left drawable of userName in the cardView
         }
@@ -96,7 +101,7 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
             if(imgPath != null)
                 this.userPic.setImageURI(Uri.parse(imgPath));
             double score = roundToHalf(current.getFinalScore());
-
+            score = roundToHalf(score/2);
             //TODO: da testare per bene
             if (score == 0.0)
                 score = 0.5;
@@ -109,7 +114,43 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
 //                        this.stars[i].setImageDrawable(R.drawable.half_star);
                         break;
                 }
-                this.stars[i].setVisibility(View.INVISIBLE);
+                this.stars[i-1].setVisibility(View.INVISIBLE);
+            }
+
+            /** TODO In order to fix this issue apply the following lines:
+
+             yourTextView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+            if (yourTextView.getLineCount() > 1) {
+            mediaAtomLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+            }
+            });
+             **/
+            int line = this.expandableText.getLineCount(); // FIXME questo parametro e' uguale a 0
+            int max = TextViewCompat.getMaxLines(this.expandableText); //questo parametro e' uguale a 3
+            if (this.expandableText.getLineCount() > TextViewCompat.getMaxLines(this.expandableText)) {
+                this.btnSeeMore.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+
+                        if (!expandable) {
+                            expandable = true;
+                            ObjectAnimator animation = ObjectAnimator.ofInt(expandableText, "maxLines", 3);
+                            animation.setDuration(200).start();
+                            btnSeeMore.setText(R.string.see_more);
+                        } else {
+                            expandable = false;
+                            ObjectAnimator animation = ObjectAnimator.ofInt(expandableText, "maxLines", 40);
+                            animation.setDuration(200).start();
+                            btnSeeMore.setText(R.string.see_less);
+                        }
+
+                    }
+                });
+            }
+            else{
+                this.btnSeeMore.setVisibility(View.INVISIBLE);
             }
         }
 
