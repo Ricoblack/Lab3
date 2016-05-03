@@ -103,7 +103,7 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
                         if(expandableText.getLineCount() < TextViewCompat.getMaxLines(expandableText))
                             btnSeeMore.setVisibility(View.INVISIBLE);
                     }
-                    else if(btnSeeMore.getVisibility() != View.INVISIBLE){ //if the text is expandable I set a listener to the button
+                    if(btnSeeMore.getVisibility() != View.INVISIBLE){ //if the text is expandable I set a listener to the button
                         btnSeeMore.setOnClickListener(new View.OnClickListener() {
                             public void onClick(View v) {
                                 if (!expandable) { // the textview is large, I want to compress it
