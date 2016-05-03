@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
@@ -47,12 +48,11 @@ public class RestaurantProfile extends AppCompatActivity {
     private ViewPager mViewPager;
 
     private static boolean expandable = true;
-    private ReviewsRecyclerAdapter reviewsAdapter = null;
+//    private static ReviewsRecyclerAdapter reviewsAdapter = null;
     static private RestaurateurJsonManager manager = null;
 
-    //FIXME: come recuperiamo id ristorante? sharedPreferences?
-    //private static String restaurantId = null;
-    private static String restaurantId="001";
+    //FIXME: come recuperiamo id ristorante?
+    private static String restaurantId = "001";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -64,8 +64,10 @@ public class RestaurantProfile extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //FIXME: va messo qui o nel caricamento del layout dell'apposito fragment?
-        setupReviewsRecyclerView();
+        manager = RestaurateurJsonManager.getInstance(this);
+
+//        //FIXME: va messo qui o nel caricamento del layout dell'apposito fragment?
+//        setupReviewsRecyclerView();
 
 //        NestedScrollView scrollView = (NestedScrollView) findViewById (R.id.scrollView);
 //        scrollView.setFillViewport (true);
@@ -88,10 +90,12 @@ public class RestaurantProfile extends AppCompatActivity {
     private void setupReviewsRecyclerView() {
         manager = RestaurateurJsonManager.getInstance(this);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.reviews_recycler_view);
-        //TODO recuperare id ristorante
-        reviewsAdapter = new ReviewsRecyclerAdapter(this, manager.getRestaurant(restaurantId).getReviews());
+        RecyclerView.Adapter reviewsAdapter = new ReviewsRecyclerAdapter(this, manager.getRestaurant(restaurantId).getReviews());
         if(recyclerView != null){
             recyclerView.setAdapter(reviewsAdapter);
+            LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(this);
+            mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
+            recyclerView.setLayoutManager(mLinearLayoutManagerVertical);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
         }
     }
@@ -217,32 +221,19 @@ public class RestaurantProfile extends AppCompatActivity {
         private View reviewsLayout(LayoutInflater inflater, ViewGroup container) {
             View rootView = inflater.inflate(R.layout.fragment_tab3, container, false);
 
-            final TextView textView = (TextView) rootView.findViewById(R.id.review_extendable_text);
-            final TextView btnSeeMore = (TextView) rootView.findViewById(R.id.review_btn_see_more);
-
-            if (btnSeeMore != null) {
-                btnSeeMore.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-
-                        if (!expandable) {
-                            expandable = true;
-                            ObjectAnimator animation = ObjectAnimator.ofInt(textView, "maxLines", 3);
-                            animation.setDuration(200).start();
-                            btnSeeMore.setText(getString(R.string.see_more));
-                        } else {
-                            expandable = false;
-                            ObjectAnimator animation = ObjectAnimator.ofInt(textView, "maxLines", 40);
-                            animation.setDuration(200).start();
-                            btnSeeMore.setText(R.string.see_less);
-                        }
-
-                    }
-                });
+            manager = RestaurateurJsonManager.getInstance(getActivity());
+            RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.reviews_recycler_view);
+            RecyclerView.Adapter reviewsAdapter = new ReviewsRecyclerAdapter(getActivity(), manager.getRestaurant(restaurantId).getReviews());
+            if(recyclerView != null){
+                recyclerView.setAdapter(reviewsAdapter);
+                LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(getActivity());
+                mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
+                recyclerView.setLayoutManager(mLinearLayoutManagerVertical);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
             }
 
             //TODO: implementare algoritmo per il calcolo del punteggio del ristorante
-            List<Review> reviews = manager.getRestaurant(restaurantId).getReviews();
-
+//            List<Review> reviews = manager.getRestaurant(restaurantId).getReviews();
             //FIXME: calcolare il punteggio ogni volta che si aggiunge una recensione invece che tutto in una volta quando serve?
 
             return rootView;
