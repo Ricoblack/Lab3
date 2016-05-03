@@ -7,6 +7,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
@@ -15,12 +19,16 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class HomeConsumer extends AppCompatActivity {
 
+    private static RestaurateurJsonManager manager = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        HomeConsumer.manager = RestaurateurJsonManager.getInstance(this);
         setContentView(R.layout.activity_home_consumer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -35,6 +43,8 @@ public class HomeConsumer extends AppCompatActivity {
                 }
             });
         }
+
+        setUpRestaurantsRecycler(manager.getRestaurants());
     }
 
     @Override
@@ -63,5 +73,20 @@ public class HomeConsumer extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setUpRestaurantsRecycler(List<Restaurant> restaurants)
+    {
+        RecyclerView rV = (RecyclerView) findViewById(R.id.RestaurateurRecyclerView);
+
+        RestaurantsRecyclerAdapter adapter = new RestaurantsRecyclerAdapter(this, restaurants);
+        rV.setAdapter(adapter);
+
+        GridLayoutManager mGridLayoutManager = new GridLayoutManager(this,2);
+        rV.setLayoutManager(mGridLayoutManager);
+
+        // Set animation
+        RecyclerView.ItemAnimator ia = new DefaultItemAnimator();  // If you don't apply other animations it uses the default one
+        rV.setItemAnimator(ia);
     }
 }

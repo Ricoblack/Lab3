@@ -38,6 +38,15 @@
             android:id="@+id/searchView"
             android:layout_alignParentTop="true"/>
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/RestaurateurRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/searchView"
+            android:layout_weight="2">
+
+        </android.support.v7.widget.RecyclerView>
+
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
