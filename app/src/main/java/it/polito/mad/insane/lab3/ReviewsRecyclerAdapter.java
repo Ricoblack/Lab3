@@ -134,7 +134,8 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
                 this.userPic.setImageURI(Uri.parse(imgPath));
             double score = roundToHalf(current.getFinalScore());
             score = roundToHalf(score/2);
-            //TODO: da testare per bene
+
+            //TODO: ha senso visualizzare il punteggio con delle stelline se poi il punteggio totale viene indicato con un numero?
             if (score == 0.0)
                 score = 0.5;
             for(int i = stars.length; i >= 1; i--){

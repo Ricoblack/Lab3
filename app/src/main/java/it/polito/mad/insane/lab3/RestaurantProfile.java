@@ -218,16 +218,28 @@ public class RestaurantProfile extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.fragment_tab3, container, false);
             manager = RestaurateurJsonManager.getInstance(getActivity());
 
-            setupReviewsRecyclerView(rootView, manager.getRestaurant(restaurantId).getReviews());
+            Restaurant restaurant = manager.getRestaurant(restaurantId);
+
+            setupReviewsRecyclerView(rootView, restaurant.getReviews());
 
             TextView tv = (TextView) rootView.findViewById(R.id.restaurant_final_score);
             DecimalFormat df = new DecimalFormat("0.0");
-            tv.setText(df.format(manager.getRestaurant(restaurantId).getAvgFinalScore()));
+            tv.setText(df.format(restaurant.getAvgFinalScore()));
 
             tv = (TextView) rootView.findViewById(R.id.reviews_number);
-            tv.setText(String.format("Based on %d reviews", manager.getRestaurant(restaurantId).getReviews().size()));
+            tv.setText(String.format("Based on %d reviews", restaurant.getReviews().size()));
 
-            //TODO settare i valori giusti anche ai singoli parametri
+            tv = (TextView) rootView.findViewById(R.id.score_1);
+            df = new DecimalFormat("0.0");
+            tv.setText(df.format(restaurant.getAvgScores()[0]));
+
+            tv = (TextView) rootView.findViewById(R.id.score_2);
+            df = new DecimalFormat("0.0");
+            tv.setText(df.format(restaurant.getAvgScores()[1]));
+
+            tv = (TextView) rootView.findViewById(R.id.score_3);
+            df = new DecimalFormat("0.0");
+            tv.setText(df.format(restaurant.getAvgScores()[2]));
 
             return rootView;
         }
