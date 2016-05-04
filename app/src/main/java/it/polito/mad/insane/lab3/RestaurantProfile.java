@@ -52,7 +52,7 @@ public class RestaurantProfile extends AppCompatActivity {
     static private RestaurateurJsonManager manager = null;
 
     //FIXME: come recuperiamo id ristorante?
-    private static String restaurantId = "001";
+    private static String restaurantId = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -65,6 +65,7 @@ public class RestaurantProfile extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         manager = RestaurateurJsonManager.getInstance(this);
+        restaurantId = getIntent().getStringExtra("ID");
 
 //        //FIXME: va messo qui o nel caricamento del layout dell'apposito fragment?
 //        setupReviewsRecyclerView();

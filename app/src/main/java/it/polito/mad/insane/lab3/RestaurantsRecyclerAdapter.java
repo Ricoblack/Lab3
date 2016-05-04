@@ -1,6 +1,7 @@
 package it.polito.mad.insane.lab3;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,18 +57,38 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
 
     public class RestaurantsViewHolder extends RecyclerView.ViewHolder {
 
+        private View cardView;
         private TextView title;
         private TextView street;
+        private String IDrestaurant;
+
+        private android.view.View.OnClickListener cardViewListener = new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                //Toast.makeText(v.getContext(),"Cliccato sulla cardView", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(v.getContext(),RestaurantProfile.class);
+                i.putExtra("ID",IDrestaurant);
+                v.getContext().startActivity(i);
+            }
+        };
 
         public RestaurantsViewHolder(View itemView) {
             super(itemView);
+            this.cardView = itemView;
             this.title = (TextView) itemView.findViewById(R.id.restaurant_title);
             this.street = (TextView) itemView.findViewById(R.id.street_restaurant);
+
+            // set the onClickListener to the View
+            this.cardView.setOnClickListener(cardViewListener);
+
         }
 
         public void setData(Restaurant current, int position) {
             this.title.setText(current.getProfile().getRestaurantName());
             this.street.setText(current.getProfile().getAddress());
+            this.IDrestaurant = current.getRestaurantID();
         }
 
 
