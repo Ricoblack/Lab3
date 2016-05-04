@@ -36,9 +36,9 @@
                         android:gravity="center_horizontal">
 
                         <TextView
+                            android:id="@+id/restaurant_final_score"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="8.7"
                             android:textSize="28sp"
                             android:textColor="@color/colorAccent"/>
 
@@ -53,9 +53,10 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/reviews_number"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Based on 144 reviews"
+                        android:text="@string/reviews_number"
                         android:textColor="@color/colorAccent"
                         android:gravity="center_horizontal"/>
 

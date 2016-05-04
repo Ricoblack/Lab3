@@ -1,5 +1,6 @@
 package it.polito.mad.insane.lab3;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -7,10 +8,14 @@ import java.util.List;
  */
 public class Restaurant {
 
+    private static final int N_SCORES = 3;
     private RestaurateurProfile profile;
     private List<Review> reviews;
     private List<Dish> dishes;
     private String restaurantID;
+    private double[] totalScores = new double[N_SCORES];
+    private double[] avgScores = new double[N_SCORES];
+    private double avgFinalScore;
 
     public Restaurant(){}
 
@@ -19,6 +24,22 @@ public class Restaurant {
         this.reviews = reviews;
         this.dishes = dishes;
         this.restaurantID = restaurantID;
+
+        // calcolo a priori punteggio del ristorante. quando avremo il server sarebbe conveniente farlo sul server per ridurre
+        // la quantita' di calcoli sul client. in questo caso ogni activity fa una semplice get invece di calcolare ogni volta il punteggio
+
+        Arrays.fill(totalScores, 0);
+        for(Review r : this.reviews){
+            for(int i = 0; i < N_SCORES; i++){
+                this.totalScores[i] += r.getScores()[i];
+            }
+        }
+        for (int i = 0; i < N_SCORES; i++) {
+            avgScores[i] = totalScores[i] / this.reviews.size();
+            avgFinalScore += avgScores[i];
+        }
+        avgFinalScore = avgFinalScore/N_SCORES;
+
     }
 
     public RestaurateurProfile getProfile() {
@@ -51,5 +72,15 @@ public class Restaurant {
 
     public void setRestaurantID(String restaurantID) {
         this.restaurantID = restaurantID;
+    }
+
+    public double[] getAvgScores(){
+        return this.avgScores;
+    }
+    public double getAvgFinalScore(){
+        return this.avgFinalScore;
+    }
+    public double[] getTotalScores (){
+        return this.totalScores;
     }
 }

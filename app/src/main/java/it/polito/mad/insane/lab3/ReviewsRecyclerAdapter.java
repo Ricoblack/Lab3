@@ -111,8 +111,8 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
                                     ObjectAnimator animation = ObjectAnimator.ofInt(expandableText, "maxLines", 3);
                                     animation.setDuration(200).start();
                                     btnSeeMore.setText(R.string.see_more);
-                                } else {
-                                    expandable = false; //the textview is compressed, I want to expand it
+                                } else { //the textview is compressed, I want to expand it
+                                    expandable = false;
                                     ObjectAnimator animation = ObjectAnimator.ofInt(expandableText, "maxLines", 40);
                                     animation.setDuration(200).start();
                                     btnSeeMore.setText(R.string.see_less);
