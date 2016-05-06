@@ -10,35 +10,41 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="it.polito.mad.insane.lab3.RestaurantProfile$PlaceholderFragment">
 
-    <TextView
-        android:id="@+id/section_label"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/MenuRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:gravity="center"/>
-    <TextView
-        android:id="@+id/section_label1"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:text="ciao1"
-        android:gravity="center"/>
-    <TextView
-        android:id="@+id/section_label2"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:text="ciao2"
-        android:gravity="center"/>
-    <TextView
-        android:id="@+id/section_label3"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:text="ciao3"
-        android:gravity="center"/>
-    <TextView
-        android:id="@+id/section_label4"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:text="ciao4"
-        android:gravity="center"/>
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
+
+    <!--<TextView-->
+        <!--android:id="@+id/section_label"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="150dp"-->
+        <!--android:gravity="center"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/section_label1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="150dp"-->
+        <!--android:text="ciao1"-->
+        <!--android:gravity="center"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/section_label2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="150dp"-->
+        <!--android:text="ciao2"-->
+        <!--android:gravity="center"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/section_label3"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="150dp"-->
+        <!--android:text="ciao3"-->
+        <!--android:gravity="center"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/section_label4"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="150dp"-->
+        <!--android:text="ciao4"-->
+        <!--android:gravity="center"/>-->
 
 
 </LinearLayout>
