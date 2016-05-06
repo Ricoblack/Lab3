@@ -1,12 +1,14 @@
 package it.polito.mad.insane.lab3;
 
 import android.animation.ObjectAnimator;
+import android.content.res.Configuration;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -190,12 +192,15 @@ public class RestaurantProfile extends AppCompatActivity {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
+            View rootView = null;
             switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
                 case 1:
-                    View rootView = inflater.inflate(R.layout.fragment_tab1, container, false);
-                    TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-                    textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+                    rootView = menuLayout(inflater, container);
+//                    rootView = inflater.inflate(R.layout.fragment_tab1, container, false);
+//                    TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+//                    textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
                     return rootView;
                 case 2:
                     rootView = infoLayout(inflater, container);
@@ -214,6 +219,17 @@ public class RestaurantProfile extends AppCompatActivity {
             return rootView;
         }
 
+        private View menuLayout(LayoutInflater inflater, ViewGroup container)
+        {
+            View rootView = inflater.inflate(R.layout.fragment_tab1, container, false);
+            // take the list of dishes form manager
+            manager = RestaurateurJsonManager.getInstance(getActivity());
+            Restaurant restaurant = manager.getRestaurant(restaurantId);
+
+            // set up dishesRecyclerView
+            setupDishesRecyclerView(rootView, restaurant.getDishes());
+            return rootView;
+        }
         private View reviewsLayout(LayoutInflater inflater, ViewGroup container) {
             View rootView = inflater.inflate(R.layout.fragment_tab3, container, false);
             manager = RestaurateurJsonManager.getInstance(getActivity());
@@ -244,7 +260,8 @@ public class RestaurantProfile extends AppCompatActivity {
             return rootView;
         }
 
-        private void setupReviewsRecyclerView(View rootView, List<Review> reviews) {
+        private void setupReviewsRecyclerView(View rootView, List<Review> reviews)
+        {
             RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.reviews_recycler_view);
             RecyclerView.Adapter reviewsAdapter = new ReviewsRecyclerAdapter(getActivity(), reviews);
             if(recyclerView != null){
@@ -253,6 +270,64 @@ public class RestaurantProfile extends AppCompatActivity {
                 mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
                 recyclerView.setLayoutManager(mLinearLayoutManagerVertical);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
+            }
+        }
+
+        private void setupDishesRecyclerView(View rootView, List<Dish> dishes)
+        {
+            // FIXME: quando clicchi su una cardview crasha quando cerca di aprire la pagina del singolo piatto.
+            // FIXME: volendo si può togliere semplicemente mettendo FALSE nel costruttore del dishesRecyclerAdapter
+
+            // set Adapter
+            RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.MenuRecyclerView);
+            RecyclerView.Adapter dishesAdapter = new DishesRecyclerAdapter(getActivity(), dishes, true);
+            if (recyclerView != null)
+            {
+                recyclerView.setAdapter(dishesAdapter);
+
+                // set Layout Manager
+                if((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE)
+                {
+                    // 10 inches
+                    if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+                    {
+                        // 2 columns
+                        GridLayoutManager mGridLayoutManager = new GridLayoutManager(getActivity(), 2);
+                        recyclerView.setLayoutManager(mGridLayoutManager);
+                    }else
+                    {
+                        // 3 columns
+                        GridLayoutManager mGridLayoutManager = new GridLayoutManager(getActivity(), 3);
+                        recyclerView.setLayoutManager(mGridLayoutManager);
+                    }
+
+                } else if((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE)
+                {
+                    // 7 inches
+                    if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+                    {
+                        // 2 columns
+                        GridLayoutManager mGridLayoutManager = new GridLayoutManager(getActivity(), 2);
+                        recyclerView.setLayoutManager(mGridLayoutManager);
+
+                    }else
+                    {
+                        // 1 column
+                        LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(getActivity());
+                        mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
+                        recyclerView.setLayoutManager(mLinearLayoutManagerVertical);
+                    }
+                }else {
+                    // small and normal screen
+                    // 1 columns
+                    LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(getActivity());
+                    mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
+                    recyclerView.setLayoutManager(mLinearLayoutManagerVertical);
+                }
+
+
+                // set Animator
+                recyclerView.setItemAnimator(new DefaultItemAnimator()); // default animations
             }
         }
 
