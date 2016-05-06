@@ -140,7 +140,7 @@ public class RestaurateurJsonManager {
 
     public Restaurant getRestaurant(String restaurantID){
         for(Restaurant r : this.getDbApp().getRestaurants())
-            if(r.getRestaurantID().compareTo(restaurantID)==0)
+            if(r.getRestaurantID().equals(restaurantID))
                 return r;
         return null;
     }
@@ -398,7 +398,8 @@ public class RestaurateurJsonManager {
             rev1.setUserID(1);
             rev1.setScores(new double[]{8.0,10.0,7.0});
             rev1.setTitle("Splendido locale per studenti");
-            rev1.setText("Il cibo è ottimo e la presenza del wifi garantisce il possibile studio anche a pranzo, i prezzi sono ottimi, consigliato!");
+            rev1.setText("Il cibo è ottimo e la presenza del wifi garantisce il possibile studio anche a pranzo, i prezzi sono ottimi," +
+                    " e inoltre aggiungiamo qualche riga per vedere se funziona la TextView espandibile!!!");
             reviews1.add(rev1);
 
             Review rev2=new Review();
@@ -406,7 +407,7 @@ public class RestaurateurJsonManager {
             rev2.setDate(new Date());
             rev2.setUserID(2);
             rev2.setScores(new double[]{8.0,10.0,7.0});
-            rev2.setTitle("Splendido locale per studenti");
+            rev2.setTitle("Ottimo locale");
             rev2.setText("Servizio rapido");
             reviews1.add(rev2);
 

@@ -104,4 +104,20 @@
     <string name="title_tab_menu">Menu</string>
     <string name="title_tab_reviews">Reviews</string>
     <string name="title_tab_info">Info</string>
+    <string name="general_info">General Info</string>
+    <string name="restaurantName">Restaurant Name</string>
+    <string name="address">Address</string>
+    <string name="university">Nearby University</string>
+    <string name="food_and_ambience">Food and Ambience</string>
+    <string name="Cuisine">Cuisine Type</string>
+    <string name="shortDescription">Short Description</string>
+    <string name="timetables_edit">Timetables</string>
+    <string name="openingHour">Opening Hour</string>
+    <string name="select">Select</string>
+    <string name="closingHour">Closing Hour</string>
+    <string name="timetables_info">Timetables Info</string>
+    <string name="extra_info">Extra Info</string>
+    <string name="payment">Payment Methods</string>
+    <string name="services">Additional Services</string>
+    <string name="reviews_number">Based on 144 reviews</string>
 </resources>

@@ -64,30 +64,39 @@
         tools:context="it.polito.mad.insane.lab3.RestaurantProfile"
         >
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <com.astuetz.PagerSlidingTabStrip
-            android:id="@+id/restaurant_tabs"
-            app:pstsShouldExpand="true"
-            app:pstsTextAllCaps="true"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_alignParentTop="true"/>
-
-            <android.support.v4.view.ViewPager
-                android:id="@+id/container"
-                android:layout_below="@id/restaurant_tabs"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                android:padding="10dp"
-                >
+                android:layout_height="wrap_content">
 
-        </android.support.v4.view.ViewPager>
+                <com.astuetz.PagerSlidingTabStrip
+                    android:id="@+id/restaurant_tabs"
+                    app:pstsShouldExpand="true"
+                    app:pstsTextAllCaps="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_alignParentTop="true"/>
 
-        </RelativeLayout>
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/container"
+                    android:layout_below="@id/restaurant_tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    android:padding="10dp"
+                    >
+
+                </android.support.v4.view.ViewPager>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
     </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>
