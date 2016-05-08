@@ -2,10 +2,12 @@ package it.polito.mad.insane.lab3;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -61,6 +63,7 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
         private TextView title;
         private TextView street;
         private String IDrestaurant;
+        private ImageView img;
 
         private android.view.View.OnClickListener cardViewListener = new View.OnClickListener()
         {
@@ -79,7 +82,7 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
             this.cardView = itemView;
             this.title = (TextView) itemView.findViewById(R.id.restaurant_title);
             this.street = (TextView) itemView.findViewById(R.id.street_restaurant);
-
+            this.img = (ImageView) itemView.findViewById(R.id.image_restaurant);
             // set the onClickListener to the View
             this.cardView.setOnClickListener(cardViewListener);
 
@@ -89,6 +92,7 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
             this.title.setText(current.getProfile().getRestaurantName());
             this.street.setText(current.getProfile().getAddress());
             this.IDrestaurant = current.getRestaurantID();
+            this.img.setImageAlpha(180);//range 0..255
         }
 
 
