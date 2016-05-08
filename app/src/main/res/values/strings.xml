@@ -1,7 +1,7 @@
 <resources>
 
     <string-array name="distance_array">
-        <item> <i>Choose a distance... </i> </item>
+        <item> <i>DISTANCE</i> </item>
         <item>100m</item>
         <item>500m</item>
         <item>1km</item>
@@ -9,7 +9,7 @@
     </string-array>
 
     <string-array name="price_array">
-        <item> <i>Choose a price... </i> </item>
+        <item> <i>PRICE</i> </item>
         <item>5€</item>
         <item>10€</item>
         <item>20€</item>
@@ -17,14 +17,14 @@
     </string-array>
 
     <string-array name="type_array">
-        <item> <i>Choose a cusine type... </i> </item>
+        <item> <i>CUSINE TYPE</i> </item>
         <item>ethnic</item>
         <item>pizza</item>
         <item>pasta</item>
     </string-array>
 
     <string-array name="time_array">
-        <item> <i>Choose a lunch time... </i> </item>
+        <item> <i>LUNCH TIME</i> </item>
         <item>10.00-15.00</item>
         <item>15.00-19.00</item>
         <item>19.00-23.00</item>
