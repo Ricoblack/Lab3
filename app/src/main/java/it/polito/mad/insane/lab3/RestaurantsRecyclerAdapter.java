@@ -64,6 +64,9 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
         private TextView street;
         private String IDrestaurant;
         private ImageView img;
+        private TextView typeCausine;
+        private TextView avgFinalScore;
+        private TextView numReview;
 
         private android.view.View.OnClickListener cardViewListener = new View.OnClickListener()
         {
@@ -83,6 +86,9 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
             this.title = (TextView) itemView.findViewById(R.id.restaurant_title);
             this.street = (TextView) itemView.findViewById(R.id.street_restaurant);
             this.img = (ImageView) itemView.findViewById(R.id.image_restaurant);
+            this.typeCausine = (TextView) itemView.findViewById(R.id.type_cusine);
+            this.avgFinalScore = (TextView) itemView.findViewById(R.id.review_finalscore);
+            this.numReview = (TextView) itemView.findViewById(R.id.num_reviews);
             // set the onClickListener to the View
             this.cardView.setOnClickListener(cardViewListener);
 
@@ -93,6 +99,9 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
             this.street.setText(current.getProfile().getAddress());
             this.IDrestaurant = current.getRestaurantID();
             this.img.setImageAlpha(180);//range 0..255
+            this.typeCausine.setText(current.getProfile().getCuisineType());
+            this.avgFinalScore.setText(Double.toString(current.getAvgFinalScore()));
+            this.numReview.setText(Integer.toString(current.getReviews().size()));
         }
 
 
