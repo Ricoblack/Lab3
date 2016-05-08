@@ -54,7 +54,26 @@ public class HomeConsumer extends AppCompatActivity {
             }
         });
 
-        setUpRestaurantsRecycler(manager.getRestaurants());
+
+
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+
+        if(extras==null){
+            //No filtering needed
+            setUpRestaurantsRecycler(manager.getRestaurants());
+
+        }
+        else {
+            //If coming from filter activity...
+            List<Restaurant> listaFiltrata = manager.getAdvancedFilteredRestaurants(extras.getString("distanceValue"),extras
+            .getString("priceValue"),extras.getString("typeValue"),extras.getString("timeValue"));
+
+            setUpRestaurantsRecycler(listaFiltrata);
+        }
+
+
+
     }
 
     @Override
@@ -69,12 +88,15 @@ public class HomeConsumer extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        //int id = item.getItemId();
+        int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
+        if (id == R.id.activity_filtro) {
+            Intent i = new Intent(this,FilterActivity.class);
+            startActivity(i);
+        }
+
+        finish();
 
 
 

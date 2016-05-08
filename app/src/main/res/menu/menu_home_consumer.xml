@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="it.polito.mad.insane.lab3.HomeConsumer">
     <item
-        android:id="@+id/activity_renato_michele"
+        android:id="@+id/activity_filtro"
         android:orderInCategory="100"
-        android:title="ProfiloRistorante"
-        app:showAsAction="never" />
+        android:title="Filtra"
+        app:showAsAction="always" />
 
 
 </menu>

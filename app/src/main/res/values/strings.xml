@@ -1,4 +1,36 @@
 <resources>
+
+    <string-array name="distance_array">
+        <item> <i>Choose a distance... </i> </item>
+        <item>100m</item>
+        <item>500m</item>
+        <item>1km</item>
+        <item>2km</item>
+    </string-array>
+
+    <string-array name="price_array">
+        <item> <i>Choose a price... </i> </item>
+        <item>5€</item>
+        <item>10€</item>
+        <item>20€</item>
+        <item>50€</item>
+    </string-array>
+
+    <string-array name="type_array">
+        <item> <i>Choose a cusine type... </i> </item>
+        <item>ethnic</item>
+        <item>pizza</item>
+        <item>pasta</item>
+    </string-array>
+
+    <string-array name="time_array">
+        <item> <i>Choose a lunch time... </i> </item>
+        <item>10.00-15.00</item>
+        <item>15.00-19.00</item>
+        <item>19.00-23.00</item>
+    </string-array>
+
+
     <string name="app_name">Lab3</string>
     <string name="quantity_available">Availability:</string>
     <string name="action_settings">Settings</string>

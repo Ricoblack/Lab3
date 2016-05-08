@@ -10,20 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="it.polito.mad.insane.lab3.FilterActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        >
-
-        <SearchView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/searchView"
-            android:layout_alignParentTop="true"
-            android:background="@color/white"/>
-
-    </RelativeLayout>
 
     <Spinner
         android:id="@+id/distance_filter"
@@ -53,4 +39,30 @@
         android:layout_weight="1">
     </Spinner>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/resetButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RESET"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/applyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="APPLY"
+            android:layout_alignBaseline="@+id/resetButton"
+            android:layout_alignBottom="@+id/resetButton"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            />
+
+    </RelativeLayout>
 </LinearLayout>
+

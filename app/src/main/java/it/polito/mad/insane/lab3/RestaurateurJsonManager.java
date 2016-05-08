@@ -159,6 +159,49 @@ public class RestaurateurJsonManager {
         return restaurants;
     }
 
+    public List<Restaurant> getAdvancedFilteredRestaurants(String distanceValue, String priceValue, String typeValue, String timeValue) {
+        ArrayList<Restaurant> restaurants=new ArrayList<Restaurant>();
+
+        //finds restaurant whose values respect filtering
+        for(Restaurant r : this.getRestaurants()){
+
+            if(distanceValue.equals("")==false){
+                //check if respects distance contraint
+                //TODO: GESTIRE LA POSIZIONE E LA RELATIVA DISTANZA
+            }
+
+            if(priceValue.equals("")==false){
+                if(checkIfRespectsPriceConstraint(r,distanceValue)==false) continue;
+            }
+
+            if(typeValue.equals("")==false){
+                if(checkIfRespectsTypeConstraint(r,typeValue)==false) continue;
+            }
+
+            if(timeValue.equals("")==false){
+                if(checkIfRespectsTimeConstraint(r,timeValue)==false) continue;
+
+            }
+
+            restaurants.add(r);
+        }
+
+        return restaurants;
+
+    }
+
+    private boolean checkIfRespectsTimeConstraint(Restaurant r, String timeValue) {
+        return true;
+    }
+
+    private boolean checkIfRespectsTypeConstraint(Restaurant r, String typeValue) {
+        return true;
+    }
+
+    private boolean checkIfRespectsPriceConstraint(Restaurant r, String distanceValue) {
+        return true;
+    }
+
 
     /**
      * Created by carlocaramia on 09/04/16.
