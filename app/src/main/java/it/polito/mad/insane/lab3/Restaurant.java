@@ -1,5 +1,7 @@
 package it.polito.mad.insane.lab3;
 
+import android.location.Location;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,14 +18,16 @@ public class Restaurant {
     private double[] totalScores = new double[N_SCORES];
     private double[] avgScores = new double[N_SCORES];
     private double avgFinalScore;
+    private Location location;
 
     public Restaurant(){}
 
-    public Restaurant(String restaurantID, RestaurateurProfile profile, List<Review> reviews, List<Dish> dishes) {
+    public Restaurant(String restaurantID, RestaurateurProfile profile, List<Review> reviews, List<Dish> dishes, Location location) {
         this.profile = profile;
         this.reviews = reviews;
         this.dishes = dishes;
         this.restaurantID = restaurantID;
+        this.location=location;
 
         // calcolo a priori punteggio del ristorante. quando avremo il server sarebbe conveniente farlo sul server per ridurre
         // la quantita' di calcoli sul client. in questo caso ogni activity fa una semplice get invece di calcolare ogni volta il punteggio
@@ -82,5 +86,13 @@ public class Restaurant {
     }
     public double[] getTotalScores (){
         return this.totalScores;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }

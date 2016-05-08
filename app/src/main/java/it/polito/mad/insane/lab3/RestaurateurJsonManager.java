@@ -2,6 +2,7 @@ package it.polito.mad.insane.lab3;
 
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.location.Location;
 
 import com.google.gson.Gson;
 
@@ -13,6 +14,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,6 +31,7 @@ public class RestaurateurJsonManager {
     private static RestaurateurJsonManager instance = null;
     private static DbApp dbApp;
     private Context myContext;
+    private Location location;  //setto il polito come location dove cercare i ristoranti
 
     public static RestaurateurJsonManager getInstance(Context myContext)
     {
@@ -39,6 +44,9 @@ public class RestaurateurJsonManager {
     {
         RestaurateurJsonManager.dbApp = new DbApp();
         this.myContext=myContext;
+        this.location=new Location("me");
+        location.setLatitude(45.064480);
+        location.setLongitude(7.660290);
 
         //Se l'app è aperta per la prima volta non c'è un json, qui lo creo e lo riempio con dati random
         //Altrimenti recupero il json salvato
@@ -168,10 +176,11 @@ public class RestaurateurJsonManager {
             if(distanceValue.equals("")==false){
                 //check if respects distance contraint
                 //TODO: GESTIRE LA POSIZIONE E LA RELATIVA DISTANZA
+                if(checkIfRespectsDistanceConstraint(r,distanceValue)==false) continue;
             }
 
             if(priceValue.equals("")==false){
-                if(checkIfRespectsPriceConstraint(r,distanceValue)==false) continue;
+                if(checkIfRespectsPriceConstraint(r,priceValue)==false) continue;
             }
 
             if(typeValue.equals("")==false){
@@ -190,16 +199,60 @@ public class RestaurateurJsonManager {
 
     }
 
+    private boolean checkIfRespectsDistanceConstraint(Restaurant r, String distanceValue) {
+
+        String subString=distanceValue.substring(0,distanceValue.length()-1);
+        float distance=Float.parseFloat(subString);
+
+        if(r.getLocation().distanceTo(this.location)<=distance) return true;
+
+
+        return false;
+    }
+
     private boolean checkIfRespectsTimeConstraint(Restaurant r, String timeValue) {
-        return true;
+
+        String[] array=timeValue.split("-");
+        String startTimeString=array[0];
+        String endTimeString=array[1];
+
+        DateFormat df=new SimpleDateFormat("HH.mm");
+        Date startTimeDate=new Date();
+        Date endTimeDate=new Date();
+
+        try {
+            startTimeDate=df.parse(startTimeString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        try {
+            endTimeDate=df.parse(endTimeString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if(r.getProfile().getOpeningHour().getHours()>=startTimeDate.getHours() &&
+                r.getProfile().getClosingHour().getHours()<=endTimeDate.getHours()) return true;
+
+        return false;
     }
 
     private boolean checkIfRespectsTypeConstraint(Restaurant r, String typeValue) {
-        return true;
+
+        if(r.getProfile().getCuisineType().toLowerCase().equals(typeValue.toLowerCase())) return true;
+        return false;
     }
 
-    private boolean checkIfRespectsPriceConstraint(Restaurant r, String distanceValue) {
-        return true;
+    private boolean checkIfRespectsPriceConstraint(Restaurant r, String priceValue) {
+
+        //check if exists at least one dish that costs less that price
+        String subString=priceValue.substring(0,priceValue.length()-1);
+        int price=Integer.parseInt(subString);
+        for(Dish d : r.getDishes()){
+            if(d.getPrice()<=price) return true;
+        }
+
+        return false;
     }
 
 
@@ -503,13 +556,26 @@ public class RestaurateurJsonManager {
             rev6.setText("Posto molto centrale e comodo, ma i prezzi sono troppo alti");
             reviews3.add(rev6);
 
+            //Creazione locations dei ristoranti
+            Location loc1=new Location("001");
+            loc1.setLatitude(45.064136);
+            loc1.setLongitude(7.659370);
+
+            Location loc2=new Location("002");
+            loc2.setLatitude(45.064605);
+            loc2.setLongitude(7.668833);
+
+            Location loc3=new Location("003");
+            loc3.setLatitude(45.064151);
+            loc3.setLongitude(7.673167);
+
             //CREAZIONE RISTORANTI
 
             this.restaurants=new ArrayList<Restaurant>();
 
-            Restaurant restaurant1=new Restaurant("001", profile, reviews1, dishes1);
-            Restaurant restaurant2=new Restaurant("002",profile2,reviews2,dishes2);
-            Restaurant restaurant3=new Restaurant("003",profile3,reviews3,dishes3);
+            Restaurant restaurant1=new Restaurant("001", profile, reviews1, dishes1,loc1);
+            Restaurant restaurant2=new Restaurant("002",profile2,reviews2,dishes2,loc2);
+            Restaurant restaurant3=new Restaurant("003",profile3,reviews3,dishes3,loc3);
 
             this.restaurants.add(restaurant1);
             this.restaurants.add(restaurant2);

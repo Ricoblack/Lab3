@@ -66,10 +66,16 @@ public class HomeConsumer extends AppCompatActivity {
         }
         else {
             //If coming from filter activity...
-            List<Restaurant> listaFiltrata = manager.getAdvancedFilteredRestaurants(extras.getString("distanceValue"),extras
-            .getString("priceValue"),extras.getString("typeValue"),extras.getString("timeValue"));
+            if (extras.getString("distanceValue") != null) {
+                List<Restaurant> listaFiltrata = manager.getAdvancedFilteredRestaurants(extras.getString("distanceValue"),extras
+                        .getString("priceValue"),extras.getString("typeValue"),extras.getString("timeValue"));
 
-            setUpRestaurantsRecycler(listaFiltrata);
+                setUpRestaurantsRecycler(listaFiltrata);
+            }
+            else {
+                setUpRestaurantsRecycler(manager.getRestaurants());
+            }
+
         }
 
 
