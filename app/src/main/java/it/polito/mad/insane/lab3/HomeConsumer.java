@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -33,16 +34,25 @@ public class HomeConsumer extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        if (fab != null) {
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+        SearchView sv = (SearchView) findViewById(R.id.searchView);
+
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(newText.equals("")) setUpRestaurantsRecycler(manager.getRestaurants());
+                else {
+                    List<Restaurant> listaFiltrata = manager.getFilteredRestaurants(newText);
+                    setUpRestaurantsRecycler(listaFiltrata);
                 }
-            });
-        }
+
+                return true;
+            }
+        });
 
         setUpRestaurantsRecycler(manager.getRestaurants());
     }
@@ -59,18 +69,14 @@ public class HomeConsumer extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        //int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
 //        if (id == R.id.action_settings) {
 //            return true;
 //        }
 
-        if(id == R.id.activity_renato_michele)
-        {
-            Intent intent = new Intent(HomeConsumer.this, RestaurantProfile.class);
-            startActivity(intent);
-        }
+
 
         return super.onOptionsItemSelected(item);
     }

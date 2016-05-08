@@ -145,6 +145,19 @@ public class RestaurateurJsonManager {
         return null;
     }
 
+    public List<Restaurant> getFilteredRestaurants(String hint) {
+        ArrayList<Restaurant> restaurants=new ArrayList<Restaurant>();
+
+        //find restaurants whose name includes 'hint' string
+        for (Restaurant r : this.getRestaurants()){
+
+            if(r.getProfile().getRestaurantName().toLowerCase().contains(hint.toLowerCase())){
+                restaurants.add(r);
+            }
+        }
+
+        return restaurants;
+    }
 
 
     /**
