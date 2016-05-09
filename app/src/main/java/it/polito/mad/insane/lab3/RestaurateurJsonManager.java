@@ -305,60 +305,60 @@ public class RestaurateurJsonManager {
             ArrayList<Dish> dishes3=new ArrayList<Dish>();
 
             //ristorante1
-            Dish dish1 = new Dish("0","Margherita", "La classica delle classiche", null, 5.50, 100);
+            Dish dish1 = new Dish("0","Margherita", "La classica delle classiche", null, 5.50, 100, false);
             dishes1.add(dish1);
 
-            Dish dish2 = new Dish("1","Marinara", "Occhio all'aglio!", null, 2.50, 200);
+            Dish dish2 = new Dish("1","Marinara", "Occhio all'aglio!", null, 2.50, 200, false);
             dishes1.add(dish2);
 
-            Dish dish3 = new Dish("2","Tonno", "Il gusto in una parola", null, 3.50, 300);
+            Dish dish3 = new Dish("2","Tonno", "Il gusto in una parola", null, 3.50, 300, false);
             dishes1.add(dish3);
 
-            Dish dish4 = new Dish("3","Politecnico", "Solo per veri ingegneri", null, 4.50, 104);
+            Dish dish4 = new Dish("3","Politecnico", "Solo per veri ingegneri", null, 4.50, 104, false);
             dishes1.add(dish4);
 
-            Dish dish5 = new Dish("4","30L", "Il nome dice tutto: imperdibile", null, 5.55, 150);
+            Dish dish5 = new Dish("4","30L", "Il nome dice tutto: imperdibile", null, 5.55, 150, false);
             dishes1.add(dish5);
 
-            Dish dish6 = new Dish("5","Hilary", "Dedicata ad una vecchia amica", null, 5.55, 150);
+            Dish dish6 = new Dish("5","Hilary", "Dedicata ad una vecchia amica", null, 5.55, 150, false);
             dishes1.add(dish6);
 
-            Dish dish7 = new Dish("6","Carlo", "Pomodoro e pesto, il mix perfetto", null, 5.55, 150);
+            Dish dish7 = new Dish("6","Carlo", "Pomodoro e pesto, il mix perfetto", null, 5.55, 150, false);
             dishes1.add(dish7);
 
-            Dish dish8 = new Dish("7","Federico", "La vera pizza napoletana, spessa al punto giusto", null, 5.55, 150);
+            Dish dish8 = new Dish("7","Federico", "La vera pizza napoletana, spessa al punto giusto", null, 5.55, 150, false);
             dishes1.add(dish8);
 
-            Dish dish9 = new Dish("8","Michele", "Pomodoro, patatine, wurstel, senape", null, 5.55, 150);
+            Dish dish9 = new Dish("8","Michele", "Pomodoro, patatine, wurstel, senape", null, 5.55, 150, false);
             dishes1.add(dish9);
 
-            Dish dish10 = new Dish("9","Renato", "Pizza e pasta: mai dire mai al gusto!", null, 5.55, 150);
+            Dish dish10 = new Dish("9","Renato", "Pizza e pasta: mai dire mai al gusto!", null, 5.55, 150, false);
             dishes1.add(dish10);
 
             //ristorante2
-            Dish dish11 = new Dish("0","Pasta al ragù", "pasta al ragu", null, 5.50, 100);
+            Dish dish11 = new Dish("0","Pasta al ragù", "pasta al ragu", null, 5.50, 100, false);
             dishes2.add(dish11);
 
-            Dish dish12 = new Dish("1","Pasta al pesto", "la vera genovese", null, 2.50, 200);
+            Dish dish12 = new Dish("1","Pasta al pesto", "la vera genovese", null, 2.50, 200, false);
             dishes2.add(dish12);
 
-            Dish dish13 = new Dish("2","Pasta alle olive", "mediterranea", null, 3.50, 300);
+            Dish dish13 = new Dish("2","Pasta alle olive", "mediterranea", null, 3.50, 300, false);
             dishes2.add(dish13);
 
-            Dish dish14 = new Dish("3","Pasta al burro", "povera ma gustosa", null, 4.50, 104);
+            Dish dish14 = new Dish("3","Pasta al burro", "povera ma gustosa", null, 4.50, 104, false);
             dishes2.add(dish14);
 
             //ristorante3
-            Dish dish15 = new Dish("0","hamburger con patate", "vieni a provarlo", null, 5.50, 100);
+            Dish dish15 = new Dish("0","hamburger con patate", "vieni a provarlo", null, 5.50, 100, false);
             dishes3.add(dish15);
 
-            Dish dish16 = new Dish("1","Riso all'inglese", "riso in bianco", null, 2.50, 200);
+            Dish dish16 = new Dish("1","Riso all'inglese", "riso in bianco", null, 2.50, 200, false);
             dishes3.add(dish16);
 
-            Dish dish17 = new Dish("2","Pasta ai 4 formaggi", "mediterranea", null, 3.50, 300);
+            Dish dish17 = new Dish("2","Pasta ai 4 formaggi", "mediterranea", null, 3.50, 300, false);
             dishes3.add(dish17);
 
-            Dish dish18 = new Dish("3","Fiorentina", "per i più coraggiosi", null, 4.50, 104);
+            Dish dish18 = new Dish("3","Fiorentina", "per i più coraggiosi", null, 4.50, 104, false);
             dishes3.add(dish18);
 
 

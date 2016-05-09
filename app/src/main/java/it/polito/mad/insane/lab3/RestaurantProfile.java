@@ -1,11 +1,8 @@
 package it.polito.mad.insane.lab3;
 
-import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -23,15 +20,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
-import android.view.ViewTreeObserver;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
-
-import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
@@ -56,9 +48,9 @@ public class RestaurantProfile extends AppCompatActivity {
 
     private ViewPager mViewPager;
     static private RestaurateurJsonManager manager = null;
+    private static String restaurantId;
+    private static DishesRecyclerAdapter dishesAdapter = null;
 
-    //FIXME: come recuperiamo id ristorante?
-    private static String restaurantId = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -71,7 +63,8 @@ public class RestaurantProfile extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         manager = RestaurateurJsonManager.getInstance(this);
-        restaurantId = getIntent().getStringExtra("ID");
+        if(getIntent().getStringExtra("ID") != null)
+            restaurantId = getIntent().getStringExtra("ID");
 
 //        //FIXME: va messo qui o nel caricamento del layout dell'apposito fragment?
 //        setupReviewsRecyclerView();
@@ -92,6 +85,29 @@ public class RestaurantProfile extends AppCompatActivity {
         if (tabsStrip != null) {
             tabsStrip.setViewPager(mViewPager);
         }
+
+//        final TextView chartSelection = (TextView) findViewById(R.id.chart_selection);
+//        if (chartSelection != null) {
+//            chartSelection.setOnClickListener(new View.OnClickListener() {
+//
+//                @Override
+//                public void onClick(View v) {
+//
+//                    Intent intent = new Intent(RestaurantProfile.this, MakeReservation.class);
+//                    startActivity(intent);
+//
+////                    String data = "";
+////                    int count = 0;
+////                    for (Dish d : dishesAdapter.getmData()) {
+////                        if (d.isSelected()) {
+////                            count++;
+////                            data = data + "\n" + d.getName();
+////                        }
+////                    }
+////                    chartSelection.setText(String.format("%d items selected. Go to chart", count));
+//                }
+//            });
+//        }
     }
 
 
@@ -116,6 +132,14 @@ public class RestaurantProfile extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+//    public void editFooter(int nSelected, double reservationPrice) {
+//        TextView tv = (TextView) findViewById(R.id.chart_selection);
+//        if (tv != null) {
+//            tv.setText(String.format("%d items. Total: %s€", nSelected, reservationPrice));
+//            tv.setVisibility(View.VISIBLE);
+//        }
+//    }
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -198,9 +222,6 @@ public class RestaurantProfile extends AppCompatActivity {
             switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
                 case 1:
                     rootView = menuLayout(inflater, container);
-//                    rootView = inflater.inflate(R.layout.fragment_tab1, container, false);
-//                    TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-//                    textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
                     return rootView;
                 case 2:
                     rootView = infoLayout(inflater, container);
@@ -215,6 +236,8 @@ public class RestaurantProfile extends AppCompatActivity {
 
         private View infoLayout(LayoutInflater inflater, ViewGroup container) {
             View rootView = inflater.inflate(R.layout.fragment_tab2, container, false);
+//            TextView tv = (TextView) getActivity().findViewById(R.id.chart_selection);
+//            tv.setVisibility(View.GONE);
             loadProfileData(rootView);
             return rootView;
         }
@@ -222,16 +245,23 @@ public class RestaurantProfile extends AppCompatActivity {
         private View menuLayout(LayoutInflater inflater, ViewGroup container)
         {
             View rootView = inflater.inflate(R.layout.fragment_tab1, container, false);
+//            TextView tv = (TextView) getActivity().findViewById(R.id.chart_selection);
+//            tv.setVisibility(View.VISIBLE);
             // take the list of dishes form manager
             manager = RestaurateurJsonManager.getInstance(getActivity());
-            Restaurant restaurant = manager.getRestaurant(restaurantId);
+            final Restaurant restaurant = manager.getRestaurant(restaurantId);
 
             // set up dishesRecyclerView
             setupDishesRecyclerView(rootView, restaurant.getDishes());
+
             return rootView;
         }
+
         private View reviewsLayout(LayoutInflater inflater, ViewGroup container) {
             View rootView = inflater.inflate(R.layout.fragment_tab3, container, false);
+//            TextView tv = (TextView) getActivity().findViewById(R.id.chart_selection);
+//            tv.setVisibility(View.GONE);
+
             manager = RestaurateurJsonManager.getInstance(getActivity());
 
             Restaurant restaurant = manager.getRestaurant(restaurantId);
@@ -280,7 +310,7 @@ public class RestaurantProfile extends AppCompatActivity {
 
             // set Adapter
             RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.MenuRecyclerView);
-            RecyclerView.Adapter dishesAdapter = new DishesRecyclerAdapter(getActivity(), dishes, true);
+            dishesAdapter = new DishesRecyclerAdapter(getActivity(), dishes, true);
             if (recyclerView != null)
             {
                 recyclerView.setAdapter(dishesAdapter);

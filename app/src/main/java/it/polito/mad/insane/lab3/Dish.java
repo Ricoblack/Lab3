@@ -12,6 +12,7 @@ public class Dish implements Serializable{
     private String photoPath;
     private double price;
     private int availability_qty;
+    private boolean isSelected;
 
 
     public Dish()
@@ -22,8 +23,9 @@ public class Dish implements Serializable{
         this.photoPath= null;
         this.price = 0;
         this.availability_qty = 0;
+        this.isSelected = false;
     }
-    public Dish(String ID, String name, String description, String photoPath, double price, int availability_qty)
+    public Dish(String ID, String name, String description, String photoPath, double price, int availability_qty, boolean selected)
     {
         this.ID = ID;
         this.name = name;
@@ -31,7 +33,7 @@ public class Dish implements Serializable{
         this.photoPath= photoPath;
         this.price = price;
         this.availability_qty = availability_qty;
-
+        this.isSelected = selected;
     }
 
 
@@ -96,4 +98,11 @@ public class Dish implements Serializable{
     }
 
 
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
 }
