@@ -6,20 +6,25 @@
     android:layout_height="match_parent"
     tools:context="it.polito.mad.insane.lab3.RestaurantProfile$PlaceholderFragment">
 
+    <TextView
+        android:id="@+id/show_reservation_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/empty_chart"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:background="@color/colorAccent"
+        android:padding="10dp"
+        android:layout_weight="0.5"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/MenuRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="9"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SHOW SELECTED"
-        android:textColor="#ffffff"
-        android:background="@color/colorAccent"
-        android:padding="10dp"
-        android:layout_weight="1"
-        android:gravity="center"/>
+
 
 </LinearLayout>

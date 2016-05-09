@@ -221,4 +221,5 @@
     <string name="ok">Ok</string>
     <string name="remove">Remove</string>
     <string name="dont_remove">Don\'t remove</string>
+    <string name="empty_chart">The chart is empty</string>
 </resources>

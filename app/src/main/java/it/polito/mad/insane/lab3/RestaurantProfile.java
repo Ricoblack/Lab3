@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -66,9 +67,6 @@ public class RestaurantProfile extends AppCompatActivity {
         if(getIntent().getStringExtra("ID") != null)
             restaurantId = getIntent().getStringExtra("ID");
 
-//        //FIXME: va messo qui o nel caricamento del layout dell'apposito fragment?
-//        setupReviewsRecyclerView();
-
 //        NestedScrollView scrollView = (NestedScrollView) findViewById (R.id.scrollView);
 //        scrollView.setFillViewport (true);
         // Create the adapter that will return a fragment for each of the three
@@ -85,29 +83,6 @@ public class RestaurantProfile extends AppCompatActivity {
         if (tabsStrip != null) {
             tabsStrip.setViewPager(mViewPager);
         }
-
-//        final TextView chartSelection = (TextView) findViewById(R.id.chart_selection);
-//        if (chartSelection != null) {
-//            chartSelection.setOnClickListener(new View.OnClickListener() {
-//
-//                @Override
-//                public void onClick(View v) {
-//
-//                    Intent intent = new Intent(RestaurantProfile.this, MakeReservation.class);
-//                    startActivity(intent);
-//
-////                    String data = "";
-////                    int count = 0;
-////                    for (Dish d : dishesAdapter.getmData()) {
-////                        if (d.isSelected()) {
-////                            count++;
-////                            data = data + "\n" + d.getName();
-////                        }
-////                    }
-////                    chartSelection.setText(String.format("%d items selected. Go to chart", count));
-//                }
-//            });
-//        }
     }
 
 
@@ -133,13 +108,15 @@ public class RestaurantProfile extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//    public void editFooter(int nSelected, double reservationPrice) {
-//        TextView tv = (TextView) findViewById(R.id.chart_selection);
-//        if (tv != null) {
-//            tv.setText(String.format("%d items. Total: %s€", nSelected, reservationPrice));
-//            tv.setVisibility(View.VISIBLE);
-//        }
-//    }
+    public void editShowButton(int nSelected, double reservationPrice) {
+        TextView tv = (TextView) findViewById(R.id.show_reservation_button);
+        if (tv != null) {
+            if(nSelected != 0)
+                tv.setText(String.format("GO TO CHART           %d items - %s€", nSelected, reservationPrice));
+            else
+                tv.setText(R.string.empty_chart);
+        }
+    }
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -249,10 +226,24 @@ public class RestaurantProfile extends AppCompatActivity {
 //            tv.setVisibility(View.VISIBLE);
             // take the list of dishes form manager
             manager = RestaurateurJsonManager.getInstance(getActivity());
-            final Restaurant restaurant = manager.getRestaurant(restaurantId);
+            Restaurant restaurant = manager.getRestaurant(restaurantId);
 
             // set up dishesRecyclerView
-            setupDishesRecyclerView(rootView, restaurant.getDishes());
+            final RecyclerView rv = setupDishesRecyclerView(rootView, restaurant.getDishes());
+            TextView tv = (TextView) rootView.findViewById((R.id.show_reservation_button));
+            if(tv != null) {
+                tv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), MakeReservation.class);
+                        if (rv != null) {
+                            intent.putExtra("reservationList",
+                                    (Serializable) ((DishesRecyclerAdapter) rv.getAdapter()).getReservationList());
+                        }
+                        startActivity(intent);
+                    }
+                });
+            }
 
             return rootView;
         }
@@ -303,7 +294,7 @@ public class RestaurantProfile extends AppCompatActivity {
             }
         }
 
-        private void setupDishesRecyclerView(View rootView, List<Dish> dishes)
+        private RecyclerView setupDishesRecyclerView(View rootView, List<Dish> dishes)
         {
             // FIXME: quando clicchi su una cardview crasha quando cerca di aprire la pagina del singolo piatto.
             // FIXME: volendo si può togliere semplicemente mettendo FALSE nel costruttore del dishesRecyclerAdapter
@@ -358,7 +349,10 @@ public class RestaurantProfile extends AppCompatActivity {
 
                 // set Animator
                 recyclerView.setItemAnimator(new DefaultItemAnimator()); // default animations
+                return recyclerView;
             }
+
+            return null;
         }
 
         private void loadProfileData(View rootView) {

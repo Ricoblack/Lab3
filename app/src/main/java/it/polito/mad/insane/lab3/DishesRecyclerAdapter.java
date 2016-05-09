@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -80,6 +81,10 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
 
     public List<Dish> getmData(){
         return mData;
+    }
+
+    public List<Dish> getReservationList() {
+        return reservationList;
     }
 
     public class DishesViewHolder extends RecyclerView.ViewHolder
@@ -158,7 +163,11 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
                         selectedPrice.setText(String.format("%s€",
                                 String.valueOf(selectedQuantities[pos] * mData.get(pos).getPrice())));
 
-//                        reservationPrice -= mData.get(pos).getPrice();
+                        reservationPrice -= mData.get(pos).getPrice();
+                        reservationQty--;
+                        reservationList.add(mData.get(pos));
+
+                        ((RestaurantProfile) context).editShowButton(reservationQty, reservationPrice);
                     }
                 }
             });
@@ -172,16 +181,14 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
                         selectedPrice.setText(String.format("%s€",
                                 String.valueOf(selectedQuantities[pos] * mData.get(pos).getPrice())));
 
-//                        reservationPrice += mData.get(pos).getPrice();
+                        reservationPrice += mData.get(pos).getPrice();
+                        reservationQty++;
+                        reservationList.add(mData.get(pos));
 
+                        ((RestaurantProfile) context).editShowButton(reservationQty, reservationPrice);
                     }
                 }
             });
-
-
-//            String imgPath = current.getPhotoPath();
-//            if(imgPath != null)
-//                this.dishPhoto.setImageURI(Uri.parse(imgPath));
         }
     }
 }
