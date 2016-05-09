@@ -21,34 +21,39 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:padding="5dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context="it.polito.mad.insane.lab3.HomeConsumer"
         tools:showIn="@layout/activity_home_consumer">
 
          <SearchView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/searchView"
-            android:layout_alignParentTop="true"/>
+             android:id="@+id/searchView"
+             android:layout_width="match_parent"
+             android:layout_height="0dp"
+             android:layout_weight="1"
+             />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/RestaurateurRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/searchView"
-            android:layout_weight="2">
+            android:layout_height="0dp"
+            android:layout_weight="3">
 
         </android.support.v7.widget.RecyclerView>
 
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/orderSpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/RestaurateurRecyclerView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true">
         </android.support.v7.widget.AppCompatSpinner>
@@ -58,11 +63,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="APPLICA"
-            android:layout_above="@+id/orderSpinner"
-            android:layout_toRightOf="@+id/orderSpinner"
-            android:layout_toEndOf="@+id/orderSpinner" />
+            android:textColor="@color/white"
+            android:background="@color/colorAccent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+             />
 
+        </RelativeLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

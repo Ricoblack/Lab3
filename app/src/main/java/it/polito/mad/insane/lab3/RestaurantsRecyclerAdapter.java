@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -81,6 +82,9 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
         };
 
         public RestaurantsViewHolder(View itemView) {
+
+            //TODO ricordare di inserire la distanza in modo dinamico
+
             super(itemView);
             this.cardView = itemView;
             this.title = (TextView) itemView.findViewById(R.id.restaurant_title);
@@ -100,7 +104,8 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
             this.IDrestaurant = current.getRestaurantID();
             this.img.setImageAlpha(180);//range 0..255
             this.typeCausine.setText(current.getProfile().getCuisineType());
-            this.avgFinalScore.setText(Double.toString(current.getAvgFinalScore()));
+            DecimalFormat df = new DecimalFormat("0.0");
+            this.avgFinalScore.setText(df.format(current.getAvgFinalScore()));
             this.numReview.setText(Integer.toString(current.getReviews().size()));
         }
 

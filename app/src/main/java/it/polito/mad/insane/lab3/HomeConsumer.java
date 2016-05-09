@@ -139,6 +139,7 @@ public class HomeConsumer extends AppCompatActivity {
 
     private void setUpRestaurantsRecycler(List<Restaurant> restaurants)
     {
+        //TODO nel caso in cui l'app venga utilizzati su cell con schermo piccolo utilizzare il linearLayout, nel caso di schermi grandi(10 pollici non 7) utilizzare griglia a 3
         RecyclerView rV = (RecyclerView) findViewById(R.id.RestaurateurRecyclerView);
 
         RestaurantsRecyclerAdapter adapter = new RestaurantsRecyclerAdapter(this, restaurants);
