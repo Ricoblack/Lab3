@@ -2,11 +2,13 @@ package it.polito.mad.insane.lab3;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,8 +20,12 @@ import android.view.MenuItem;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HomeConsumer extends AppCompatActivity {
@@ -54,7 +60,29 @@ public class HomeConsumer extends AppCompatActivity {
             }
         });
 
+        AppCompatButton applyButton=(AppCompatButton) findViewById(R.id.applyOrdering);
+        applyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Spinner dSpinner = (Spinner) findViewById(R.id.orderSpinner);
+                if(dSpinner.getSelectedItemPosition()==0) {
+                    Toast.makeText(v.getContext(),"Seleziona un ordinamento",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    setUpRestaurantsRecycler(manager.getOrderedRestaurants(dSpinner.getSelectedItem().toString()));
+                }
+            }
+        });
 
+        final Spinner dSpinner = (Spinner) findViewById(R.id.orderSpinner);
+        List<String> orderings = new ArrayList<>();
+        Resources res = getResources();
+        String[] dStrings = res.getStringArray(R.array.order_array);
+        Collections.addAll(orderings, dStrings);
+        MySpinnerAdapter dAdapter = new MySpinnerAdapter(HomeConsumer.this, R.layout.support_simple_spinner_dropdown_item,
+                orderings);
+        dAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        dSpinner.setAdapter(dAdapter);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();

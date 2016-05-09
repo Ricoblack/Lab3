@@ -5,6 +5,7 @@ import android.content.ContextWrapper;
 import android.location.Location;
 
 import com.google.gson.Gson;
+import com.google.gson.internal.bind.CollectionTypeAdapterFactory;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -19,6 +20,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -253,6 +256,26 @@ public class RestaurateurJsonManager {
         }
 
         return false;
+    }
+
+    public List<Restaurant> getOrderedRestaurants(String orderBy) {
+        if(orderBy.toLowerCase().equals("distance")){
+            Collections.sort(this.getRestaurants(), new Comparator<Restaurant>() {
+                @Override
+                public int compare(Restaurant lhs, Restaurant rhs) {
+                    return (int)(location.distanceTo(lhs.getLocation())-location.distanceTo(rhs.getLocation()));
+                }
+            });
+        }
+        else if(orderBy.toLowerCase().equals("score")){
+            Collections.sort(this.getRestaurants(), new Comparator<Restaurant>() {
+                @Override
+                public int compare(Restaurant lhs, Restaurant rhs) {
+                    return (int)(lhs.getAvgFinalScore()-rhs.getAvgFinalScore());
+                }
+            });
+        }
+        return getRestaurants();
     }
 
 
