@@ -98,26 +98,31 @@
             </RelativeLayout>
 
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/relativeLayout_final_score">
             <TextView
                 android:id="@+id/num_reviews"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/relativeLayout_final_score"
                 android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
                 android:paddingLeft="16dp"
                 android:textSize="12sp"
-                android:text="2039"/>
+                android:text="2039 reviews"/>
 
-            <TextView
-                 android:id="@+id/id_review"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_toRightOf="@id/num_reviews"
-                 android:layout_centerVertical="true"
-                 android:textSize="12sp"
-                 android:paddingLeft="16dp"
-                 android:text="reviews"
-                 />
+            </RelativeLayout>
+            <!--<TextView-->
+                 <!--android:id="@+id/id_review"-->
+                 <!--android:layout_width="wrap_content"-->
+                 <!--android:layout_height="wrap_content"-->
+                 <!--android:layout_toRightOf="@id/num_reviews"-->
+                 <!--android:layout_centerVertical="true"-->
+                 <!--android:textSize="12sp"-->
+                 <!--android:paddingLeft="16dp"-->
+                 <!--android:text="reviews"-->
+                 <!--/>-->
 
 
         </RelativeLayout>
