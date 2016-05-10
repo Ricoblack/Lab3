@@ -16,6 +16,7 @@ public class Booking implements Serializable,  Comparable<Booking>
     private List<Dish> dishes = new ArrayList<>();
     private String note;
     private String restaurantID;
+    private double totalPrice;
 
 
     public String getID() {
@@ -62,5 +63,13 @@ public class Booking implements Serializable,  Comparable<Booking>
 
     public void setRestaurantID(String restaurantID) {
         this.restaurantID = restaurantID;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double price){
+        this.totalPrice = price;
     }
 }

@@ -38,6 +38,7 @@ public class MakeReservation extends AppCompatActivity {
     private static RestaurateurJsonManager manager = null;
     private static String restaurantId;
     private static String additionalNotes = "";
+    private static double totalPrice = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class MakeReservation extends AppCompatActivity {
 
         final List<Dish> dishesToDisplay = new ArrayList<>();
         ArrayList<Integer> quantitiesToDisplay = new ArrayList<>();
-        double totalPrice = 0;
+        totalPrice = 0;
         for(int i=0; i < dishes.size(); i++){
             if(quantities[i] != 0){
                 dishesToDisplay.add(dishes.get(i));
@@ -113,6 +114,7 @@ public class MakeReservation extends AppCompatActivity {
         b.setDishes(dishesToDisplay);
         b.setID("001"); //FIXME bisogna creare un campo ID nel db da incrementare ogni volta?
         b.setRestaurantID(restaurantId);
+        b.setTotalPrice(totalPrice);
         EditText et = (EditText) findViewById(R.id.reservation_additional_notes);
         if(et != null){
             additionalNotes = et.getText().toString();
@@ -124,8 +126,9 @@ public class MakeReservation extends AppCompatActivity {
         manager.saveDbApp(); //TODO salvare la prenotazione nel DB
         reservationDate = null;
         additionalNotes = "";
+        totalPrice = 0;
         finish();
-        Intent intent = new Intent(MakeReservation.this, HomeConsumer.class);
+        Intent intent = new Intent(MakeReservation.this, MyReservations.class);
         startActivity(intent);
 
     }

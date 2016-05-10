@@ -97,7 +97,7 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
             this.expandableText.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
-                    if(first){ // here we check if the text is longer than the textview space for the first time. If no, don't need
+                    if(first){ // here we check if the text is longer than the textview space for the first time. If not, don't need
                                // the button "see more"
                         first = false;
                         if(expandableText.getLineCount() < TextViewCompat.getMaxLines(expandableText))
