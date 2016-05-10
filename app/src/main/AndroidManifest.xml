@@ -33,6 +33,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.polito.mad.insane.lab3.RestaurantProfile" />
         </activity>
+        <activity
+            android:name=".MyReservations"
+            android:label="@string/title_activity_my_reservations"
+            android:parentActivityName=".HomeConsumer"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="it.polito.mad.insane.lab3.HomeConsumer" />
+        </activity>
     </application>
 
 </manifest>
