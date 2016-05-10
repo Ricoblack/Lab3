@@ -53,7 +53,32 @@ public class MySpinnerAdapter extends ArrayAdapter<String>
 
     @Override
     public View getView(int pos, View cnvtView, ViewGroup prnt) {
-        return getCustomView(pos, cnvtView, prnt);
+
+        //return getCustomView(pos, cnvtView, prnt);
+        if(pos == 0) {
+
+            LayoutInflater inflater = LayoutInflater.from(this.contextSpinner);
+            View mySpinner = inflater.inflate(R.layout.custom_spinner, prnt,
+                    false);
+
+            ImageView image = (ImageView) mySpinner.findViewById(R.id.spinner_image);
+            image.setVisibility(View.INVISIBLE);
+
+            TextView main_text = (TextView) mySpinner
+                    .findViewById(R.id.name_option);
+            main_text.setText(choices.get(pos));
+
+            return mySpinner;
+        }else{
+            LayoutInflater inflater = LayoutInflater.from(this.contextSpinner);
+            View mySpinner = inflater.inflate(R.layout.custom_spinner, prnt,
+                    false);
+
+            TextView main_text = (TextView) mySpinner.findViewById(R.id.name_option);
+            main_text.setText(choices.get(pos));
+
+            return mySpinner;
+        }
     }
     public View getCustomView(int position, View convertView,
                               ViewGroup parent) {
@@ -77,6 +102,9 @@ public class MySpinnerAdapter extends ArrayAdapter<String>
                 LayoutInflater inflater = LayoutInflater.from(this.contextSpinner);
                 View mySpinner = inflater.inflate(R.layout.custom_spinner, parent,
                         false);
+
+                ImageView image = (ImageView) mySpinner.findViewById(R.id.spinner_image);
+                image.setVisibility(View.INVISIBLE);
 
                 TextView main_text = (TextView) mySpinner.findViewById(R.id.name_option);
                 main_text.setText(choices.get(position));
