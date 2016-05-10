@@ -118,6 +118,7 @@ public class MakeReservation extends AppCompatActivity {
             additionalNotes = et.getText().toString();
             b.setNote(additionalNotes);
         }
+        //TODO decrementare le available quantity dei piatti
 
         manager.getBookings().add(b);
         manager.saveDbApp(); //TODO salvare la prenotazione nel DB

@@ -9,9 +9,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,13 +19,11 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
 {
     private final Context context;
     private List<Dish> mData; // actual data to be displayed
-    private int[] popupsVisibility;
-    private int[] selectedQuantities;
+    private int[] popupsVisibility; //per evitare problemi con le posizioni delle view, memorizzo qui il flag del popup, se visibile o meno
+    private int[] selectedQuantities; //array che contiene le quantita' selezionate di ogni piatto del menu'
     private LayoutInflater mInflater;
-//    private boolean cardView_clickable;
-    private  int reservationQty;
-    private  double reservationPrice;
-//    private List<Dish> reservationList;
+    private  int reservationQty; // quantita' totale di item presenti nella prenotazione in esame
+    private  double reservationPrice; //prezzo totale degli item presenti nella prenotazione in esame
 
     public DishesRecyclerAdapter(Context context, List<Dish> data)
     {
@@ -37,13 +32,12 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
         this.mData = data;
 
         popupsVisibility = new int[data.size()];
-        Arrays.fill(popupsVisibility, View.GONE);
+        Arrays.fill(popupsVisibility, View.GONE); // all'inizio i popup sono tutti invisibili
         selectedQuantities = new int[data.size()];
         Arrays.fill(selectedQuantities, 0);
 
         reservationQty = 0;
         reservationPrice = 0;
-//        reservationList = new ArrayList<>();
     }
 
     /**
@@ -101,8 +95,7 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
 
     public class DishesViewHolder extends RecyclerView.ViewHolder
     {
-        private View cardView;
-        private ImageView dishPhoto;
+//        private ImageView dishPhoto;
         private TextView dishID;
         private TextView dishName;
         private TextView dishDesc;
@@ -120,8 +113,7 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
         public DishesViewHolder(View itemView)
         {
             super(itemView);
-            this.cardView = itemView;
-            this.dishPhoto = (ImageView) itemView.findViewById(R.id.dish_photo);
+//            this.dishPhoto = (ImageView) itemView.findViewById(R.id.dish_photo);
             this.dishID = (TextView) itemView.findViewById(R.id.dish_ID);
             this.dishName = (TextView) itemView.findViewById(R.id.dish_name);
             this.dishDesc =  (TextView) itemView.findViewById(R.id.dish_description);
@@ -143,22 +135,23 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
             this.dishName.setText(current.getName());
             this.dishDesc.setText(current.getDescription());
             this.dishPrice.setText(Double.toString(current.getPrice()));
-            this.dishAvailabQty.setText(Integer.toString(current.getAvailability_qty()));
+            this.dishAvailabQty.setText(Integer.toString(current.getAvailability_qty())); //FIXME togliere questo campo
+                                                                                          // mostrare solo quando non e' disponibile
 
-            this.selectionLayout.setVisibility(popupsVisibility[position]);
-            this.separator.setVisibility(popupsVisibility[position]);
+            this.selectionLayout.setVisibility(popupsVisibility[position]); //layout del popup
+            this.separator.setVisibility(popupsVisibility[position]); //layout della linea separatrice
             this.selectedQuantity.setText(String.valueOf(selectedQuantities[position]));
             this.selectedPrice.setText(String.valueOf(selectedQuantities[position] * mData.get(position).getPrice()));
 
             this.mainLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(popupsVisibility[pos] == View.GONE) {
+                    if(popupsVisibility[pos] == View.GONE) { // al click se il popup è invisibile lo faccio apparire...
                         selectionLayout.setVisibility(View.VISIBLE);
                         separator.setVisibility(View.VISIBLE);
                         popupsVisibility[pos] = View.VISIBLE;
                     }
-                    else {
+                    else { //... se e' visibile lo nascondo
                         selectionLayout.setVisibility(View.GONE);
                         separator.setVisibility(View.INVISIBLE);
                         popupsVisibility[pos] = View.GONE;
@@ -169,23 +162,18 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
             this.minusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(selectedQuantities[pos] != 0) {
+                    if(selectedQuantities[pos] != 0) { // TODO se clicco di nuovo sul menu' nascondo il popup o non faccio nulla?
                         selectedQuantities[pos]--;
                         selectedQuantity.setText(String.valueOf(selectedQuantities[pos]));
-                        selectedPrice.setText(String.format("%s€",
-                                String.valueOf(selectedQuantities[pos] * mData.get(pos).getPrice())));
+                        selectedPrice.setText(String.format("%s€", String.valueOf(selectedQuantities[pos] * mData.get(pos).getPrice())));
 
-                        reservationPrice -= mData.get(pos).getPrice();
-                        reservationQty--;
-//                        reservationList.remove(mData.get(pos));
-
-//                        if(selectedQuantities[pos] == 0)
-//                            reservationList.remove(mData.get(pos));
-
-//                        ((RestaurantProfile) context).editShowButton(reservationQty, reservationPrice);
+                        reservationPrice -= mData.get(pos).getPrice(); //decremento il prezzo totale della prenotazione
+                        reservationQty--; //decremento la quantita' di item della prenotazione
 
                         TextView tv = (TextView) ((RestaurantProfile) context).findViewById(R.id.show_reservation_button);
-                        if (tv != null){
+                        if (tv != null){ // FIXME qui c'e' un bug. quando clicco indietro dalla pagina di prenotazione questa textview
+                                         // risulta sempre null.
+                                         // FIXME aggiustare il layout e conseguentemente questa stampa
                             if(reservationQty != 0)
                                 tv.setText(String.format("GO TO CART           %d items - %s€", reservationQty, reservationPrice));
                             else
@@ -201,16 +189,13 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
                     if(selectedQuantities[pos] != 10) {
                         selectedQuantities[pos]++;
                         selectedQuantity.setText(String.valueOf(selectedQuantities[pos]));
-                        selectedPrice.setText(String.format("%s€",
-                                String.valueOf(selectedQuantities[pos] * mData.get(pos).getPrice())));
+                        selectedPrice.setText(String.format("%s€", String.valueOf(selectedQuantities[pos] * mData.get(pos).getPrice())));
 
-                        reservationPrice += mData.get(pos).getPrice();
-                        reservationQty++;
-//                        if(!reservationList.contains(mData.get(pos)))
-//                            reservationList.add(mData.get(pos));
+                        reservationPrice += mData.get(pos).getPrice(); //incremento il prezzo totale della prenotazione
+                        reservationQty++; //incremento la quantita' di item della prenotazione
 
                         TextView tv = (TextView) ((RestaurantProfile) context).findViewById(R.id.show_reservation_button);
-                        if (tv != null){
+                        if (tv != null){ //FIXME come per il minusButton
                             if(reservationQty != 0)
                                 tv.setText(String.format("GO TO CART           %d items - %s€", reservationQty, reservationPrice));
                             else
