@@ -179,7 +179,7 @@ public class RestaurateurJsonManager {
 
             if(distanceValue.equals("")==false){
                 //check if respects distance contraint
-                //TODO: GESTIRE LA POSIZIONE E LA RELATIVA DISTANZA
+
                 if(checkIfRespectsDistanceConstraint(r,distanceValue)==false) continue;
             }
 
@@ -260,8 +260,10 @@ public class RestaurateurJsonManager {
     }
 
     public List<Restaurant> getOrderedRestaurants(String orderBy) {
+        List<Restaurant> lista=getRestaurants();
+
         if(orderBy.toLowerCase().equals("distance")){
-            Collections.sort(this.getRestaurants(), new Comparator<Restaurant>() {
+            Collections.sort(lista, new Comparator<Restaurant>() {
                 @Override
                 public int compare(Restaurant lhs, Restaurant rhs) {
                     return (int)(location.distanceTo(lhs.getLocation())-location.distanceTo(rhs.getLocation()));
@@ -269,14 +271,14 @@ public class RestaurateurJsonManager {
             });
         }
         else if(orderBy.toLowerCase().equals("score")){
-            Collections.sort(this.getRestaurants(), new Comparator<Restaurant>() {
+            Collections.sort(lista, new Comparator<Restaurant>() {
                 @Override
                 public int compare(Restaurant lhs, Restaurant rhs) {
                     return (int)(lhs.getAvgFinalScore()-rhs.getAvgFinalScore());
                 }
             });
         }
-        return getRestaurants();
+        return lista;
     }
 
 
@@ -598,8 +600,8 @@ public class RestaurateurJsonManager {
 
             this.restaurants=new ArrayList<Restaurant>();
 
-            Restaurant restaurant1=new Restaurant("001", profile, reviews1, dishes1,loc1);
-            Restaurant restaurant2=new Restaurant("002",profile2,reviews2,dishes2,loc2);
+            Restaurant restaurant1=new Restaurant("001", profile, reviews1, dishes1,loc2);
+            Restaurant restaurant2=new Restaurant("002",profile2,reviews2,dishes2,loc1);
             Restaurant restaurant3=new Restaurant("003",profile3,reviews3,dishes3,loc3);
 
             this.restaurants.add(restaurant1);
