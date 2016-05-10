@@ -3,6 +3,7 @@ package it.polito.mad.insane.lab3;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.location.Location;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.internal.bind.CollectionTypeAdapterFactory;
@@ -285,6 +286,21 @@ public class RestaurateurJsonManager {
         return this.location;
     }
 
+    public void deleteReservation(String id) {
+        //delete reservation with ID=id and save db again
+        ArrayList<Booking> bookings= (ArrayList<Booking>) getBookings();
+        for(int i=0;i<bookings.size();i++){
+            Booking b=bookings.get(i);
+            if(b.getID().equals(id)){
+                bookings.remove(i);
+                saveDbApp();
+                return; //ritorno immediatamente perchè non dovrebbero esserci due prenotazioni con medesimo ID
+            }
+
+
+        }
+    }
+
     /**
      * Created by carlocaramia on 09/04/16.
      */
@@ -394,6 +410,8 @@ public class RestaurateurJsonManager {
 
             //CARICAMENTO DATI BOOKINGS
             this.bookings=new ArrayList<Booking>();
+
+            /*
 
             Booking newBooking = new Booking();
             newBooking.setID("1");
@@ -524,6 +542,7 @@ public class RestaurateurJsonManager {
             newBooking10.setDate_time(calendar);
             newBooking10.setRestaurantID("003");
             bookings.add(newBooking10);
+            */
 
             //CARICAMENTO REVIEWS
 

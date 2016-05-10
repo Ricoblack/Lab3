@@ -10,17 +10,18 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class MyReservations extends AppCompatActivity {
+public class MyReservationsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //TODO: gestire il pulsante indietro e la freccia sulla toolbar
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_reservations);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.reservation_recycler_view);
-        //FIXME ci sono mille prenotazioni, c'e' qualcosa che non va
+
         if(rv != null){
             RestaurateurJsonManager manager = RestaurateurJsonManager.getInstance(this);
             BookingsRecyclerAdapter adapter = new BookingsRecyclerAdapter(this, manager.getBookings());

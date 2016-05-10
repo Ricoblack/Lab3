@@ -7,14 +7,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -22,17 +20,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import org.w3c.dom.Text;
-import org.w3c.dom.ls.LSException;
-
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
-public class MakeReservation extends AppCompatActivity {
+public class MakeReservationActivity extends AppCompatActivity {
 
     private static Calendar reservationDate = null;
     private static RestaurateurJsonManager manager = null;
@@ -87,8 +82,8 @@ public class MakeReservation extends AppCompatActivity {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MakeReservation.this);
-                    builder.setTitle(MakeReservation.this.getResources().getString(R.string.alert_title))
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MakeReservationActivity.this);
+                    builder.setTitle(MakeReservationActivity.this.getResources().getString(R.string.alert_title))
                             .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     saveReservation(dishesToDisplay);
@@ -109,10 +104,12 @@ public class MakeReservation extends AppCompatActivity {
     }
 
     private void saveReservation(List<Dish> dishesToDisplay) {
+
         Booking b = new Booking();
         b.setDate_time(reservationDate);
         b.setDishes(dishesToDisplay);
-        b.setID("001"); //FIXME bisogna creare un campo ID nel db da incrementare ogni volta?
+        int rand= (int) (Math.random()*1000);
+        b.setID(String.valueOf(rand)); //FIXME lasciare al manager il compito di settare un id, ora lo metto random
         b.setRestaurantID(restaurantId);
         b.setTotalPrice(totalPrice);
         EditText et = (EditText) findViewById(R.id.reservation_additional_notes);
@@ -122,13 +119,13 @@ public class MakeReservation extends AppCompatActivity {
         }
         //TODO decrementare le available quantity dei piatti
 
-        manager.getBookings().add(b);
-        manager.saveDbApp(); //TODO salvare la prenotazione nel DB
+        manager.getBookings().add(b); //TODO far fare al manager la modifica del db, così ce lo troviamo pronto per l'online e in automatico genera un nuovo id prenotazione
+        manager.saveDbApp();
         reservationDate = null;
         additionalNotes = "";
         totalPrice = 0;
         finish();
-        Intent intent = new Intent(MakeReservation.this, MyReservations.class);
+        Intent intent = new Intent(MakeReservationActivity.this, MyReservationsActivity.class);
         startActivity(intent);
 
     }
@@ -219,7 +216,7 @@ public class MakeReservation extends AppCompatActivity {
         }
 
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            ((MakeReservation) getActivity()).setHour(hourOfDay, minute);
+            ((MakeReservationActivity) getActivity()).setHour(hourOfDay, minute);
         }
     }
 
@@ -238,7 +235,7 @@ public class MakeReservation extends AppCompatActivity {
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            ((MakeReservation)getActivity()).setDate(year,month,day);
+            ((MakeReservationActivity)getActivity()).setDate(year,month,day);
         }
     }
 }

@@ -35,7 +35,7 @@ public class DishArrayAdapter extends ArrayAdapter<Dish> {
         DishHolder holder;
 
         if (row == null) {
-            LayoutInflater inflater = ((MakeReservation) context).getLayoutInflater();
+            LayoutInflater inflater = ((MakeReservationActivity) context).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
 
             holder = new DishHolder();

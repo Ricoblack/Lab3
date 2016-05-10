@@ -7,6 +7,12 @@
         android:orderInCategory="100"
         android:title="Filtra"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/activity_reservations"
+        android:orderInCategory="100"
+        android:title="Prenotazioni"
+        app:showAsAction="always" />
+
 
 
 </menu>

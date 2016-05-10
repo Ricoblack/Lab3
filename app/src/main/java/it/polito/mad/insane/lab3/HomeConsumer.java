@@ -1,27 +1,18 @@
 package it.polito.mad.insane.lab3;
 
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewTreeObserver;
-import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -135,6 +126,10 @@ public class HomeConsumer extends AppCompatActivity {
             Intent i = new Intent(this,FilterActivity.class);
             startActivity(i);
         }
+        if(id == R.id.activity_reservations){
+            Intent i = new Intent(this,MyReservationsActivity.class);
+            startActivity(i);
+        }
 
         finish();
 
@@ -155,7 +150,7 @@ public class HomeConsumer extends AppCompatActivity {
         rV.setLayoutManager(mGridLayoutManager);
 
         // Set animation
-        RecyclerView.ItemAnimator ia = new DefaultItemAnimator();  // If you don't apply other animations it uses the default one
+        RecyclerView.ItemAnimator ia = new SlideInOutLeftItemAnimator(rV);  // try animator //FIXME: doesn't work
         rV.setItemAnimator(ia);
     }
 }

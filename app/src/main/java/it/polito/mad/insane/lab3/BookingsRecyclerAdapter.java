@@ -1,6 +1,10 @@
 package it.polito.mad.insane.lab3;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,15 +59,33 @@ public class BookingsRecyclerAdapter extends RecyclerView.Adapter<BookingsRecycl
         private TextView hour;
         private TextView nItems;
         private TextView totalPrice;
+        private View view;
+        private RestaurateurJsonManager manager;
 
         public BookingsViewHolder(View itemView) {
             super(itemView);
+            this.manager=RestaurateurJsonManager.getInstance(null);
             this.restaurantName = (TextView) itemView.findViewById(R.id.reservation_cardview_restaurant_name);
             this.ID = (TextView) itemView.findViewById(R.id.reservation_cardview_ID);
             this.date = (TextView) itemView.findViewById(R.id.reservation_cardview_date);
             this.hour = (TextView) itemView.findViewById(R.id.reservation_cardview_hour);
             this.nItems = (TextView) itemView.findViewById(R.id.reservation_cardview_nItems);
             this.totalPrice = (TextView) itemView.findViewById(R.id.reservation_cardview_price);
+            this.view=itemView;
+
+            this.view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //TODO: ovviamente al buon charles piace buttare tutto nel cesso, ma andrebbe gestita l'eliminazione
+                    //TODO: e relativo invalidate della listview
+                    manager.deleteReservation(ID.getText().toString());
+                    Intent i = new Intent(v.getContext(),MyReservationsActivity.class);
+                    AppCompatActivity act=(AppCompatActivity)v.getContext();
+                    act.startActivity(i);
+                    act.finish();
+                }
+            });
+
         }
 
         public void setData(Booking current, int position) {
