@@ -281,6 +281,9 @@ public class RestaurateurJsonManager {
         return lista;
     }
 
+    public Location getLocation(){
+        return this.location;
+    }
 
     /**
      * Created by carlocaramia on 09/04/16.

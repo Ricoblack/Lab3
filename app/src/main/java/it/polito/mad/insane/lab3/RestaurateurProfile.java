@@ -65,7 +65,7 @@ public class RestaurateurProfile {
     public void setClosingHour(Date closingHour) {
         this.closingHour = closingHour;
     }
-    
+
 
     public String getRestaurantName() {
         return restaurantName;
