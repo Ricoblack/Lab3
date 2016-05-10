@@ -148,6 +148,7 @@ public class RestaurateurJsonManager {
     public List<Restaurant> getRestaurants(){
         return this.getDbApp().getRestaurants();
     }
+    public List<Booking> getBookings() { return this.getDbApp().getBookings(); }
 
     public Restaurant getRestaurant(String restaurantID){
         for(Restaurant r : this.getDbApp().getRestaurants())
@@ -288,6 +289,7 @@ public class RestaurateurJsonManager {
         private List<Restaurant> restaurants;
 
         private List<Booking> bookings;
+
 
         public  DbApp()
         {

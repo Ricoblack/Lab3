@@ -2,6 +2,7 @@ package it.polito.mad.insane.lab3;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -25,8 +26,8 @@ import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 
-import java.io.Serializable;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -48,9 +49,10 @@ public class RestaurantProfile extends AppCompatActivity {
      */
 
     private ViewPager mViewPager;
-    static private RestaurateurJsonManager manager = null;
+    private static RestaurateurJsonManager manager = null;
     private static String restaurantId;
     private static DishesRecyclerAdapter dishesAdapter = null;
+    private static List<Dish> reservationList = null;
 
 
     @Override
@@ -83,8 +85,43 @@ public class RestaurantProfile extends AppCompatActivity {
         if (tabsStrip != null) {
             tabsStrip.setViewPager(mViewPager);
         }
+//        if(dishesAdapter != null)
+//            editShowButton(dishesAdapter.getReservationQty(), dishesAdapter.getReservationPrice());
+
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        dishesAdapter = null;
+        reservationList = null;
+        restaurantId = null;
+    }
+
+//    @Override
+//    protected void onResumeFragments() {
+//        super.onResumeFragments();
+//        if(dishesAdapter != null)
+//            editShowButton(dishesAdapter.getReservationQty(), dishesAdapter.getReservationPrice());
+//    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(dishesAdapter != null)
+            editShowButton(dishesAdapter.getReservationQty(), dishesAdapter.getReservationPrice());
+    }
+
+    public void editShowButton(int quantity, double price) {
+
+        TextView tv = (TextView) findViewById(R.id.show_reservation_button);
+        if (tv != null) {
+            if (quantity != 0)
+                tv.setText(String.format("GO TO CART           %d items - %s€", quantity, price));
+            else
+                tv.setText(R.string.empty_cart);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -106,16 +143,6 @@ public class RestaurantProfile extends AppCompatActivity {
 //        }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void editShowButton(int nSelected, double reservationPrice) {
-        TextView tv = (TextView) findViewById(R.id.show_reservation_button);
-        if (tv != null) {
-            if(nSelected != 0)
-                tv.setText(String.format("GO TO CHART           %d items - %s€", nSelected, reservationPrice));
-            else
-                tv.setText(R.string.empty_chart);
-        }
     }
 
     /**
@@ -231,16 +258,27 @@ public class RestaurantProfile extends AppCompatActivity {
             // set up dishesRecyclerView
             final RecyclerView rv = setupDishesRecyclerView(rootView, restaurant.getDishes());
             TextView tv = (TextView) rootView.findViewById((R.id.show_reservation_button));
+
             if(tv != null) {
+                if(dishesAdapter != null)
+                    editShowButton(dishesAdapter.getReservationQty(), dishesAdapter.getReservationPrice(), rootView);
+
                 tv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getActivity(), MakeReservation.class);
                         if (rv != null) {
-                            intent.putExtra("reservationList",
-                                    (Serializable) ((DishesRecyclerAdapter) rv.getAdapter()).getReservationList());
+                            Bundle bundle = new Bundle();
+                            if(dishesAdapter.getReservationQty() == 0)
+                                Toast.makeText(getActivity(), "Cart must contain at least one dish", Toast.LENGTH_SHORT).show();
+                            else {
+//                                bundle.putParcelableArrayList("reservationList", (ArrayList<? extends Parcelable>) reservationList);
+                                bundle.putIntArray("selectedQuantities", dishesAdapter.getSelectedQuantities());
+                                bundle.putString("ID", restaurantId);
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                            }
                         }
-                        startActivity(intent);
                     }
                 });
             }
@@ -296,12 +334,14 @@ public class RestaurantProfile extends AppCompatActivity {
 
         private RecyclerView setupDishesRecyclerView(View rootView, List<Dish> dishes)
         {
-            // FIXME: quando clicchi su una cardview crasha quando cerca di aprire la pagina del singolo piatto.
-            // FIXME: volendo si può togliere semplicemente mettendo FALSE nel costruttore del dishesRecyclerAdapter
-
             // set Adapter
             RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.MenuRecyclerView);
-            dishesAdapter = new DishesRecyclerAdapter(getActivity(), dishes, true);
+            if (recyclerView != null) {
+                if(dishesAdapter == null)
+                    dishesAdapter = new DishesRecyclerAdapter(getActivity(), dishes);
+                recyclerView.setAdapter(dishesAdapter);
+            }
+
             if (recyclerView != null)
             {
                 recyclerView.setAdapter(dishesAdapter);
@@ -353,6 +393,17 @@ public class RestaurantProfile extends AppCompatActivity {
             }
 
             return null;
+        }
+
+        public static void editShowButton(int quantity, double price, View rootView) {
+//        if (tv == null)
+            TextView tv = (TextView) rootView.findViewById(R.id.show_reservation_button);
+            if (tv != null) {
+                if(quantity != 0)
+                    tv.setText(String.format("GO TO CART           %d items - %s€", quantity, price));
+                else
+                    tv.setText(R.string.empty_cart);
+            }
         }
 
         private void loadProfileData(View rootView) {
@@ -422,6 +473,8 @@ public class RestaurantProfile extends AppCompatActivity {
             }
         }
     }
+
+
 
 
 }

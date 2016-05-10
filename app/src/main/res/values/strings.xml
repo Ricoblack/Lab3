@@ -228,4 +228,13 @@
     <string name="remove">Remove</string>
     <string name="dont_remove">Don\'t remove</string>
     <string name="empty_chart">The chart is empty</string>
+    <string name="select_hour">Select reservation hour</string>
+    <string name="select_date">Select reservation date</string>
+    <string name="empty_cart">The cart is empty</string>
+    <string name="order_summary">Order summary</string>
+    <string name="total_price">Total Price</string>
+    <string name="reservation_restaurant_name">Restaurant name</string>
+    <string name="restaurant_name">Restaurant name</string>
+    <string name="alert_title">Are you sure you want to make reservation?</string>
+    <string name="add_addtional_notes">Add addtional notes...</string>
 </resources>

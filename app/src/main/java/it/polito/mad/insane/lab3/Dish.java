@@ -1,11 +1,14 @@
 package it.polito.mad.insane.lab3;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 
 /**
  * Created by carlocaramia on 08/04/16.
  */
-public class Dish implements Serializable{
+public class Dish implements Serializable /*, Parcelable*/{
     private String ID;
     private String name;
     private String description;
@@ -14,17 +17,17 @@ public class Dish implements Serializable{
     private int availability_qty;
     private boolean isSelected;
 
+//    public Dish(Parcel in)
+//    {
+//        this.ID = in.readString();
+//        this.name = in.readString();
+//        this.description= in.readString();
+//        this.photoPath= in.readString();
+//        this.price = in.readDouble();
+//        this.availability_qty = in.readInt();
+//        this.isSelected = in.readByte() != 0;
+//    }
 
-    public Dish()
-    {
-        this.ID = null;
-        this.name = null;
-        this.description= null;
-        this.photoPath= null;
-        this.price = 0;
-        this.availability_qty = 0;
-        this.isSelected = false;
-    }
     public Dish(String ID, String name, String description, String photoPath, double price, int availability_qty, boolean selected)
     {
         this.ID = ID;
@@ -105,4 +108,34 @@ public class Dish implements Serializable{
     public void setSelected(boolean selected) {
         isSelected = selected;
     }
+
+//    @Override
+//    public int describeContents() {
+//        return 0;
+//    }
+
+//    @Override
+//    public void writeToParcel(Parcel dest, int flags) {
+//        dest.writeString(ID);
+//        dest.writeString(name);
+//        dest.writeString(description);
+//        dest.writeString(photoPath);
+//        dest.writeDouble(price);
+//        dest.writeInt(availability_qty);
+//        dest.writeByte((byte) (isSelected ? 1 : 0));
+////        readFromParcel:
+////        myBoolean = in.readByte() != 0;
+//    }
+
+//    public static final Parcelable.Creator<Dish> CREATOR = new Parcelable.Creator<Dish>()
+//    {
+//        public Dish createFromParcel(Parcel in)
+//        {
+//            return new Dish(in);
+//        }
+//        public Dish[] newArray(int size)
+//        {
+//            return new Dish[size];
+//        }
+//    };
 }

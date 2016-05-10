@@ -28,9 +28,9 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
 //    private boolean cardView_clickable;
     private  int reservationQty;
     private  double reservationPrice;
-    private List<Dish> reservationList;
+//    private List<Dish> reservationList;
 
-    public DishesRecyclerAdapter(Context context, List<Dish> data, boolean clickable)
+    public DishesRecyclerAdapter(Context context, List<Dish> data)
     {
         this.mInflater = LayoutInflater.from(context);
         this.context = context;
@@ -43,7 +43,7 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
 
         reservationQty = 0;
         reservationPrice = 0;
-        reservationList = new ArrayList<>();
+//        reservationList = new ArrayList<>();
     }
 
     /**
@@ -83,8 +83,20 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
         return mData;
     }
 
-    public List<Dish> getReservationList() {
-        return reservationList;
+//    public List<Dish> getReservationList() {
+//        return reservationList;
+//    }
+
+    public int getReservationQty(){
+        return reservationQty;
+    }
+
+    public double getReservationPrice(){
+        return reservationPrice;
+    }
+
+    public int[] getSelectedQuantities(){
+        return selectedQuantities;
     }
 
     public class DishesViewHolder extends RecyclerView.ViewHolder
@@ -165,9 +177,20 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
 
                         reservationPrice -= mData.get(pos).getPrice();
                         reservationQty--;
-                        reservationList.add(mData.get(pos));
+//                        reservationList.remove(mData.get(pos));
 
-                        ((RestaurantProfile) context).editShowButton(reservationQty, reservationPrice);
+//                        if(selectedQuantities[pos] == 0)
+//                            reservationList.remove(mData.get(pos));
+
+//                        ((RestaurantProfile) context).editShowButton(reservationQty, reservationPrice);
+
+                        TextView tv = (TextView) ((RestaurantProfile) context).findViewById(R.id.show_reservation_button);
+                        if (tv != null){
+                            if(reservationQty != 0)
+                                tv.setText(String.format("GO TO CART           %d items - %s€", reservationQty, reservationPrice));
+                            else
+                                tv.setText(R.string.empty_cart);
+                        }
                     }
                 }
             });
@@ -183,79 +206,19 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
 
                         reservationPrice += mData.get(pos).getPrice();
                         reservationQty++;
-                        reservationList.add(mData.get(pos));
+//                        if(!reservationList.contains(mData.get(pos)))
+//                            reservationList.add(mData.get(pos));
 
-                        ((RestaurantProfile) context).editShowButton(reservationQty, reservationPrice);
+                        TextView tv = (TextView) ((RestaurantProfile) context).findViewById(R.id.show_reservation_button);
+                        if (tv != null){
+                            if(reservationQty != 0)
+                                tv.setText(String.format("GO TO CART           %d items - %s€", reservationQty, reservationPrice));
+                            else
+                                tv.setText(R.string.empty_cart);
+                        }
                     }
                 }
             });
         }
     }
 }
-
-
-//CODICE VECCHIO NON DOVREBBE SERVIRE MA NON SI SA MAI
-//        holder.selection.setTag(mData.get(position));
-
-//        holder.selection.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                final CheckBox cb = (CheckBox) v;
-////                Dish dish = (Dish) cb.getTag();
-//                if (cb.isChecked()) {
-//                    holder.selection.setChecked(true);
-//                    mData.get(pos).setSelected(true);
-//                    RestaurantProfile activity = (RestaurantProfile) context;
-//
-//                    nSelected++;
-//                    reservationPrice += mData.get(pos).getPrice();
-//
-//                    activity.editFooter(nSelected, reservationPrice);
-//                } else {
-//                    holder.selection.setChecked(false);
-//                    mData.get(pos).setSelected(false);
-//                    RestaurantProfile activity = (RestaurantProfile) context;
-//
-//                    nSelected--;
-//                    reservationPrice -= mData.get(pos).getPrice();
-//
-//                    activity.editFooter(nSelected, reservationPrice);
-//                }
-
-//                dish.setSelected(cb.isChecked());
-//                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-//                if(cb.isChecked()){
-//
-//                    builder.setTitle(new StringBuilder().append(mData.get(holder.getAdapterPosition()).getName()).append(" ").
-//                            append(mData.get(holder.getAdapterPosition()).getPrice()).toString());
-//                    builder.setPositiveButton(R.string.add_dialog_button, new DialogInterface.OnClickListener() {
-//
-//                        public void onClick(DialogInterface dialog, int id)
-//                        {
-//
-//                        }
-//                    });
-//                    builder.setNegativeButton(R.string.cancel_dialog_button, new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int id) {
-//                            holder.selection.setChecked(false);
-//                            mData.get(holder.getAdapterPosition()).setSelected(false);
-//                        }
-//                    });
-//                    // Create the AlertDialog
-//                    AlertDialog dialog = builder.create();
-//                    dialog.show();
-//                }
-//                else{
-//
-//                    holder.selection.setChecked(false);
-//                    mData.get(holder.getAdapterPosition()).setSelected(false);
-//                    RestaurantProfile activity = (RestaurantProfile) context;
-//
-//                    nSelected--;
-//                    reservationPrice -= mData.get(holder.getAdapterPosition()).getPrice();
-//
-//                    activity.editFooter(nSelected, reservationPrice);
-//                }
-//            }
-//        }
-//            }
-//        });
