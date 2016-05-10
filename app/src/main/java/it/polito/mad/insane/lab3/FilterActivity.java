@@ -87,6 +87,7 @@ public class FilterActivity extends AppCompatActivity {
         dAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         dSpinner.setAdapter(dAdapter);
 
+
         final Spinner pSpinner = (Spinner) findViewById(R.id.price_filter);
         List<String> prices = new ArrayList<>();
         Resources res2 = getResources();
@@ -116,7 +117,6 @@ public class FilterActivity extends AppCompatActivity {
                 times);
         tiAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         tiSpinner.setAdapter(tiAdapter);
-
 
     }
 

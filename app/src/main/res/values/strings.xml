@@ -24,9 +24,9 @@
 
     <string-array name="type_array">
         <item> <i>CUSINE TYPE</i> </item>
-        <item>ethnic</item>
-        <item>pizza</item>
-        <item>pasta</item>
+        <item>ETHNIC</item>
+        <item>PIZZA</item>
+        <item>PASTA</item>
     </string-array>
 
     <string-array name="time_array">
