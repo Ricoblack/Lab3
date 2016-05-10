@@ -44,8 +44,14 @@ public class HomeConsumer extends AppCompatActivity {
 
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
+            public boolean onQueryTextSubmit(String newText) {
+                if(newText.equals("")) setUpRestaurantsRecycler(manager.getRestaurants());
+                else {
+                    List<Restaurant> listaFiltrata = manager.getFilteredRestaurants(newText);
+                    setUpRestaurantsRecycler(listaFiltrata);
+                }
+
+                return true;
             }
 
             @Override

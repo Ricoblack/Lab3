@@ -127,6 +127,7 @@ public class MakeReservation extends AppCompatActivity {
         finish();
         Intent intent = new Intent(MakeReservation.this, HomeConsumer.class);
         startActivity(intent);
+
     }
 
     @Override

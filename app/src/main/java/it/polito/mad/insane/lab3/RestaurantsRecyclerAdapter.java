@@ -20,11 +20,13 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
 
     private List<Restaurant> mData;
     private LayoutInflater mInflater;
+    private RestaurateurJsonManager manager;
 
     //construttore
     public RestaurantsRecyclerAdapter(Context context, List<Restaurant> data) {
         this.mData = data;
         this.mInflater = LayoutInflater.from(context);
+        this.manager=RestaurateurJsonManager.getInstance(context);
     }
 
     /**
@@ -68,6 +70,7 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
         private TextView typeCausine;
         private TextView avgFinalScore;
         private TextView numReview;
+        private TextView distance;
 
         private android.view.View.OnClickListener cardViewListener = new View.OnClickListener()
         {
@@ -82,8 +85,7 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
         };
 
         public RestaurantsViewHolder(View itemView) {
-
-            //TODO ricordare di inserire la distanza in modo dinamico
+            
 
             super(itemView);
             this.cardView = itemView;
@@ -93,6 +95,8 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
             this.typeCausine = (TextView) itemView.findViewById(R.id.type_cusine);
             this.avgFinalScore = (TextView) itemView.findViewById(R.id.review_finalscore);
             this.numReview = (TextView) itemView.findViewById(R.id.num_reviews);
+            this.distance=(TextView) itemView.findViewById(R.id.distance_restaurant);
+
             // set the onClickListener to the View
             this.cardView.setOnClickListener(cardViewListener);
 
@@ -108,6 +112,8 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
             this.avgFinalScore.setText(df.format(current.getAvgFinalScore()));
             //TODO capire come cambiarlo a secondo della lingua
             this.numReview.setText(Integer.toString(current.getReviews().size())+" reviews");
+            float distance=current.getLocation().distanceTo(manager.getLocation());
+            this.distance.setText(String.format("%.0f",distance)+"m");
         }
 
 
