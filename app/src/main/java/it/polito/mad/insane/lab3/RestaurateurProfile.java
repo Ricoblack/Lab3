@@ -65,15 +65,7 @@ public class RestaurateurProfile {
     public void setClosingHour(Date closingHour) {
         this.closingHour = closingHour;
     }
-
-    public String getAdress() {
-        return address;
-    }
-
-    //FIXME non l'ho cancellato perchè non ne sono sicuro ma ci sono due address uno con una e uno senza d immagino che uno dei due sia inutile XD(la mia firma ormai)
-    public void setAdress(String adress) {
-        this.address = adress;
-    }
+    
 
     public String getRestaurantName() {
         return restaurantName;
