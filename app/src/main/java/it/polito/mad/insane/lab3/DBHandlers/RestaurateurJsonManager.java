@@ -263,7 +263,7 @@ public class RestaurateurJsonManager {
     }
 
     public List<Restaurant> getOrderedRestaurants(String orderBy) {
-        List<Restaurant> lista=getRestaurants();
+        List<Restaurant> lista = getRestaurants();
 
         if(orderBy.toLowerCase().equals("distance")){
             Collections.sort(lista, new Comparator<Restaurant>() {
@@ -277,7 +277,7 @@ public class RestaurateurJsonManager {
             Collections.sort(lista, new Comparator<Restaurant>() {
                 @Override
                 public int compare(Restaurant lhs, Restaurant rhs) {
-                    return (int)(lhs.getAvgFinalScore()-rhs.getAvgFinalScore());
+                    return (int)(rhs.getAvgFinalScore()- lhs.getAvgFinalScore());
                 }
             });
         }
@@ -347,16 +347,13 @@ public class RestaurateurJsonManager {
             RestaurateurProfile profile4=new RestaurateurProfile("Ovolollo restaurant", "Via saluzzo 17", "PoliTo","Etnico", "L'isola del miglior ovolollo studentesco",new Date(),new Date(),"Cicchetto di ben venuto il sabato sera","Bancomat","Wifi-free");
             RestaurateurProfile profile5=new RestaurateurProfile("Origami restaurant", "Piazza Vittorio Veneto, 18/F", "UniTo","Etnico", "Il miglior giapponese di Torino",new Date(),new Date(),"All you can eat a pranzo","Bancomat","Wifi-free");
 
-
-
-
             //CARICAMENTO DATI DISHES
             ArrayList<Dish> dishes1=new ArrayList<Dish>();
             ArrayList<Dish> dishes2=new ArrayList<Dish>();
             ArrayList<Dish> dishes3=new ArrayList<Dish>();
 
             //ristorante1
-            Dish dish1 = new Dish("0","Margherita", "La classica delle classiche", null, 5.50, 100, false);
+            Dish dish1 = new Dish("0","Margherita", "La classica delle classiche", null, 5.50, 5, false);
             dishes1.add(dish1);
 
             Dish dish2 = new Dish("1","Marinara", "Occhio all'aglio!", null, 2.50, 200, false);

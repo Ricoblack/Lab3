@@ -23,7 +23,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/restaurant_prova"
+                android:src="@drawable/default_img_rest_1"
                 />
 
             <TextView

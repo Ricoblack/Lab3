@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/activity_vertical_margin">
+
 
         <android.support.v7.widget.CardView
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,7 +14,7 @@
             android:layout_height="wrap_content"
             android:orientation = "horizontal"
             card_view:cardCornerRadius="2dp"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
             >
 
             <LinearLayout
@@ -95,7 +97,7 @@
             android:layout_height="wrap_content"
             android:orientation = "horizontal"
             card_view:cardCornerRadius="2dp"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
             >
 
             <LinearLayout
@@ -163,7 +165,7 @@
             android:layout_height="wrap_content"
             android:orientation = "horizontal"
             card_view:cardCornerRadius="2dp"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
             >
 
             <LinearLayout
@@ -273,7 +275,7 @@
             android:layout_height="wrap_content"
             android:orientation = "horizontal"
             card_view:cardCornerRadius="2dp"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
             >
 
             <LinearLayout

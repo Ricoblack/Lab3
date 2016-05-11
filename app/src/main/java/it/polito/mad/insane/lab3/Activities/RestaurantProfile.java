@@ -73,8 +73,10 @@ public class RestaurantProfile extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         manager = RestaurateurJsonManager.getInstance(this);
-        if(getIntent().getStringExtra("ID") != null)
+        if(getIntent().getStringExtra("ID") != null) {
             restaurantId = getIntent().getStringExtra("ID");
+            setTitle(manager.getRestaurant(restaurantId).getProfile().getRestaurantName());
+        }
 
 //        NestedScrollView scrollView = (NestedScrollView) findViewById (R.id.scrollView);
 //        scrollView.setFillViewport (true);

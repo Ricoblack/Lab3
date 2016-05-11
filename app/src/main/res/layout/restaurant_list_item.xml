@@ -24,7 +24,7 @@
                 android:layout_centerVertical="true"
                 android:scaleType="centerCrop"
                 android:background="@color/black"
-                android:src="@drawable/restaurant_prova"
+                android:src="@drawable/default_img_rest_1"
                 />
 
             <TextView
@@ -45,7 +45,6 @@
                 android:id="@+id/restaurant_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="cacca"
                 android:textSize="20sp"
                 android:layout_above="@id/type_cusine"
                 android:textColor="@color/white"

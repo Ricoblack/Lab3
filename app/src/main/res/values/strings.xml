@@ -84,7 +84,7 @@
     <string name="select_hour">Select reservation time</string>
     <string name="select_date">Select reservation date</string>
     <string name="empty_cart">The cart is empty</string>
-    <string name="order_summary">Order summary</string>
+    <string name="order_summary">ORDER SUMMARY</string>
     <string name="total_price">Total Price</string>
     <string name="reservation_restaurant_name">Restaurant name</string>
     <string name="restaurant_name">Restaurant name</string>
