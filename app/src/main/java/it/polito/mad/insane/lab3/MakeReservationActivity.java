@@ -12,6 +12,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -19,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
@@ -82,6 +84,10 @@ public class MakeReservationActivity extends AppCompatActivity {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if(reservationDate == null){
+                        Toast.makeText(MakeReservationActivity.this, getString(R.string.specify_date_time), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     AlertDialog.Builder builder = new AlertDialog.Builder(MakeReservationActivity.this);
                     builder.setTitle(MakeReservationActivity.this.getResources().getString(R.string.alert_title))
                             .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -101,6 +107,18 @@ public class MakeReservationActivity extends AppCompatActivity {
             });
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void saveReservation(List<Dish> dishesToDisplay) {
@@ -169,6 +187,8 @@ public class MakeReservationActivity extends AppCompatActivity {
 
     public void setHour(int hourOfDay, int minute){
 
+        if(reservationDate == null)
+            reservationDate = Calendar.getInstance();
         reservationDate.set(Calendar.HOUR_OF_DAY, hourOfDay);
         reservationDate.set(Calendar.MINUTE, minute);
         Button button = (Button) findViewById(R.id.reservation_hour);
@@ -180,7 +200,8 @@ public class MakeReservationActivity extends AppCompatActivity {
     }
 
     private void setDate(int year, int month, int day) {
-        reservationDate = Calendar.getInstance();
+        if (reservationDate == null)
+            reservationDate = Calendar.getInstance();
         reservationDate.set(Calendar.YEAR, year);
         reservationDate.set(Calendar.MONTH, month);
         reservationDate.set(Calendar.DAY_OF_MONTH, day);

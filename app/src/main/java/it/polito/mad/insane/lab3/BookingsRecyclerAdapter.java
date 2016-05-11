@@ -1,10 +1,8 @@
 package it.polito.mad.insane.lab3;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;

@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
 
@@ -136,7 +138,8 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
             this.selectionLayout.setVisibility(popupsVisibility[position]); //layout del popup
             this.separator.setVisibility(popupsVisibility[position]); //layout della linea separatrice
             this.selectedQuantity.setText(String.valueOf(selectedQuantities[position]));
-            this.selectedPrice.setText(String.valueOf(selectedQuantities[position] * mData.get(position).getPrice()));
+            this.selectedPrice.setText(MessageFormat.format("{0}€",
+                    String.valueOf(selectedQuantities[position] * mData.get(position).getPrice())));
 
             this.mainLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -166,9 +169,7 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
                         reservationQty--; //decremento la quantita' di item della prenotazione
 
                         TextView tv = (TextView) ((RestaurantProfile) context).findViewById(R.id.show_reservation_button);
-                        if (tv != null){ // FIXME qui c'e' un bug. quando clicco indietro dalla pagina di prenotazione questa textview
-                                         // risulta sempre null.
-                                         // FIXME aggiustare il layout e conseguentemente questa stampa
+                        if (tv != null){ // FIXME aggiustare il layout e conseguentemente questa stampa
                             if(reservationQty != 0)
                                 tv.setText(String.format("GO TO CART           %d items - %s€", reservationQty, reservationPrice));
                             else

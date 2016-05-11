@@ -21,6 +21,7 @@
         <activity
             android:name=".RestaurantProfile"
             android:label="@string/title_activity_restaurant_profile"
+            android:parentActivityName=".HomeConsumer"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".FilterActivity" />
         <activity

@@ -12,7 +12,7 @@ public class Booking implements Serializable,  Comparable<Booking>
 {
 
     private String ID;
-    private Calendar date_time = Calendar.getInstance();
+    private Calendar date_time;
     private List<Dish> dishes = new ArrayList<>();
     private String note;
     private String restaurantID;
