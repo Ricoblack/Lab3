@@ -102,4 +102,5 @@
     <string name="reset_button">RESET</string>
     <string name="apply_button">APPLY</string>
     <string name="specify_date_time">You need to specify the date and time</string>
+    <string name="title_activity_filter">Filter</string>
 </resources>

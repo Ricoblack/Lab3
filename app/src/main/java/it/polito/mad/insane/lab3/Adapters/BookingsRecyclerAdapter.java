@@ -79,8 +79,7 @@ public class BookingsRecyclerAdapter extends RecyclerView.Adapter<BookingsRecycl
             this.view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO: ovviamente al buon charles piace buttare tutto nel cesso, ma andrebbe gestita l'eliminazione
-                    //TODO: e relativo invalidate della listview
+                    //TODO: va gestita l'eliminazione e relativo invalidate della listview (va copiata la cancellazione dell'item dall'adapter dal lab2)
                     manager.deleteReservation(ID.getText().toString());
                     Intent i = new Intent(v.getContext(),MyReservationsActivity.class);
                     AppCompatActivity act=(AppCompatActivity)v.getContext();
