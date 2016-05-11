@@ -1,6 +1,7 @@
 package it.polito.mad.insane.lab3.Activities;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -100,6 +101,13 @@ public class RestaurantProfile extends AppCompatActivity {
         }
 //        if(dishesAdapter != null)
 //            editShowButton(dishesAdapter.getReservationQty(), dishesAdapter.getReservationPrice());
+
+        // Fix Portrait Mode
+        if( (getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL ||
+                (getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL)
+        {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
 
     }
 

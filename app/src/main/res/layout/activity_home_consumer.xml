@@ -90,7 +90,7 @@
                 android:id="@+id/applyOrdering"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="APPLICA"
+                android:text="@string/apply_button"
                 android:textSize="14sp"
                 android:textColor="@color/colorAccent"
                 android:background="@color/white"
