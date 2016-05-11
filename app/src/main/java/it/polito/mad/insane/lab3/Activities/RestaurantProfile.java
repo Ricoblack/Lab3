@@ -3,6 +3,7 @@ package it.polito.mad.insane.lab3.Activities;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -93,6 +94,8 @@ public class RestaurantProfile extends AppCompatActivity {
         // Attach the view pager to the tab strip
         if (tabsStrip != null) {
             tabsStrip.setViewPager(mViewPager);
+            tabsStrip.setTextColor(ContextCompat.getColor(RestaurantProfile.this, R.color.colorPrimary));
+            tabsStrip.setIndicatorColor(ContextCompat.getColor(RestaurantProfile.this, R.color.colorPrimary));
         }
 //        if(dishesAdapter != null)
 //            editShowButton(dishesAdapter.getReservationQty(), dishesAdapter.getReservationPrice());
