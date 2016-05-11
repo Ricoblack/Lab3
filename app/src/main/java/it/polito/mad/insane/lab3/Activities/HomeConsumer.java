@@ -78,6 +78,8 @@ public class HomeConsumer extends AppCompatActivity {
             }
         });
 
+
+        //TODO togliere order by e lasciare solo le due scelte distance e score
         final Spinner dSpinner = (Spinner) findViewById(R.id.orderSpinner);
         List<String> orderings = new ArrayList<>();
         Resources res = getResources();

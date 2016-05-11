@@ -81,7 +81,7 @@ public class MySpinnerAdapterHome extends ArrayAdapter<String> {
                     .findViewById(R.id.text_spinner_home);
             main_text.setText(choices.get(position));
             main_text.setTextColor(resSpinnerAdapter.getColor(R.color.colorPrimary));
-            main_text.setPadding(10,10,10,10);
+            main_text.setPadding(20,20,20,20);
 
 
             return mySpinner;
@@ -93,7 +93,7 @@ public class MySpinnerAdapterHome extends ArrayAdapter<String> {
             TextView main_text = (TextView) mySpinner.findViewById(R.id.text_spinner_home);
             main_text.setText(choices.get(position));
             main_text.setTextColor(resSpinnerAdapter.getColor(R.color.black));
-            main_text.setPadding(10,10,10,10);
+            main_text.setPadding(20,20,20,20);
 
 
             return mySpinner;
