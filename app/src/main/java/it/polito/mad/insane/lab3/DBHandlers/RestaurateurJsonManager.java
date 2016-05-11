@@ -353,7 +353,7 @@ public class RestaurateurJsonManager {
             ArrayList<Dish> dishes3=new ArrayList<Dish>();
 
             //ristorante1
-            Dish dish1 = new Dish("0","Margherita", "La classica delle classiche", null, 5.50, 100, false);
+            Dish dish1 = new Dish("0","Margherita", "La classica delle classiche", null, 5.50, 5, false);
             dishes1.add(dish1);
 
             Dish dish2 = new Dish("1","Marinara", "Occhio all'aglio!", null, 2.50, 200, false);

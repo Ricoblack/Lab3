@@ -26,7 +26,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                android:src="@drawable/dish_default_green_5"/>
 
             <RelativeLayout
                 android:id="@+id/Dish_text_content"
@@ -80,7 +81,6 @@
                         android:layout_toLeftOf="@id/dish_price"
                         android:layout_toStartOf="@id/dish_price"
                         android:layout_centerVertical="true"/>
-                        <!--android:src="@drawable/euro_symbol_green_500" -->
 
 
 

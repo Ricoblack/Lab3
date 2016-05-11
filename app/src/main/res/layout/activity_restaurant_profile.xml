@@ -32,6 +32,7 @@
                     android:scaleType="centerCrop"
                     android:fitsSystemWindows="true"
                     app:layout_collapseMode="pin"
+                    android:src="@drawable/default_img_rest_1"
                     />
 
                 <android.support.v7.widget.Toolbar
