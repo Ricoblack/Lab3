@@ -151,8 +151,9 @@ public class MakeReservationActivity extends AppCompatActivity {
         Booking b = new Booking();
         b.setDate_time(reservationDate);
         b.setDishes(dishesToDisplay);
-        int rand= (int) (Math.random()*1000);
-        b.setID(String.valueOf(rand)); //FIXME lasciare al manager il compito di settare un id, ora lo metto random
+        //int rand= (int) (Math.random()*1000);
+        //b.setID(String.valueOf(rand)); //FIXME lasciare al manager il compito di settare un id, ora lo metto random --> risolto; da testare un po
+        b.setID(String.valueOf(RestaurateurJsonManager.getNextReservationID()));
         b.setRestaurantID(restaurantId);
         b.setTotalPrice(totalPrice);
         EditText et = (EditText) findViewById(R.id.reservation_additional_notes);
@@ -168,7 +169,7 @@ public class MakeReservationActivity extends AppCompatActivity {
 
         manager.getBookings().add(b); //TODO far fare al manager la modifica del db, così ce lo troviamo pronto per l'online e in automatico genera un nuovo id prenotazione
         manager.saveDbApp();
-        clearStaticVariables();
+        MakeReservationActivity.clearStaticVariables();
         RestaurantProfile.clearStaticVariables(); //FIXME non pulisce le variabili dell'altra activity, o almeno cosi' sembra
         finish();
         Intent intent = new Intent(MakeReservationActivity.this, MyReservationsActivity.class);

@@ -35,6 +35,7 @@ import it.polito.mad.insane.lab3.Data.Review;
 public class RestaurateurJsonManager {
 
     private static RestaurateurJsonManager instance = null;
+    private static int currentReservationID = 0;
     private static DbApp dbApp;
     private Context myContext;
     private Location location;  //setto il polito come location dove cercare i ristoranti
@@ -45,6 +46,12 @@ public class RestaurateurJsonManager {
             RestaurateurJsonManager.instance = new RestaurateurJsonManager(myContext);
 
         return RestaurateurJsonManager.instance;
+    }
+
+    public static int getNextReservationID()
+    {
+        currentReservationID ++; // start form 0
+        return  currentReservationID;
     }
     private RestaurateurJsonManager(Context myContext)
     {

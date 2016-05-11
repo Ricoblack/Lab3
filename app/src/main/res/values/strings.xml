@@ -88,7 +88,7 @@
     <string name="total_price">Total Price</string>
     <string name="reservation_restaurant_name">Restaurant name</string>
     <string name="restaurant_name">Restaurant name</string>
-    <string name="alert_title">Are you sure you want to make reservation?</string>
+    <string name="alert_title">Are you sure you want to confirm the reservation?</string>
     <string name="add_addtional_notes">Add additional notes…</string>
     <string name="title_activity_my_reservations">MyReservations</string>
     <string name="cardView_reservation_restaurant_ID">ID</string>
@@ -103,7 +103,7 @@
     <string name="apply_button">APPLY</string>
     <string name="specify_date_time">You need to specify the date and time</string>
     <string name="title_activity_filter">Filter</string>
-    <string name="delete_reservation_alert_title">Are you sure you want to delete reservation?</string>
+    <string name="delete_reservation_alert_title">Are you sure you want to delete the reservation?</string>
     <string name="filter">Filter</string>
     <string name="reservation">Reservation</string>
     <string name="no_reservation_available">There are no reservations available</string>
