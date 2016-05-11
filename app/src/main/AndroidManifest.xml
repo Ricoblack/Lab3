@@ -22,7 +22,11 @@
             android:name=".Activities.RestaurantProfile"
             android:label="@string/title_activity_restaurant_profile"
             android:parentActivityName=".Activities.HomeConsumer"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activities.HomeConsumer" />
+        </activity>
         <activity
             android:name=".Activities.MakeReservationActivity"
             android:label="@string/title_activity_make_reservation"
@@ -42,15 +46,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activities.HomeConsumer" />
         </activity>
-
         <activity
             android:name=".Activities.FilterActivity"
             android:label="@string/title_activity_filter"
             android:parentActivityName=".Activities.HomeConsumer"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".Activities.HomeConsumer" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="it.polito.mad.insane.lab3.Activities.HomeConsumer" />
+        </activity>
     </application>
 
 </manifest>
