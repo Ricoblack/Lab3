@@ -7,6 +7,12 @@
     android:fitsSystemWindows="true"
     tools:context=".Activities.MyReservationsActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,18 +27,29 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:id="@+id/no_reservation_message"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/no_reservation_available"/>
+        >
+    <TextView
+        android:id="@+id/no_reservation_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textSize="25sp"
+        android:text="non ci sono prenotazioni"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/reservation_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_alignParentTop="true"
         android:padding="16dp">
     </android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
+
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

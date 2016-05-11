@@ -56,6 +56,8 @@ public class MakeReservationActivity extends AppCompatActivity {
         manager = RestaurateurJsonManager.getInstance(this);
         List<Dish> dishes = manager.getRestaurant(restaurantId).getDishes();
 
+        setTitle(manager.getRestaurant(restaurantId).getProfile().getRestaurantName());
+
         final List<Dish> dishesToDisplay = new ArrayList<>();
         ArrayList<Integer> quantitiesToDisplay = new ArrayList<>();
         totalPrice = 0;
@@ -72,10 +74,10 @@ public class MakeReservationActivity extends AppCompatActivity {
             tv.setText(MessageFormat.format("{0}€", String.valueOf(df.format(totalPrice))));
         }
 
-        tv = (TextView) findViewById(R.id.reservation_restaurant_name);
-        if (tv != null) {
-            tv.setText(manager.getRestaurant(restaurantId).getProfile().getRestaurantName());
-        }
+//        tv = (TextView) findViewById(R.id.reservation_restaurant_name);
+//        if (tv != null) {
+//            tv.setText(manager.getRestaurant(restaurantId).getProfile().getRestaurantName());
+//        }
 
         DishArrayAdapter adapter = new DishArrayAdapter(this, R.layout.dish_listview_item, dishesToDisplay, quantitiesToDisplay);
 
