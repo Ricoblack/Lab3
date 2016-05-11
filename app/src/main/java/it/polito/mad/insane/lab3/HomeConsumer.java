@@ -85,8 +85,8 @@ public class HomeConsumer extends AppCompatActivity {
         Resources res = getResources();
         String[] dStrings = res.getStringArray(R.array.order_array);
         Collections.addAll(orderings, dStrings);
-        MySpinnerAdapter dAdapter = new MySpinnerAdapter(HomeConsumer.this, R.layout.support_simple_spinner_dropdown_item,
-                orderings);
+        MySpinnerAdapter_home dAdapter = new MySpinnerAdapter_home(HomeConsumer.this, R.layout.support_simple_spinner_dropdown_item,
+                orderings, res);
         dAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         dSpinner.setAdapter(dAdapter);
 

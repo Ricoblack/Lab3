@@ -20,13 +20,15 @@ public class MySpinnerAdapter extends ArrayAdapter<String>
 {
     Context contextSpinner;
     List<String> choices = new ArrayList<>();
+    Resources resSpinnerAdapter;
 
 
-    public MySpinnerAdapter(Context context, int resource, List objects)
+    public MySpinnerAdapter(Context context, int resource, List objects, Resources res)
     {
         super(context, resource, objects);
         contextSpinner = context;
         choices = (List<String>)objects;
+        this.resSpinnerAdapter = res;
     }
 
     @Override
@@ -96,6 +98,8 @@ public class MySpinnerAdapter extends ArrayAdapter<String>
                 TextView main_text = (TextView) mySpinner
                         .findViewById(R.id.name_option);
                 main_text.setText(choices.get(position));
+                main_text.setTextColor(resSpinnerAdapter.getColor(R.color.colorPrimary));
+
 
                 return mySpinner;
             }else{

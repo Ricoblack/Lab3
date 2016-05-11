@@ -83,7 +83,7 @@ public class FilterActivity extends AppCompatActivity {
         String[] dStrings = res.getStringArray(R.array.distance_array);
         Collections.addAll(distances, dStrings);
         MySpinnerAdapter dAdapter = new MySpinnerAdapter(FilterActivity.this, R.layout.support_simple_spinner_dropdown_item,
-                distances);
+                distances,res);
         dAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         dSpinner.setAdapter(dAdapter);
 
@@ -94,7 +94,7 @@ public class FilterActivity extends AppCompatActivity {
         String[] pStrings = res2.getStringArray(R.array.price_array);
         Collections.addAll(prices, pStrings);
         MySpinnerAdapter pAdapter = new MySpinnerAdapter(FilterActivity.this, R.layout.support_simple_spinner_dropdown_item,
-                prices);
+                prices,res2);
         pAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         pSpinner.setAdapter(pAdapter);
 
@@ -104,7 +104,7 @@ public class FilterActivity extends AppCompatActivity {
         String[] tStrings = res3.getStringArray(R.array.type_array);
         Collections.addAll(types, tStrings);
         MySpinnerAdapter tAdapter = new MySpinnerAdapter(FilterActivity.this, R.layout.support_simple_spinner_dropdown_item,
-                types);
+                types,res3);
         tAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         tSpinner.setAdapter(tAdapter);
 
@@ -114,7 +114,7 @@ public class FilterActivity extends AppCompatActivity {
         String[] tiStrings = res4.getStringArray(R.array.time_array);
         Collections.addAll(times, tiStrings);
         MySpinnerAdapter tiAdapter = new MySpinnerAdapter(FilterActivity.this, R.layout.support_simple_spinner_dropdown_item,
-                times);
+                times,res4);
         tiAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         tiSpinner.setAdapter(tiAdapter);
 
