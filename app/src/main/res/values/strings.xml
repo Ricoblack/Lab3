@@ -104,4 +104,7 @@
     <string name="specify_date_time">You need to specify the date and time</string>
     <string name="title_activity_filter">Filter</string>
     <string name="delete_reservation_alert_title">Are you sure you want to delete reservation?</string>
+    <string name="filter">Filter</string>
+    <string name="reservation">Reservation</string>
+    <string name="no_reservation_available">There are no reservations available</string>
 </resources>

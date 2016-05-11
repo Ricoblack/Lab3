@@ -50,7 +50,7 @@ public class RestaurateurJsonManager {
     {
         RestaurateurJsonManager.dbApp = new DbApp();
         this.myContext=myContext;
-        this.location=new Location("me");
+        this.location = new Location("me");
         location.setLatitude(45.064480);
         location.setLongitude(7.660290);
 
@@ -341,13 +341,16 @@ public class RestaurateurJsonManager {
 
 
             //CARICAMENTO DATI RISTORANTI
-            RestaurateurProfile profile =new RestaurateurProfile("Pizza-Pazza","corso duca degli abruzzi, 10","PoliTo","Pizza","Venite a provare la pizza più gustosa di Torino",new Date(),new Date(),"Chiusi la domenica","Bancomat","Wifi-free");
-            RestaurateurProfile profile2=new RestaurateurProfile("Just Pasta", "via roma, 55", "UniTo","Pasta","Pasta per tutti i gusti",new Date(),new Date(),"Aperti tutta la settimana","Bancomat,carta","Privo di barriere architettoniche");
-            RestaurateurProfile profile3=new RestaurateurProfile("Pub la locanda", "via lagrange, 17", "UniTo","Etnico", "L'isola felice dello studente universitario",new Date(),new Date(),"Giropizza il sabato sera","Bancomat","Wifi-free");
+            RestaurateurProfile profile =new RestaurateurProfile("Pizza-Pazza","Corso duca degli abruzzi, 10","PoliTo","Pizza","Venite a provare la pizza più gustosa di Torino",new Date(),new Date(),"Chiusi la domenica","Bancomat","Wifi-free");
+            RestaurateurProfile profile2=new RestaurateurProfile("Just Pasta", "Via roma, 55", "UniTo","Pasta","Pasta per tutti i gusti",new Date(),new Date(),"Aperti tutta la settimana","Bancomat,carta","Privo di barriere architettoniche");
+            RestaurateurProfile profile3=new RestaurateurProfile("Pub la locanda", "Via lagrange, 17", "UniTo","Etnico", "L'isola felice dello studente universitario",new Date(),new Date(),"Giropizza il sabato sera","Bancomat","Wifi-free");
+            RestaurateurProfile profile4=new RestaurateurProfile("Ovolollo restaurant", "Via saluzzo 17", "PoliTo","Etnico", "L'isola del miglior ovolollo studentesco",new Date(),new Date(),"Cicchetto di ben venuto il sabato sera","Bancomat","Wifi-free");
+            RestaurateurProfile profile5=new RestaurateurProfile("Origami restaurant", "Piazza Vittorio Veneto, 18/F", "UniTo","Etnico", "Il miglior giapponese di Torino",new Date(),new Date(),"All you can eat a pranzo","Bancomat","Wifi-free");
+
+
+
 
             //CARICAMENTO DATI DISHES
-
-
             ArrayList<Dish> dishes1=new ArrayList<Dish>();
             ArrayList<Dish> dishes2=new ArrayList<Dish>();
             ArrayList<Dish> dishes3=new ArrayList<Dish>();
@@ -551,6 +554,7 @@ public class RestaurateurJsonManager {
             ArrayList<Review> reviews1=new ArrayList<Review>();
             ArrayList<Review> reviews2=new ArrayList<Review>();
             ArrayList<Review> reviews3=new ArrayList<Review>();
+            ArrayList<Review> reviews5=new ArrayList<Review>();
 
             Review rev1=new Review();
             rev1.setRestaurantID("001");
@@ -607,30 +611,48 @@ public class RestaurateurJsonManager {
             rev6.setText("Posto molto centrale e comodo, ma i prezzi sono troppo alti");
             reviews3.add(rev6);
 
+            reviews5.add(rev1);
+            reviews5.add(rev4);
+            reviews5.add(rev6);
+
+
             //Creazione locations dei ristoranti
-            Location loc1=new Location("001");
+            Location loc1 = new Location("001");
             loc1.setLatitude(45.064136);
             loc1.setLongitude(7.659370);
 
-            Location loc2=new Location("002");
+            Location loc2 = new Location("002");
             loc2.setLatitude(45.064605);
             loc2.setLongitude(7.668833);
 
-            Location loc3=new Location("003");
+            Location loc3 = new Location("003");
             loc3.setLatitude(45.064151);
             loc3.setLongitude(7.673167);
 
+            Location loc4 = new Location("004");
+            loc4.setLatitude(45.0595401);
+            loc4.setLongitude(7.6771335);
+
+            Location loc5 = new Location("005");
+            loc5.setLatitude(45.0608443);
+            loc5.setLongitude(7.6803656);
+
             //CREAZIONE RISTORANTI
 
-            this.restaurants=new ArrayList<Restaurant>();
+            this.restaurants = new ArrayList<Restaurant>();
 
             Restaurant restaurant1=new Restaurant("001", profile, reviews1, dishes1,loc2);
             Restaurant restaurant2=new Restaurant("002",profile2,reviews2,dishes2,loc1);
             Restaurant restaurant3=new Restaurant("003",profile3,reviews3,dishes3,loc3);
+            Restaurant restaurant4=new Restaurant("004",profile4,reviews3,dishes3,loc4);
+            Restaurant restaurant5=new Restaurant("005",profile5,reviews5,dishes3,loc5);
+
 
             this.restaurants.add(restaurant1);
             this.restaurants.add(restaurant2);
             this.restaurants.add(restaurant3);
+            this.restaurants.add(restaurant4);
+            this.restaurants.add(restaurant5);
 
         }
 

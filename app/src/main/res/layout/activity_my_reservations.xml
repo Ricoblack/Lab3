@@ -21,6 +21,12 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <TextView
+        android:id="@+id/no_reservation_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/no_reservation_available"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/reservation_recycler_view"
         android:layout_width="match_parent"
