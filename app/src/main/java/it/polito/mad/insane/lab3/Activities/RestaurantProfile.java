@@ -144,12 +144,26 @@ public class RestaurantProfile extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        switch (id) {
+            case android.R.id.home:
+                clear();
+                MakeReservationActivity.clear();
+                finish();
+                return true;
+        }
+
 //        //noinspection SimplifiableIfStatement
 //        if (id == R.id.action_settings) {
 //            return true;
 //        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void clear(){
+        dishesAdapter = null;
+        reservationList = null;
+        restaurantId = null;
     }
 
     /**

@@ -126,6 +126,12 @@ public class MakeReservationActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public static void clear(){
+        reservationDate = null;
+        additionalNotes = "";
+        totalPrice = 0;
+    }
+
     private void saveReservation(List<Dish> dishesToDisplay) {
 
         Booking b = new Booking();
@@ -144,9 +150,7 @@ public class MakeReservationActivity extends AppCompatActivity {
 
         manager.getBookings().add(b); //TODO far fare al manager la modifica del db, così ce lo troviamo pronto per l'online e in automatico genera un nuovo id prenotazione
         manager.saveDbApp();
-        reservationDate = null;
-        additionalNotes = "";
-        totalPrice = 0;
+        clear();
         finish();
         Intent intent = new Intent(MakeReservationActivity.this, MyReservationsActivity.class);
         startActivity(intent);
