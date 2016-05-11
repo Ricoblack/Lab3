@@ -22,7 +22,6 @@ public class FilterActivity extends AppCompatActivity {
 
     // TODO: usare le shared preferences per salvare i filtri impostati e modificarli
 
-    // TODO: sistemare la grafica di questa activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

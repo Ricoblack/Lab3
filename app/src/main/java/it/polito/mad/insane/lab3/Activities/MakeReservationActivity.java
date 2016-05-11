@@ -42,6 +42,8 @@ public class MakeReservationActivity extends AppCompatActivity {
     private static String additionalNotes = "";
     private static double totalPrice = 0;
 
+    //TODO: mettere controllo su data e ora della prenotazione, in modo da non permettere di prenotare per un giorno passato o nell'orario in cui è chiuso il ristorante
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
