@@ -36,7 +36,7 @@ import it.polito.mad.insane.lab3.Data.Review;
 public class RestaurateurJsonManager {
 
     private static RestaurateurJsonManager instance = null;
-    private static int currentReservationID = 0;
+
     private static DbApp dbApp;
     private Context myContext;
     private Location location;  //setto il polito come location dove cercare i ristoranti
@@ -49,10 +49,14 @@ public class RestaurateurJsonManager {
         return RestaurateurJsonManager.instance;
     }
 
-    public static int getNextReservationID()
+    public int getNextReservationID()
     {
-        currentReservationID ++; // start form 0
-        return  currentReservationID;
+        int currentId=dbApp.getCurrentReservationID();
+        dbApp.setCurrentReservationID(currentId+1);
+        //dbApp.currentReservationID ++; // start form 0
+        saveDbApp();    //TODO: ora funziona, ma non capisco il senso del dover salvare qui e pure dopo...
+        getDbApp();
+        return  dbApp.getCurrentReservationID();
     }
     private RestaurateurJsonManager(Context myContext)
     {
@@ -344,11 +348,13 @@ public class RestaurateurJsonManager {
 
         private List<Booking> bookings;
 
+        private int currentReservationID;
 
         public  DbApp()
         {
             this.restaurants = null;
             this.bookings = null;
+            this.currentReservationID=0;
         }
 
         public List<Restaurant> getRestaurants() {
@@ -365,6 +371,14 @@ public class RestaurateurJsonManager {
 
         public void setBookings(List<Booking> bookings) {
             this.bookings = bookings;
+        }
+
+        public int getCurrentReservationID() {
+            return currentReservationID;
+        }
+
+        public void setCurrentReservationID(int currentReservationID) {
+            this.currentReservationID = currentReservationID;
         }
 
         public void fillDbApp()
@@ -685,6 +699,7 @@ public class RestaurateurJsonManager {
             this.restaurants.add(restaurant5);
 
         }
+
 
     }
 

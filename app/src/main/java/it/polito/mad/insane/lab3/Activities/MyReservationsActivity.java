@@ -59,7 +59,7 @@ public class MyReservationsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
-                finish();
+                finish();  //FIXME: non basta fare così, se torno indietro riapre l'activity per prenotare con i piatti selezionati ma crasha tutto perchè in memoria non c'è nulla, credo debba essere fixato nell'onresume della RestaurantProfile
                 return true;
         }
 

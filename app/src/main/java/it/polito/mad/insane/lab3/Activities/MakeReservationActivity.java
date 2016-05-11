@@ -45,7 +45,7 @@ public class MakeReservationActivity extends AppCompatActivity {
     private static double totalPrice = 0;
     private static int[] quantities;
 
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +100,7 @@ public class MakeReservationActivity extends AppCompatActivity {
                         Toast.makeText(MakeReservationActivity.this, getString(R.string.specify_date_time), Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    //Verifico che i costraint per la prenotazione siano rispettati: in orario di lavoro e tra almeno un ora
                     if(manager.reservationRespectsTimeContraints(reservationDate,restaurantId)==false){
                         Toast.makeText(MakeReservationActivity.this, getString(R.string.respect_time_contraints), Toast.LENGTH_SHORT).show();
                         return;
@@ -152,12 +153,14 @@ public class MakeReservationActivity extends AppCompatActivity {
 
     private void saveReservation(List<Dish> dishesToDisplay) {
 
+
+        //TODO far fare al manager la modifica del db, così ce lo troviamo pronto per l'online
+
         Booking b = new Booking();
         b.setDate_time(reservationDate);
         b.setDishes(dishesToDisplay);
-        //int rand= (int) (Math.random()*1000);
-        //b.setID(String.valueOf(rand)); //FIXME lasciare al manager il compito di settare un id, ora lo metto random --> risolto; da testare un po
-        b.setID(String.valueOf(RestaurateurJsonManager.getNextReservationID()));
+
+        b.setID(String.valueOf(manager.getNextReservationID()));
         b.setRestaurantID(restaurantId);
         b.setTotalPrice(totalPrice);
         EditText et = (EditText) findViewById(R.id.reservation_additional_notes);
@@ -165,19 +168,20 @@ public class MakeReservationActivity extends AppCompatActivity {
             additionalNotes = et.getText().toString();
             b.setNote(additionalNotes);
         }
-        //FIXME non sembra che questa cosa stia funzionando, controllare in debug
+        //FIXME non sembra che questa cosa stia funzionando, controllare in debug ---
         for(int i = 0; i < manager.getRestaurant(restaurantId).getDishes().size(); i++){
             int quantity = manager.getRestaurant(restaurantId).getDishes().get(i).getAvailability_qty();
             manager.getRestaurant(restaurantId).getDishes().get(i).setAvailability_qty(quantity - quantities[i]);
         }
 
-        manager.getBookings().add(b); //TODO far fare al manager la modifica del db, così ce lo troviamo pronto per l'online e in automatico genera un nuovo id prenotazione
+        manager.getBookings().add(b);
         manager.saveDbApp();
         MakeReservationActivity.clearStaticVariables();
-        RestaurantProfile.clearStaticVariables(); //FIXME non pulisce le variabili dell'altra activity, o almeno cosi' sembra
-        finish();
+        RestaurantProfile.clearStaticVariables(); //FIXME non pulisce le variabili dell'altra activity, o almeno cosi' sembra e questo causa l'exception tornando indietro da myBookings
+
         Intent intent = new Intent(MakeReservationActivity.this, MyReservationsActivity.class);
         startActivity(intent);
+        finish();
 
     }
 

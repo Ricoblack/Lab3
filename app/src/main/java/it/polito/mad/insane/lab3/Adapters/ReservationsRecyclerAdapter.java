@@ -120,7 +120,7 @@ public class ReservationsRecyclerAdapter extends RecyclerView.Adapter<Reservatio
             totalPrice.setText(MessageFormat.format("{0}€", String.valueOf(df.format(current.getTotalPrice()))));
             Calendar calendar = current.getDate_time();
             hour.setText(MessageFormat.format("{0}:{1}", calendar.get(Calendar.HOUR_OF_DAY),
-                    calendar.get(Calendar.MINUTE)));
+                    calendar.get(Calendar.MINUTE))); //FIXME: le 22.09 vengono scritte come 22.9 perchè manca la chiamata a pad()
             date.setText(MessageFormat.format("{0}/{1}/{2}", pad(calendar.get(Calendar.DAY_OF_MONTH)),
                     pad(calendar.get(Calendar.MONTH) + 1), pad(calendar.get(Calendar.YEAR))));
         }
