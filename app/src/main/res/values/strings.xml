@@ -102,6 +102,7 @@
     <string name="reset_button">RESET</string>
     <string name="apply_button">APPLY</string>
     <string name="specify_date_time">You need to specify the date and time</string>
+    <string name="respect_time_contraints">You can\'t reserve in selected date</string>
     <string name="title_activity_filter">Filter</string>
     <string name="delete_reservation_alert_title">Are you sure you want to delete the reservation?</string>
     <string name="filter">Filter</string>

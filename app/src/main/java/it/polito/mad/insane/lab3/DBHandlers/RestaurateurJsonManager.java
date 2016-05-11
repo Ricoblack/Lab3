@@ -17,6 +17,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -311,6 +312,28 @@ public class RestaurateurJsonManager {
         }
     }
 
+    public boolean reservationRespectsTimeContraints(Calendar reservationDate, String restaurantId) {
+        //controllo se la prenotazione è minimo tra un ora e nell'orario di apertura
+        Calendar cal = Calendar.getInstance(); // creates calendar
+        cal.setTime(new Date()); // sets calendar time/date
+        cal.add(Calendar.HOUR_OF_DAY, 1); //add one hour
+
+        RestaurateurProfile profile=getRestaurant(restaurantId).getProfile();
+
+        if(reservationDate.after(cal) && timeIsAfter(reservationDate.getTime(),profile.getOpeningHour())&&
+                timeIsBefore(reservationDate.getTime(),profile.getClosingHour()) ) return true;
+        return false;
+
+
+    }
+    private boolean timeIsBefore(Date d1, Date d2) {
+        DateFormat f = new SimpleDateFormat("HH:mm:ss.SSS");
+        return f.format(d1).compareTo(f.format(d2)) < 0;
+    }
+    private boolean timeIsAfter(Date d1, Date d2) {
+        DateFormat f = new SimpleDateFormat("HH:mm:ss.SSS");
+        return f.format(d1).compareTo(f.format(d2)) >= 0;
+    }
     /**
      * Created by carlocaramia on 09/04/16.
      */
@@ -347,9 +370,11 @@ public class RestaurateurJsonManager {
         public void fillDbApp()
         {
 
-
+            Date d=new Date();  //Debug date to test if time constraints on reservations work
+            d.setHours(23);
+            d.setMinutes(55);
             //CARICAMENTO DATI RISTORANTI
-            RestaurateurProfile profile =new RestaurateurProfile("Pizza-Pazza","Corso duca degli abruzzi, 10","PoliTo","Pizza","Venite a provare la pizza più gustosa di Torino",new Date(),new Date(),"Chiusi la domenica","Bancomat","Wifi-free");
+            RestaurateurProfile profile =new RestaurateurProfile("Pizza-Pazza","Corso duca degli abruzzi, 10","PoliTo","Pizza","Venite a provare la pizza più gustosa di Torino",new Date(),d,"Chiusi la domenica","Bancomat","Wifi-free");
             RestaurateurProfile profile2=new RestaurateurProfile("Just Pasta", "Via roma, 55", "UniTo","Pasta","Pasta per tutti i gusti",new Date(),new Date(),"Aperti tutta la settimana","Bancomat,carta","Privo di barriere architettoniche");
             RestaurateurProfile profile3=new RestaurateurProfile("Pub la locanda", "Via lagrange, 17", "UniTo","Etnico", "L'isola felice dello studente universitario",new Date(),new Date(),"Giropizza il sabato sera","Bancomat","Wifi-free");
             RestaurateurProfile profile4=new RestaurateurProfile("Ovolollo restaurant", "Via saluzzo 17", "PoliTo","Etnico", "L'isola del miglior ovolollo studentesco",new Date(),new Date(),"Cicchetto di ben venuto il sabato sera","Bancomat","Wifi-free");

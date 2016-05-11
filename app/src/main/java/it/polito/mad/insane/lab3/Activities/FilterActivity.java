@@ -140,7 +140,6 @@ public class FilterActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(this,HomeConsumer.class);
-        startActivity(i);
+        super.onBackPressed();
     }
 }

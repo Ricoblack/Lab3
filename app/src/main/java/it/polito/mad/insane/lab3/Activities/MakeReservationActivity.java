@@ -45,7 +45,7 @@ public class MakeReservationActivity extends AppCompatActivity {
     private static double totalPrice = 0;
     private static int[] quantities;
 
-    //TODO: mettere controllo su data e ora della prenotazione, in modo da non permettere di prenotare per un giorno passato o nell'orario in cui è chiuso il ristorante
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +98,10 @@ public class MakeReservationActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     if(reservationDate == null){
                         Toast.makeText(MakeReservationActivity.this, getString(R.string.specify_date_time), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if(manager.reservationRespectsTimeContraints(reservationDate,restaurantId)==false){
+                        Toast.makeText(MakeReservationActivity.this, getString(R.string.respect_time_contraints), Toast.LENGTH_SHORT).show();
                         return;
                     }
                     AlertDialog.Builder builder = new AlertDialog.Builder(MakeReservationActivity.this);
