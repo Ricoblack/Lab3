@@ -24,7 +24,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".FilterActivity" />
         <activity
-            android:name=".MakeReservation"
+            android:name=".MakeReservationActivity"
             android:label="@string/title_activity_make_reservation"
             android:parentActivityName=".RestaurantProfile"
             android:theme="@style/AppTheme.NoActionBar"
@@ -34,7 +34,7 @@
                 android:value="it.polito.mad.insane.lab3.RestaurantProfile" />
         </activity>
         <activity
-            android:name=".MyReservations"
+            android:name=".MyReservationsActivity"
             android:label="@string/title_activity_my_reservations"
             android:parentActivityName=".HomeConsumer"
             android:theme="@style/AppTheme.NoActionBar">

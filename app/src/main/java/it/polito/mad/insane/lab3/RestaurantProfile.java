@@ -2,7 +2,6 @@ package it.polito.mad.insane.lab3;
 
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -27,7 +26,6 @@ import android.widget.Toast;
 import com.astuetz.PagerSlidingTabStrip;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -266,7 +264,7 @@ public class RestaurantProfile extends AppCompatActivity {
                 tv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getActivity(), MakeReservation.class);
+                        Intent intent = new Intent(getActivity(), MakeReservationActivity.class);
                         if (rv != null) {
                             Bundle bundle = new Bundle();
                             if(dishesAdapter.getReservationQty() == 0)

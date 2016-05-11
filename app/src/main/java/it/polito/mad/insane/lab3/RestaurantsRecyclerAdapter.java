@@ -53,6 +53,7 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
     public void onBindViewHolder(RestaurantsViewHolder holder, int position) {
         Restaurant currentObj = this.mData.get(position);
         holder.setData(currentObj, position);
+
     }
 
     @Override
@@ -85,7 +86,7 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
         };
 
         public RestaurantsViewHolder(View itemView) {
-            
+
 
             super(itemView);
             this.cardView = itemView;

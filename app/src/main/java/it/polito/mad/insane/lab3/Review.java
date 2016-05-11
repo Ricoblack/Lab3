@@ -17,8 +17,6 @@ public class Review implements Serializable{
     private String restaurantID;
 
 
-
-
     public int getUserID() {
         return userID;
     }
@@ -86,4 +84,5 @@ public class Review implements Serializable{
     public void setRestaurantID(String restaurantID) {
         this.restaurantID = restaurantID;
     }
+
 }
