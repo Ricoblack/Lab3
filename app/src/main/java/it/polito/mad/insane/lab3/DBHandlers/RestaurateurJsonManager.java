@@ -1,12 +1,10 @@
-package it.polito.mad.insane.lab3;
+package it.polito.mad.insane.lab3.DBHandlers;
 
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.location.Location;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.google.gson.internal.bind.CollectionTypeAdapterFactory;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,16 +13,20 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+
+import it.polito.mad.insane.lab3.Data.Booking;
+import it.polito.mad.insane.lab3.Data.Dish;
+import it.polito.mad.insane.lab3.Data.Restaurant;
+import it.polito.mad.insane.lab3.Data.RestaurateurProfile;
+import it.polito.mad.insane.lab3.Data.Review;
 
 /**
  * Created by carlocaramia on 08/04/16.

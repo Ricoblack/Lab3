@@ -1,4 +1,4 @@
-package it.polito.mad.insane.lab3;
+package it.polito.mad.insane.lab3.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +12,10 @@ import android.widget.TextView;
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
+
+import it.polito.mad.insane.lab3.Activities.RestaurantProfile;
+import it.polito.mad.insane.lab3.Data.Dish;
+import it.polito.mad.insane.lab3.R;
 
 /**
  * Created by miche on 08/04/2016.

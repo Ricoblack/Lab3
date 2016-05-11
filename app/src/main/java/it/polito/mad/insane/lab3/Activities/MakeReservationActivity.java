@@ -1,4 +1,4 @@
-package it.polito.mad.insane.lab3;
+package it.polito.mad.insane.lab3.Activities;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -27,7 +27,12 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Random;
+
+import it.polito.mad.insane.lab3.Data.Booking;
+import it.polito.mad.insane.lab3.Data.Dish;
+import it.polito.mad.insane.lab3.Adapters.DishArrayAdapter;
+import it.polito.mad.insane.lab3.R;
+import it.polito.mad.insane.lab3.DBHandlers.RestaurateurJsonManager;
 
 public class MakeReservationActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package it.polito.mad.insane.lab3;
+package it.polito.mad.insane.lab3.Activities;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import it.polito.mad.insane.lab3.Adapters.MySpinnerAdapterFilter;
+import it.polito.mad.insane.lab3.R;
+
 public class FilterActivity extends AppCompatActivity {
 
     @Override
@@ -22,8 +25,7 @@ public class FilterActivity extends AppCompatActivity {
         //set up spinners
         setUpSpinners();
 
-
-        //set up on click listeners
+        //set up on click listeners of the buttons
         AppCompatButton reset= (AppCompatButton) findViewById(R.id.resetButton);
         AppCompatButton apply=(AppCompatButton) findViewById(R.id.applyButton);
 
@@ -33,7 +35,6 @@ public class FilterActivity extends AppCompatActivity {
                 onResetPressed(v);
             }
         });
-
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +83,7 @@ public class FilterActivity extends AppCompatActivity {
         Resources res = getResources();
         String[] dStrings = res.getStringArray(R.array.distance_array);
         Collections.addAll(distances, dStrings);
-        MySpinnerAdapter dAdapter = new MySpinnerAdapter(FilterActivity.this, R.layout.support_simple_spinner_dropdown_item,
+        MySpinnerAdapterFilter dAdapter = new MySpinnerAdapterFilter(FilterActivity.this, R.layout.support_simple_spinner_dropdown_item,
                 distances,res);
         dAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         dSpinner.setAdapter(dAdapter);
@@ -93,7 +94,7 @@ public class FilterActivity extends AppCompatActivity {
         Resources res2 = getResources();
         String[] pStrings = res2.getStringArray(R.array.price_array);
         Collections.addAll(prices, pStrings);
-        MySpinnerAdapter pAdapter = new MySpinnerAdapter(FilterActivity.this, R.layout.support_simple_spinner_dropdown_item,
+        MySpinnerAdapterFilter pAdapter = new MySpinnerAdapterFilter(FilterActivity.this, R.layout.support_simple_spinner_dropdown_item,
                 prices,res2);
         pAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         pSpinner.setAdapter(pAdapter);
@@ -103,7 +104,7 @@ public class FilterActivity extends AppCompatActivity {
         Resources res3 = getResources();
         String[] tStrings = res3.getStringArray(R.array.type_array);
         Collections.addAll(types, tStrings);
-        MySpinnerAdapter tAdapter = new MySpinnerAdapter(FilterActivity.this, R.layout.support_simple_spinner_dropdown_item,
+        MySpinnerAdapterFilter tAdapter = new MySpinnerAdapterFilter(FilterActivity.this, R.layout.support_simple_spinner_dropdown_item,
                 types,res3);
         tAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         tSpinner.setAdapter(tAdapter);
@@ -113,7 +114,7 @@ public class FilterActivity extends AppCompatActivity {
         Resources res4 = getResources();
         String[] tiStrings = res4.getStringArray(R.array.time_array);
         Collections.addAll(times, tiStrings);
-        MySpinnerAdapter tiAdapter = new MySpinnerAdapter(FilterActivity.this, R.layout.support_simple_spinner_dropdown_item,
+        MySpinnerAdapterFilter tiAdapter = new MySpinnerAdapterFilter(FilterActivity.this, R.layout.support_simple_spinner_dropdown_item,
                 times,res4);
         tiAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         tiSpinner.setAdapter(tiAdapter);

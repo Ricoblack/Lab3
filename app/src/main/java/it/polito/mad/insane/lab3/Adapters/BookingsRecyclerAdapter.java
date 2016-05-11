@@ -1,4 +1,4 @@
-package it.polito.mad.insane.lab3;
+package it.polito.mad.insane.lab3.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,11 @@ import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.List;
+
+import it.polito.mad.insane.lab3.Activities.MyReservationsActivity;
+import it.polito.mad.insane.lab3.Data.Booking;
+import it.polito.mad.insane.lab3.R;
+import it.polito.mad.insane.lab3.DBHandlers.RestaurateurJsonManager;
 
 /**
  * Created by Renato on 10/05/2016.

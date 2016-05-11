@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="it.polito.mad.insane.lab3.RestaurantProfile">
+    tools:context=".Activities.RestaurantProfile">
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar"
@@ -54,7 +54,7 @@
             android:clipToPadding="false"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:showIn = "@layout/activity_restaurant_profile"
-            tools:context="it.polito.mad.insane.lab3.RestaurantProfile"
+            tools:context=".Activities.RestaurantProfile"
             >
 
             <LinearLayout

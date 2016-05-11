@@ -99,5 +99,7 @@
     <string name="hh_mm">hh/mm</string>
     <string name="n_dish">N° dish</string>
     <string name="delete_reservation_button">DELETE</string>
+    <string name="reset_button">RESET</string>
+    <string name="apply_button">APPLY</string>
     <string name="specify_date_time">You need to specify the date and time</string>
 </resources>

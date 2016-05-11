@@ -1,4 +1,4 @@
-package it.polito.mad.insane.lab3;
+package it.polito.mad.insane.lab3.Activities;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -29,6 +29,15 @@ import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import it.polito.mad.insane.lab3.Data.Dish;
+import it.polito.mad.insane.lab3.Adapters.DishesRecyclerAdapter;
+import it.polito.mad.insane.lab3.R;
+import it.polito.mad.insane.lab3.Data.Restaurant;
+import it.polito.mad.insane.lab3.DBHandlers.RestaurateurJsonManager;
+import it.polito.mad.insane.lab3.Data.RestaurateurProfile;
+import it.polito.mad.insane.lab3.Data.Review;
+import it.polito.mad.insane.lab3.Adapters.ReviewsRecyclerAdapter;
 
 public class RestaurantProfile extends AppCompatActivity {
 

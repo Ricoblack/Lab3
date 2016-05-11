@@ -1,4 +1,4 @@
-package it.polito.mad.insane.lab3;
+package it.polito.mad.insane.lab3.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,10 @@ import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import it.polito.mad.insane.lab3.Activities.MakeReservationActivity;
+import it.polito.mad.insane.lab3.Data.Dish;
+import it.polito.mad.insane.lab3.R;
 
 /**
  * Created by Renato on 10/05/2016.

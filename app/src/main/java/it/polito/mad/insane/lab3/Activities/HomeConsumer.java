@@ -1,4 +1,4 @@
-package it.polito.mad.insane.lab3;
+package it.polito.mad.insane.lab3.Activities;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -18,6 +18,13 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import it.polito.mad.insane.lab3.Adapters.MySpinnerAdapterHome;
+import it.polito.mad.insane.lab3.R;
+import it.polito.mad.insane.lab3.Data.Restaurant;
+import it.polito.mad.insane.lab3.Adapters.RestaurantsRecyclerAdapter;
+import it.polito.mad.insane.lab3.DBHandlers.RestaurateurJsonManager;
+import it.polito.mad.insane.lab3.Animations.SlideInOutLeftItemAnimator;
 
 public class HomeConsumer extends AppCompatActivity {
 
@@ -76,7 +83,7 @@ public class HomeConsumer extends AppCompatActivity {
         Resources res = getResources();
         String[] dStrings = res.getStringArray(R.array.order_array);
         Collections.addAll(orderings, dStrings);
-        MySpinnerAdapter_home dAdapter = new MySpinnerAdapter_home(HomeConsumer.this, R.layout.support_simple_spinner_dropdown_item,
+        MySpinnerAdapterHome dAdapter = new MySpinnerAdapterHome(HomeConsumer.this, R.layout.support_simple_spinner_dropdown_item,
                 orderings, res);
         dAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         dSpinner.setAdapter(dAdapter);
@@ -100,7 +107,6 @@ public class HomeConsumer extends AppCompatActivity {
             else {
                 setUpRestaurantsRecycler(manager.getRestaurants());
             }
-
         }
 
 
@@ -132,8 +138,6 @@ public class HomeConsumer extends AppCompatActivity {
         }
 
         finish();
-
-
 
         return super.onOptionsItemSelected(item);
     }

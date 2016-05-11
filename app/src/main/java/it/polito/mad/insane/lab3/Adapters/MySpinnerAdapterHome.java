@@ -1,4 +1,4 @@
-package it.polito.mad.insane.lab3;
+package it.polito.mad.insane.lab3.Adapters;
 
 import android.widget.ArrayAdapter;
 import android.content.Context;
@@ -13,16 +13,18 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polito.mad.insane.lab3.R;
+
 /**
  * Created by Federico on 11/05/2016.
  */
-public class MySpinnerAdapter_home extends ArrayAdapter<String> {
+public class MySpinnerAdapterHome extends ArrayAdapter<String> {
     Context contextSpinner;
     List<String> choices = new ArrayList<>();
     Resources resSpinnerAdapter;
 
 
-    public MySpinnerAdapter_home(Context context, int resource, List objects, Resources res)
+    public MySpinnerAdapterHome(Context context, int resource, List objects, Resources res)
     {
         super(context, resource, objects);
         contextSpinner = context;

@@ -1,4 +1,4 @@
-package it.polito.mad.insane.lab3;
+package it.polito.mad.insane.lab3.Data;
 
 import android.os.Parcel;
 import android.os.Parcelable;

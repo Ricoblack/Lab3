@@ -1,4 +1,4 @@
-package it.polito.mad.insane.lab3;
+package it.polito.mad.insane.lab3.Adapters;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
@@ -14,6 +14,9 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import it.polito.mad.insane.lab3.Data.Review;
+import it.polito.mad.insane.lab3.R;
 
 /**
  * Created by Renato on 28/04/2016.
@@ -91,6 +94,8 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
             //TODO: add the userPic instead of the left drawable of userName in the cardView
         }
 
+
+        // TODO: sincronizzare l'animazione di compressione della cardview in modo che il testo cambi dopo la compressione
         public void setData(Review current, int position){
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             this.date.setText(dateFormat.format(current.getDate()));
