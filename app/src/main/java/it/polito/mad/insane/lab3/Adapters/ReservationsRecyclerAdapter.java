@@ -18,7 +18,6 @@ import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import it.polito.mad.insane.lab3.Activities.MakeReservationActivity;
 import it.polito.mad.insane.lab3.Activities.MyReservationsActivity;
 import it.polito.mad.insane.lab3.Data.Booking;
 import it.polito.mad.insane.lab3.R;
@@ -27,13 +26,13 @@ import it.polito.mad.insane.lab3.DBHandlers.RestaurateurJsonManager;
 /**
  * Created by Renato on 10/05/2016.
  */
-public class BookingsRecyclerAdapter extends RecyclerView.Adapter<BookingsRecyclerAdapter.BookingsViewHolder>{
+public class ReservationsRecyclerAdapter extends RecyclerView.Adapter<ReservationsRecyclerAdapter.BookingsViewHolder>{
 
     private final Context context;
     private List<Booking> mData; //actual data to be displayed
     private LayoutInflater mInflater;
 
-    public BookingsRecyclerAdapter(Context context, List<Booking> data){
+    public ReservationsRecyclerAdapter(Context context, List<Booking> data){
         this.context = context;
         this.mData = data;
         this.mInflater = LayoutInflater.from(context);

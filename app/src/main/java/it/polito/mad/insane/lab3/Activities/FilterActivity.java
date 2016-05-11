@@ -20,6 +20,7 @@ import it.polito.mad.insane.lab3.R;
 
 public class FilterActivity extends AppCompatActivity {
 
+    // TODO: sistemare la grafica di questa activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import it.polito.mad.insane.lab3.Adapters.BookingsRecyclerAdapter;
+import it.polito.mad.insane.lab3.Adapters.ReservationsRecyclerAdapter;
 import it.polito.mad.insane.lab3.R;
 import it.polito.mad.insane.lab3.DBHandlers.RestaurateurJsonManager;
 
@@ -26,7 +26,7 @@ public class MyReservationsActivity extends AppCompatActivity {
 
         if(rv != null){
             RestaurateurJsonManager manager = RestaurateurJsonManager.getInstance(this);
-            BookingsRecyclerAdapter adapter = new BookingsRecyclerAdapter(this, manager.getBookings());
+            ReservationsRecyclerAdapter adapter = new ReservationsRecyclerAdapter(this, manager.getBookings());
             rv.setAdapter(adapter);
             LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(this);
             mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
