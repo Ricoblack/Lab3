@@ -7,8 +7,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
+import java.util.List;
 
 import it.polito.mad.insane.lab3.Adapters.ReservationsRecyclerAdapter;
+import it.polito.mad.insane.lab3.Data.Booking;
 import it.polito.mad.insane.lab3.R;
 import it.polito.mad.insane.lab3.DBHandlers.RestaurateurJsonManager;
 
@@ -26,12 +31,18 @@ public class MyReservationsActivity extends AppCompatActivity {
 
         if(rv != null){
             RestaurateurJsonManager manager = RestaurateurJsonManager.getInstance(this);
-            ReservationsRecyclerAdapter adapter = new ReservationsRecyclerAdapter(this, manager.getBookings());
-            rv.setAdapter(adapter);
-            LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(this);
-            mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
-            rv.setLayoutManager(mLinearLayoutManagerVertical);
-            rv.setItemAnimator(new DefaultItemAnimator());
+            List<Booking> bookingList = manager.getBookings();
+            if(!bookingList.isEmpty())
+            {
+                TextView reservationMessage = (TextView) findViewById(R.id.no_reservation_message);
+                reservationMessage.setVisibility(View.GONE);
+                ReservationsRecyclerAdapter adapter = new ReservationsRecyclerAdapter(this, manager.getBookings());
+                rv.setAdapter(adapter);
+                LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(this);
+                mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
+                rv.setLayoutManager(mLinearLayoutManagerVertical);
+                rv.setItemAnimator(new DefaultItemAnimator());
+            }
         }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

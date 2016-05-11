@@ -117,7 +117,7 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
             this.avgFinalScore.setText(df.format(current.getAvgFinalScore()));
             //TODO capire come cambiarlo a secondo della lingua
             this.numReview.setText(Integer.toString(current.getReviews().size())+" reviews");
-            float distance=current.getLocation().distanceTo(manager.getLocation());
+            float distance = current.getLocation().distanceTo(manager.getLocation());
             this.distance.setText(String.format("%.0f",distance)+"m");
         }
 
