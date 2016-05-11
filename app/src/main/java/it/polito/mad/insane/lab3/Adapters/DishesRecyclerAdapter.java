@@ -1,11 +1,14 @@
 package it.polito.mad.insane.lab3.Adapters;
 
 import android.content.Context;
+import android.media.Image;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -102,7 +105,7 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
         private TextView dishName;
         private TextView dishDesc;
         private TextView dishPrice;
-        private TextView dishAvailabQty;
+        private TextView dishAvailability;
         private Button minusButton;
         private Button plusButton;
         private TextView selectedQuantity;
@@ -110,6 +113,7 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
         private LinearLayout selectionLayout;
         private LinearLayout mainLayout;
         private View separator;
+        private ImageView expandArrow;
 //        private CheckBox selection;
 
         public DishesViewHolder(View itemView)
@@ -120,7 +124,7 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
             this.dishName = (TextView) itemView.findViewById(R.id.dish_name);
             this.dishDesc =  (TextView) itemView.findViewById(R.id.dish_description);
             this.dishPrice = (TextView) itemView.findViewById(R.id.dish_price);
-            this.dishAvailabQty = (TextView) itemView.findViewById(R.id.dish_availab_qty);
+            this.dishAvailability = (TextView) itemView.findViewById(R.id.dish_availability);
             this.minusButton = (Button) itemView.findViewById(R.id.dish_minus_button);
             this.plusButton = (Button) itemView.findViewById(R.id.dish_plus_button);
             this.selectedQuantity = (TextView) itemView.findViewById(R.id.dish_selected_quantity);
@@ -128,22 +132,27 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
             this.selectionLayout = (LinearLayout) itemView.findViewById(R.id.add_dish_popup) ;
             this.mainLayout = (LinearLayout) itemView.findViewById(R.id.cardView_main_layout);
             this.separator = itemView.findViewById(R.id.cardView_separator);
+            this.expandArrow = (ImageView) itemView.findViewById(R.id.expand_arrow);
         }
 
         public void setData(Dish current, int position )
         {
             final int pos = position;
+            DecimalFormat df = new DecimalFormat("0.00");
             this.dishID.setText(current.getID());
             this.dishName.setText(current.getName());
             this.dishDesc.setText(current.getDescription());
-            this.dishPrice.setText(Double.toString(current.getPrice()));
-            this.dishAvailabQty.setText(Integer.toString(current.getAvailability_qty())); //FIXME togliere questo campo
+            this.dishPrice.setText(MessageFormat.format("{0}€", String.valueOf(df.format(current.getPrice()))));
+            if(current.getAvailability_qty() == 0) {
+                this.dishAvailability.setVisibility(View.VISIBLE);
+                //TODO rendere non espandibile la cardView (ad es. settare popupsVisibility a -1)
+            }
                                                                                           // mostrare solo quando non e' disponibile
 
             this.selectionLayout.setVisibility(popupsVisibility[position]); //layout del popup
             this.separator.setVisibility(popupsVisibility[position]); //layout della linea separatrice
             this.selectedQuantity.setText(String.valueOf(selectedQuantities[position]));
-            DecimalFormat df = new DecimalFormat("0.00");
+            df = new DecimalFormat("0.00");
             this.selectedPrice.setText(MessageFormat.format("{0}€",
                     String.valueOf(df.format(selectedQuantities[position] * mData.get(position).getPrice()))));
 
@@ -153,11 +162,13 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
                     if(popupsVisibility[pos] == View.GONE) { // al click se il popup è invisibile lo faccio apparire...
                         selectionLayout.setVisibility(View.VISIBLE);
                         separator.setVisibility(View.VISIBLE);
+                        expandArrow.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_keyboard_arrow_up_black_24dp));
                         popupsVisibility[pos] = View.VISIBLE;
                     }
                     else { //... se e' visibile lo nascondo
                         selectionLayout.setVisibility(View.GONE);
                         separator.setVisibility(View.INVISIBLE);
+                        expandArrow.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_keyboard_arrow_down_black_24dp));
                         popupsVisibility[pos] = View.GONE;
                     }
                 }
