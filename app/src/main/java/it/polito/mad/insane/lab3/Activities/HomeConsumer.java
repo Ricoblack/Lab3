@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -38,7 +39,7 @@ public class HomeConsumer extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        SearchView sv = (SearchView) findViewById(R.id.searchView);
+        final SearchView sv = (SearchView) findViewById(R.id.searchView);
 
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -60,6 +61,13 @@ public class HomeConsumer extends AppCompatActivity {
                 }
 
                 return true;
+            }
+        });
+
+        sv.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                sv.setIconified(false);
             }
         });
 
