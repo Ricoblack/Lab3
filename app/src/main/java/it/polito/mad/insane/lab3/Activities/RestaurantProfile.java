@@ -146,8 +146,8 @@ public class RestaurantProfile extends AppCompatActivity {
 
         switch (id) {
             case android.R.id.home:
-                clear();
-                MakeReservationActivity.clear();
+                clearStaticVariables();
+                MakeReservationActivity.clearStaticVariables();
                 finish();
                 return true;
         }
@@ -160,7 +160,7 @@ public class RestaurantProfile extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void clear(){
+    private void clearStaticVariables(){
         dishesAdapter = null;
         reservationList = null;
         restaurantId = null;

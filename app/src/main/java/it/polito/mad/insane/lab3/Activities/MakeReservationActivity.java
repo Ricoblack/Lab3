@@ -126,7 +126,7 @@ public class MakeReservationActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static void clear(){
+    public static void clearStaticVariables(){
         reservationDate = null;
         additionalNotes = "";
         totalPrice = 0;
@@ -150,7 +150,7 @@ public class MakeReservationActivity extends AppCompatActivity {
 
         manager.getBookings().add(b); //TODO far fare al manager la modifica del db, così ce lo troviamo pronto per l'online e in automatico genera un nuovo id prenotazione
         manager.saveDbApp();
-        clear();
+        clearStaticVariables();
         finish();
         Intent intent = new Intent(MakeReservationActivity.this, MyReservationsActivity.class);
         startActivity(intent);

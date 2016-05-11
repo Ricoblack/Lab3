@@ -1,12 +1,16 @@
 package it.polito.mad.insane.lab3.Adapters;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -14,6 +18,7 @@ import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import it.polito.mad.insane.lab3.Activities.MakeReservationActivity;
 import it.polito.mad.insane.lab3.Activities.MyReservationsActivity;
 import it.polito.mad.insane.lab3.Data.Booking;
 import it.polito.mad.insane.lab3.R;
@@ -63,6 +68,7 @@ public class BookingsRecyclerAdapter extends RecyclerView.Adapter<BookingsRecycl
         private TextView nItems;
         private TextView totalPrice;
         private View view;
+        private ImageView trash;
         private RestaurateurJsonManager manager;
 
         public BookingsViewHolder(View itemView) {
@@ -74,17 +80,32 @@ public class BookingsRecyclerAdapter extends RecyclerView.Adapter<BookingsRecycl
             this.hour = (TextView) itemView.findViewById(R.id.reservation_cardview_hour);
             this.nItems = (TextView) itemView.findViewById(R.id.reservation_cardview_nItems);
             this.totalPrice = (TextView) itemView.findViewById(R.id.reservation_cardview_price);
+            this.trash = (ImageView) itemView.findViewById(R.id.delete_reservation);
             this.view=itemView;
 
-            this.view.setOnClickListener(new View.OnClickListener() {
+            this.trash.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //TODO: va gestita l'eliminazione e relativo invalidate della listview (va copiata la cancellazione dell'item dall'adapter dal lab2)
-                    manager.deleteReservation(ID.getText().toString());
-                    Intent i = new Intent(v.getContext(),MyReservationsActivity.class);
-                    AppCompatActivity act=(AppCompatActivity)v.getContext();
-                    act.startActivity(i);
-                    act.finish();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle(context.getResources().getString(R.string.delete_reservation_alert_title))
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    manager.deleteReservation(ID.getText().toString());
+                                    Intent i = new Intent(context,MyReservationsActivity.class);
+                                    AppCompatActivity act=(AppCompatActivity)context;
+                                    act.startActivity(i);
+                                    act.finish();
+                                }
+                            })
+                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.dismiss();
+                                }
+                            });
+
+                    Dialog dialog = builder.create();
+                    dialog.show();
                 }
             });
 

@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
@@ -142,8 +143,9 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
             this.selectionLayout.setVisibility(popupsVisibility[position]); //layout del popup
             this.separator.setVisibility(popupsVisibility[position]); //layout della linea separatrice
             this.selectedQuantity.setText(String.valueOf(selectedQuantities[position]));
+            DecimalFormat df = new DecimalFormat("0.00");
             this.selectedPrice.setText(MessageFormat.format("{0}€",
-                    String.valueOf(selectedQuantities[position] * mData.get(position).getPrice())));
+                    String.valueOf(df.format(selectedQuantities[position] * mData.get(position).getPrice()))));
 
             this.mainLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -167,7 +169,9 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
                     if(selectedQuantities[pos] != 0) { // TODO se clicco di nuovo sul menu' nascondo il popup o non faccio nulla?
                         selectedQuantities[pos]--;
                         selectedQuantity.setText(String.valueOf(selectedQuantities[pos]));
-                        selectedPrice.setText(String.format("%s€", String.valueOf(selectedQuantities[pos] * mData.get(pos).getPrice())));
+                        DecimalFormat df = new DecimalFormat("0.00");
+                        selectedPrice.setText(MessageFormat.format("{0}€",
+                                String.valueOf(df.format(selectedQuantities[pos] * mData.get(pos).getPrice()))));
 
                         reservationPrice -= mData.get(pos).getPrice(); //decremento il prezzo totale della prenotazione
                         reservationQty--; //decremento la quantita' di item della prenotazione
@@ -189,7 +193,9 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
                     if(selectedQuantities[pos] != 10) {
                         selectedQuantities[pos]++;
                         selectedQuantity.setText(String.valueOf(selectedQuantities[pos]));
-                        selectedPrice.setText(String.format("%s€", String.valueOf(selectedQuantities[pos] * mData.get(pos).getPrice())));
+                        DecimalFormat df = new DecimalFormat("0.00");
+                        selectedPrice.setText(MessageFormat.format("{0}€",
+                                String.valueOf(df.format(selectedQuantities[pos] * mData.get(pos).getPrice()))));
 
                         reservationPrice += mData.get(pos).getPrice(); //incremento il prezzo totale della prenotazione
                         reservationQty++; //incremento la quantita' di item della prenotazione

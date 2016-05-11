@@ -48,7 +48,6 @@ public class HomeConsumer extends AppCompatActivity {
                     List<Restaurant> listaFiltrata = manager.getFilteredRestaurants(newText);
                     setUpRestaurantsRecycler(listaFiltrata);
                 }
-
                 return true;
             }
 
