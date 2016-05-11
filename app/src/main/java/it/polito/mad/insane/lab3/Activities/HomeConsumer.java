@@ -139,8 +139,6 @@ public class HomeConsumer extends AppCompatActivity {
             startActivity(i);
         }
 
-        finish();
-
         return super.onOptionsItemSelected(item);
     }
 
