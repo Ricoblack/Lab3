@@ -104,28 +104,29 @@
 
 
                 <TextView
-                    android:id="@+id/dish_availab_qty"
+                    android:id="@+id/dish_availability"
                     android:layout_width="wrap_content"
-                    android:text="110"
+                    android:text="Not available"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:layout_below="@id/dish_description"
                     android:layout_alignEnd="@id/dish_description"
                     android:layout_alignRight="@id/dish_description"
+                    android:visibility="gone"
                     />
 
-                <TextView
+
+                <ImageView
+                    android:id="@+id/expand_arrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_toLeftOf="@id/dish_availab_qty"
-                    android:layout_toStartOf="@id/dish_availab_qty"
                     android:layout_below="@id/dish_description"
-                    android:paddingRight="@dimen/margin_between_cardView"
-                    android:paddingEnd="@dimen/margin_between_cardView"
-                    android:text="@string/quantity_available"/>
+                    android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    />
 
 
             </RelativeLayout>

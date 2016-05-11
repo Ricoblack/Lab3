@@ -82,6 +82,7 @@ public class ReservationsRecyclerAdapter extends RecyclerView.Adapter<Reservatio
             this.trash = (ImageView) itemView.findViewById(R.id.delete_reservation);
             this.view=itemView;
 
+
             this.trash.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
