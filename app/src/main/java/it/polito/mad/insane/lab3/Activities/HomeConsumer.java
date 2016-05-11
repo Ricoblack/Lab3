@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -86,19 +87,13 @@ public class HomeConsumer extends AppCompatActivity {
                 }
             }
         });
+        //TODO: per ora setto il pulsante invisibile
+        applyButton.setVisibility(View.INVISIBLE);
 
+       //set up ordering spinner
+        setUpSpinner();
 
-        //TODO togliere order by e lasciare solo le due scelte distance e score nello spinner della home page
-        final Spinner dSpinner = (Spinner) findViewById(R.id.orderSpinner);
-        List<String> orderings = new ArrayList<>();
-        Resources res = getResources();
-        String[] dStrings = res.getStringArray(R.array.order_array);
-        Collections.addAll(orderings, dStrings);
-        MySpinnerAdapterHome dAdapter = new MySpinnerAdapterHome(HomeConsumer.this, R.layout.support_simple_spinner_dropdown_item,
-                orderings, res);
-        dAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        dSpinner.setAdapter(dAdapter);
-
+        //check if filtering request happened
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
 
@@ -171,5 +166,35 @@ public class HomeConsumer extends AppCompatActivity {
         // Set animation
         RecyclerView.ItemAnimator ia = new SlideInOutLeftItemAnimator(rV);  // try animator //FIXME: doesn't work
         rV.setItemAnimator(ia);
+    }
+
+    private void setUpSpinner(){
+        //TODO togliere order by e lasciare solo le due scelte distance e score nello spinner della home page
+        final Spinner dSpinner = (Spinner) findViewById(R.id.orderSpinner);
+        List<String> orderings = new ArrayList<>();
+        Resources res = getResources();
+        String[] dStrings = res.getStringArray(R.array.order_array);
+        Collections.addAll(orderings, dStrings);
+        MySpinnerAdapterHome dAdapter = new MySpinnerAdapterHome(HomeConsumer.this, R.layout.support_simple_spinner_dropdown_item,
+                orderings, res);
+        dAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        dSpinner.setAdapter(dAdapter);
+
+        dSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position==1|| position==2){
+                    setUpRestaurantsRecycler(manager.getOrderedRestaurants(dSpinner.getSelectedItem().toString()));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                //nothing
+            }
+        });
+
+        dSpinner.setSelection(2);
+
     }
 }
