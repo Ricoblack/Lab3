@@ -166,7 +166,7 @@ public class RestaurantProfile extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void clearStaticVariables(){
+    public static void clearStaticVariables(){
         dishesAdapter = null;
         reservationList = null;
         restaurantId = null;

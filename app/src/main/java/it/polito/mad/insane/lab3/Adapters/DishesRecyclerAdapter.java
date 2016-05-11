@@ -135,7 +135,7 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
             this.expandArrow = (ImageView) itemView.findViewById(R.id.expand_arrow);
         }
 
-        public void setData(Dish current, int position )
+        public void setData(final Dish current, int position )
         {
             final int pos = position;
             DecimalFormat df = new DecimalFormat("0.00");
@@ -145,7 +145,7 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
             this.dishPrice.setText(MessageFormat.format("{0}€", String.valueOf(df.format(current.getPrice()))));
             if(current.getAvailability_qty() == 0) {
                 this.dishAvailability.setVisibility(View.VISIBLE);
-                //TODO rendere non espandibile la cardView (ad es. settare popupsVisibility a -1)
+                popupsVisibility[position] = View.GONE;
             }
                                                                                           // mostrare solo quando non e' disponibile
 
@@ -159,7 +159,8 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
             this.mainLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(popupsVisibility[pos] == View.GONE) { // al click se il popup è invisibile lo faccio apparire...
+                    if(popupsVisibility[pos] == View.GONE && current.getAvailability_qty() != 0) { // al click se il popup è invisibile
+                        // e il prodotto e' disponibile lo faccio apparire...
                         selectionLayout.setVisibility(View.VISIBLE);
                         separator.setVisibility(View.VISIBLE);
                         expandArrow.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_keyboard_arrow_up_black_24dp));
@@ -167,7 +168,7 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
                     }
                     else { //... se e' visibile lo nascondo
                         selectionLayout.setVisibility(View.GONE);
-                        separator.setVisibility(View.INVISIBLE);
+                        separator.setVisibility(View.GONE);
                         expandArrow.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_keyboard_arrow_down_black_24dp));
                         popupsVisibility[pos] = View.GONE;
                     }
@@ -177,7 +178,7 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
             this.minusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(selectedQuantities[pos] != 0) { // TODO se clicco di nuovo sul menu' nascondo il popup o non faccio nulla?
+                    if(selectedQuantities[pos] != 0) {
                         selectedQuantities[pos]--;
                         selectedQuantity.setText(String.valueOf(selectedQuantities[pos]));
                         DecimalFormat df = new DecimalFormat("0.00");
@@ -201,7 +202,7 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
             this.plusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(selectedQuantities[pos] != 10) {
+                    if(selectedQuantities[pos] < current.getAvailability_qty()) {
                         selectedQuantities[pos]++;
                         selectedQuantity.setText(String.valueOf(selectedQuantities[pos]));
                         DecimalFormat df = new DecimalFormat("0.00");

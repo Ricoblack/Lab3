@@ -41,6 +41,7 @@ public class MakeReservationActivity extends AppCompatActivity {
     private static String restaurantId;
     private static String additionalNotes = "";
     private static double totalPrice = 0;
+    private static int[] quantities;
 
     //TODO: mettere controllo su data e ora della prenotazione, in modo da non permettere di prenotare per un giorno passato o nell'orario in cui è chiuso il ristorante
 
@@ -52,7 +53,7 @@ public class MakeReservationActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Bundle bundle = getIntent().getExtras();
-        int[] quantities = bundle.getIntArray("selectedQuantities");
+        quantities = bundle.getIntArray("selectedQuantities");
         restaurantId = bundle.getString("ID");
 
         manager = RestaurateurJsonManager.getInstance(this);
@@ -150,11 +151,16 @@ public class MakeReservationActivity extends AppCompatActivity {
             additionalNotes = et.getText().toString();
             b.setNote(additionalNotes);
         }
-        //TODO decrementare le available quantity dei piatti
+        //FIXME non sembra che questa cosa stia funzionando, controllare in debug
+        for(int i = 0; i < manager.getRestaurant(restaurantId).getDishes().size(); i++){
+            int quantity = manager.getRestaurant(restaurantId).getDishes().get(i).getAvailability_qty();
+            manager.getRestaurant(restaurantId).getDishes().get(i).setAvailability_qty(quantity - quantities[i]);
+        }
 
         manager.getBookings().add(b); //TODO far fare al manager la modifica del db, così ce lo troviamo pronto per l'online e in automatico genera un nuovo id prenotazione
         manager.saveDbApp();
         clearStaticVariables();
+        RestaurantProfile.clearStaticVariables(); //FIXME non pulisce le variabili dell'altra activity, o almeno cosi' sembra
         finish();
         Intent intent = new Intent(MakeReservationActivity.this, MyReservationsActivity.class);
         startActivity(intent);

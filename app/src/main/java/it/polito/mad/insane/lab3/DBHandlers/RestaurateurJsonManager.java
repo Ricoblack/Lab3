@@ -289,6 +289,7 @@ public class RestaurateurJsonManager {
     }
 
     public void deleteReservation(String id) {
+        //TODO bisogna riaggiungere le quantita' dei dishes della prenotazione nel campo available_quantity dell'oggetto Dish
         //delete reservation with ID=id and save db again
         ArrayList<Booking> bookings= (ArrayList<Booking>) getBookings();
         for(int i=0;i<bookings.size();i++){
