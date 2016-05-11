@@ -94,8 +94,9 @@ public class RestaurantProfile extends AppCompatActivity {
         // Attach the view pager to the tab strip
         if (tabsStrip != null) {
             tabsStrip.setViewPager(mViewPager);
-            tabsStrip.setTextColor(ContextCompat.getColor(RestaurantProfile.this, R.color.colorPrimary));
-            tabsStrip.setIndicatorColor(ContextCompat.getColor(RestaurantProfile.this, R.color.colorPrimary));
+            tabsStrip.setBackgroundColor(ContextCompat.getColor(RestaurantProfile.this, R.color.colorPrimary));
+            tabsStrip.setTextColor(ContextCompat.getColor(RestaurantProfile.this, R.color.white));
+            tabsStrip.setIndicatorColor(ContextCompat.getColor(RestaurantProfile.this, R.color.white));
         }
 //        if(dishesAdapter != null)
 //            editShowButton(dishesAdapter.getReservationQty(), dishesAdapter.getReservationPrice());
