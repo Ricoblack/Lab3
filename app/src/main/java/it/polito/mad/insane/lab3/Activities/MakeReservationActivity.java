@@ -142,6 +142,13 @@ public class MakeReservationActivity extends AppCompatActivity {
     }
 
     @Override
+    public void finish()
+    {
+        super.finish();
+        clearStaticVariables();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
@@ -162,9 +169,7 @@ public class MakeReservationActivity extends AppCompatActivity {
 
     private void saveReservation(List<Dish> dishesToDisplay, List<Integer> quantitiesToDisplay) {
 
-
-        //TODO far fare al manager la modifica del db, così ce lo troviamo pronto per l'online
-
+        //TODO far fare al manager la creazione della booking del db, così ce lo troviamo pronto per l'online
         Booking b = new Booking();
         b.setDate_time(reservationDate);
         b.setDishes(dishesToDisplay);
@@ -186,14 +191,10 @@ public class MakeReservationActivity extends AppCompatActivity {
 
         manager.getBookings().add(b);
         manager.saveDbApp();
-        MakeReservationActivity.clearStaticVariables();
-        RestaurantProfile.clearStaticVariables(); //FIXME non pulisce le variabili dell'altra activity, o almeno cosi' sembra e questo causa l'exception tornando indietro da myBookings
 
-        finish();
+        finish(); // finish() the current activity
         Intent intent = new Intent(MakeReservationActivity.this, MyReservationsActivity.class);
-        startActivity(intent);
-
-
+        startActivity(intent); // start the new activity
     }
 
     @Override

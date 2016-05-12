@@ -73,6 +73,7 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
         private TextView expandableText;
         private TextView btnSeeMore;
         private TextView date;
+        private int position;
         private boolean first = true;
         private boolean expandable = true;
 
@@ -97,6 +98,7 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
 
         // TODO: sincronizzare l'animazione di compressione della cardview in modo che il testo cambi dopo la compressione
         public void setData(Review current, int position){
+            this.position = position;
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             this.date.setText(dateFormat.format(current.getDate()));
             this.expandableText.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {

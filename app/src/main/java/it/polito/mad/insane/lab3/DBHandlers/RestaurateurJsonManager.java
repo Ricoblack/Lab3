@@ -51,17 +51,14 @@ public class RestaurateurJsonManager {
 
     public int getNextReservationID()
     {
-        int currentId=dbApp.getCurrentReservationID();
-        dbApp.setCurrentReservationID(currentId+1);
-        //dbApp.currentReservationID ++; // start form 0
-        saveDbApp();    //TODO: ora funziona, ma non capisco il senso del dover salvare qui e pure dopo...
-        getDbApp();
-        return  dbApp.getCurrentReservationID();
+        int nextID = dbApp.getNextReservationID(); // this method auto-increment the ID
+        this.saveDbApp(); // save the increment
+        return nextID;
     }
     private RestaurateurJsonManager(Context myContext)
     {
         RestaurateurJsonManager.dbApp = new DbApp();
-        this.myContext=myContext;
+        this.myContext = myContext;
         this.location = new Location("me");
         location.setLatitude(45.064480);
         location.setLongitude(7.660290);
@@ -77,7 +74,7 @@ public class RestaurateurJsonManager {
         else
         {
             //recupero json
-            this.dbApp=getDbApp();
+            this.dbApp = getDbApp();
         }
     }
 
@@ -85,7 +82,7 @@ public class RestaurateurJsonManager {
     {
         //ritorna la stringa del Json
 
-        if(dbApp==null) return "";
+        if(dbApp == null) return "";
 
         Gson gson = new Gson();
         String json = gson.toJson(dbApp);
@@ -140,11 +137,11 @@ public class RestaurateurJsonManager {
         ContextWrapper cw = new ContextWrapper(myContext);
         // path to /data/data/yourapp/app_data/jsonDir
         File directory = cw.getDir("jsonDir", Context.MODE_PRIVATE);
-        BufferedReader bufferedReader=null;
+        BufferedReader bufferedReader = null;
 
         try
         {
-            File f=new File(directory, "dbapp.json");
+            File f = new File(directory, "dbapp.json");
             bufferedReader = new BufferedReader(new FileReader(f));
         }
         catch (FileNotFoundException e)
@@ -156,7 +153,7 @@ public class RestaurateurJsonManager {
         //convert the json string back to object
         DbApp obj = gson.fromJson(bufferedReader, DbApp.class);
 
-        this.dbApp=obj;
+        this.dbApp = obj;
         return obj;
     }
 
@@ -370,13 +367,13 @@ public class RestaurateurJsonManager {
 
         private List<Booking> bookings;
 
-        private int currentReservationID=0;
+        private int currentReservationID = 0;
 
         public  DbApp()
         {
             this.restaurants = null;
             this.bookings = null;
-            this.currentReservationID=0;
+            this.currentReservationID = 0;
         }
 
         public List<Restaurant> getRestaurants() {
@@ -727,6 +724,11 @@ public class RestaurateurJsonManager {
         }
 
 
+        public int getNextReservationID()
+        {
+            this.currentReservationID++;
+            return this.currentReservationID;
+        }
     }
 
 }

@@ -24,6 +24,11 @@ public class MyReservationsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // finish the RestaurantProfile activity if is not finished
+        if(RestaurantProfile.RestaurantProfileActivity != null)
+            RestaurantProfile.RestaurantProfileActivity.finish();
+
         setContentView(R.layout.activity_my_reservations);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -61,7 +66,7 @@ public class MyReservationsActivity extends AppCompatActivity {
         switch (item.getItemId())
         {
             case android.R.id.home:
-                finish();  //FIXME: non basta fare così, se torno indietro riapre l'activity per prenotare con i piatti selezionati ma crasha tutto perchè in memoria non c'è nulla, credo debba essere fixato nell'onresume della RestaurantProfile
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);

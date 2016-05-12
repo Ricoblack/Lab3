@@ -1,5 +1,6 @@
 package it.polito.mad.insane.lab3.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -62,11 +63,22 @@ public class RestaurantProfile extends AppCompatActivity {
     private static DishesRecyclerAdapter dishesAdapter = null;
     private static List<Dish> reservationList = null;
 
+    public static Activity RestaurantProfileActivity = null; // attribute used to finish() the current activity from another activity
+
+    @Override
+    public void finish()
+    {
+        super.finish();
+        RestaurantProfileActivity = null;
+        clearStaticVariables();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        RestaurantProfile.RestaurantProfileActivity = this;
+
         setContentView(R.layout.activity_restaurant_profile);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -159,7 +171,6 @@ public class RestaurantProfile extends AppCompatActivity {
 
         switch (id) {
             case android.R.id.home:
-                clearStaticVariables();
                 MakeReservationActivity.clearStaticVariables();
                 finish();
                 return true;
