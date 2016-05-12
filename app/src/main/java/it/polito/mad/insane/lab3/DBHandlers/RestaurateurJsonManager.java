@@ -324,17 +324,16 @@ public class RestaurateurJsonManager {
 
     public boolean reservationRespectsTimeContraints(Calendar reservationDate, String restaurantId) {
 //        //controllo se la prenotazione è minimo tra un ora e nell'orario di apertura
-//        Calendar cal = Calendar.getInstance(); // creates calendar
-//        cal.setTime(new Date()); // sets calendar time/date
-//        cal.add(Calendar.HOUR_OF_DAY, 1); //add one hour
-//
-//        RestaurateurProfile profile=getRestaurant(restaurantId).getProfile();
-//
-//        if(reservationDate.after(cal) && timeIsAfter(reservationDate.getTime(),profile.getOpeningHour())&&
-//                timeIsBefore(reservationDate.getTime(),profile.getClosingHour()) ) return true;
-//        return false;
+        Calendar cal = Calendar.getInstance(); // creates calendar
+        cal.setTime(new Date()); // sets calendar time/date
+        cal.add(Calendar.MINUTE, 1); //add one minute
 
-        return true; //FIXME: la parte commentata va scommentata
+        RestaurateurProfile profile=getRestaurant(restaurantId).getProfile();
+
+        if(reservationDate.after(cal) && timeIsAfter(reservationDate.getTime(),profile.getOpeningHour())&&
+                timeIsBefore(reservationDate.getTime(),profile.getClosingHour()) ) return true;
+        return false;
+
 
     }
     private boolean timeIsBefore(Date d1, Date d2) {
@@ -407,15 +406,19 @@ public class RestaurateurJsonManager {
         public void fillDbApp()
         {
 
-            Date d = new Date();  //Debug date to test if time constraints on reservations work
-            d.setHours(23);
-            d.setMinutes(55);
+            Date dClose = new Date();  //Debug date to test if time constraints on reservations work
+            dClose.setHours(23);  //tutti i ristoranti sono aperti dalle 7.05 fino alle 23.55
+            dClose.setMinutes(55);
+
+            Date dStart=new Date();
+            dStart.setHours(7);
+            dStart.setMinutes(5);
             //CARICAMENTO DATI RISTORANTI
-            RestaurateurProfile profile =new RestaurateurProfile("Pizza-Pazza","Corso duca degli abruzzi, 10","PoliTo","Pizza","Venite a provare la pizza più gustosa di Torino",new Date(),d,"Chiusi la domenica","Bancomat","Wifi-free");
-            RestaurateurProfile profile2=new RestaurateurProfile("Just Pasta", "Via roma, 55", "UniTo","Pasta","Pasta per tutti i gusti",new Date(),new Date(),"Aperti tutta la settimana","Bancomat,carta","Privo di barriere architettoniche");
-            RestaurateurProfile profile3=new RestaurateurProfile("Pub la locanda", "Via lagrange, 17", "UniTo","Ethnic", "L'isola felice dello studente universitario",new Date(),new Date(),"Giropizza il sabato sera","Bancomat","Wifi-free");
-            RestaurateurProfile profile4=new RestaurateurProfile("Ovolollo restaurant", "Via saluzzo 17", "PoliTo","Ethnic", "L'isola del miglior ovolollo studentesco",new Date(),new Date(),"Cicchetto di ben venuto il sabato sera","Bancomat","Wifi-free");
-            RestaurateurProfile profile5=new RestaurateurProfile("Origami restaurant", "Piazza Vittorio Veneto, 18/F", "UniTo","Ethnic", "Il miglior giapponese di Torino",new Date(),new Date(),"All you can eat a pranzo","Bancomat","Wifi-free");
+            RestaurateurProfile profile =new RestaurateurProfile("Pizza-Pazza","Corso duca degli abruzzi, 10","PoliTo","Pizza","Venite a provare la pizza più gustosa di Torino",dStart,dClose,"Chiusi la domenica","Bancomat","Wifi-free");
+            RestaurateurProfile profile2=new RestaurateurProfile("Just Pasta", "Via roma, 55", "UniTo","Pasta","Pasta per tutti i gusti",dStart,dClose,"Aperti tutta la settimana","Bancomat,carta","Privo di barriere architettoniche");
+            RestaurateurProfile profile3=new RestaurateurProfile("Pub la locanda", "Via lagrange, 17", "UniTo","Ethnic", "L'isola felice dello studente universitario",dStart,dClose,"Giropizza il sabato sera","Bancomat","Wifi-free");
+            RestaurateurProfile profile4=new RestaurateurProfile("Ovolollo restaurant", "Via saluzzo 17", "PoliTo","Ethnic", "L'isola del miglior ovolollo studentesco",dStart,dClose,"Cicchetto di ben venuto il sabato sera","Bancomat","Wifi-free");
+            RestaurateurProfile profile5=new RestaurateurProfile("Origami restaurant", "Piazza Vittorio Veneto, 18/F", "UniTo","Ethnic", "Il miglior giapponese di Torino",dStart,dClose,"All you can eat a pranzo","Bancomat","Wifi-free");
 
             //CARICAMENTO DATI DISHES
             ArrayList<Dish> dishes1=new ArrayList<Dish>();

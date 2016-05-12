@@ -96,10 +96,18 @@ public class MakeReservationActivity extends AppCompatActivity {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Button hour= (Button) findViewById(R.id.reservation_hour);
+                    Button date=(Button) findViewById(R.id.reservation_date);
+
+                    if(hour.getText().toString().toLowerCase().equals("select") || date.getText().toString().toLowerCase().equals("select")){
+                        Toast.makeText(MakeReservationActivity.this, getString(R.string.specify_date_time), Toast.LENGTH_SHORT).show();
+                        return;
+                    };
                     if(reservationDate == null){
                         Toast.makeText(MakeReservationActivity.this, getString(R.string.specify_date_time), Toast.LENGTH_SHORT).show();
                         return;
                     }
+
                     //Verifico che i costraint per la prenotazione siano rispettati: in orario di lavoro e tra almeno un ora
                     if(manager.reservationRespectsTimeContraints(reservationDate,restaurantId)==false){
                         Toast.makeText(MakeReservationActivity.this, getString(R.string.respect_time_contraints), Toast.LENGTH_SHORT).show();
