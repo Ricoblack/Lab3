@@ -30,27 +30,27 @@ public class MySpinnerAdapterHome extends ArrayAdapter<String> {
         this.resSpinnerAdapter = res;
     }
 
-    @Override
-    public boolean isEnabled(int position){
-        return position != 0;
-    }
+            @Override
+            public boolean isEnabled(int position){
+                return position != 0;
+            }
 
-    @Override
-    public View getDropDownView(int position, View convertView, ViewGroup parent)
-    {
-        return getCustomView(position, convertView, parent);
-    }
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent)
+            {
+                return getCustomView(position, convertView, parent);
+            }
 
-    @Override
-    public View getView(int pos, View cnvtView, ViewGroup prnt) {
+            @Override
+            public View getView(int pos, View cnvtView, ViewGroup prnt) {
 
-        if(pos == 0) {
+                if(pos == 0) {
 
-            LayoutInflater inflater = LayoutInflater.from(this.contextSpinner);
-            View mySpinner = inflater.inflate(R.layout.custom_spinner_home, prnt,
-                    false);
+                    LayoutInflater inflater = LayoutInflater.from(this.contextSpinner);
+                    View mySpinner = inflater.inflate(R.layout.custom_spinner_home, prnt,
+                            false);
 
-            TextView main_text = (TextView) mySpinner
+                    TextView main_text = (TextView) mySpinner
                     .findViewById(R.id.text_spinner_home);
             main_text.setText(choices.get(pos));
 

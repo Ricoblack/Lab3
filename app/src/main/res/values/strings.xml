@@ -110,4 +110,5 @@
     <string name="no_reservation_available">There are no reservations available</string>
     <string name="title_activity_display_reservation">DisplayReservation</string>
     <string name="reviews">reviews</string>
+    <string name="reviews_string">reviews</string>
 </resources>
