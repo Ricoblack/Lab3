@@ -1,4 +1,4 @@
-package it.polito.mad.insane.lab3.Adapters;
+package it.polito.mad.insane.lab3.adapters;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
@@ -15,7 +15,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import it.polito.mad.insane.lab3.Data.Review;
+import it.polito.mad.insane.lab3.data.Review;
 import it.polito.mad.insane.lab3.R;
 
 /**

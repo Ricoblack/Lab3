@@ -1,7 +1,4 @@
-package it.polito.mad.insane.lab3.Data;
-
-import android.os.Parcel;
-import android.os.Parcelable;
+package it.polito.mad.insane.lab3.data;
 
 import java.io.Serializable;
 

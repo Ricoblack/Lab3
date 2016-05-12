@@ -1,4 +1,4 @@
-package it.polito.mad.insane.lab3.DBHandlers;
+package it.polito.mad.insane.lab3.dBHandlers;
 
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -23,11 +23,11 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-import it.polito.mad.insane.lab3.Data.Booking;
-import it.polito.mad.insane.lab3.Data.Dish;
-import it.polito.mad.insane.lab3.Data.Restaurant;
-import it.polito.mad.insane.lab3.Data.RestaurateurProfile;
-import it.polito.mad.insane.lab3.Data.Review;
+import it.polito.mad.insane.lab3.data.Booking;
+import it.polito.mad.insane.lab3.data.Dish;
+import it.polito.mad.insane.lab3.data.Restaurant;
+import it.polito.mad.insane.lab3.data.RestaurateurProfile;
+import it.polito.mad.insane.lab3.data.Review;
 
 /**
  * Created by carlocaramia on 08/04/16.
@@ -300,34 +300,41 @@ public class RestaurateurJsonManager {
         return this.location;
     }
 
+    /**
+     * delete the reservation with ID given as parameter
+     * @param id
+     * @return the object removed
+     */
     public void deleteReservation(String id) {
         //TODO bisogna riaggiungere le quantita' dei dishes della prenotazione nel campo available_quantity dell'oggetto Dish
         //delete reservation with ID=id and save db again
         ArrayList<Booking> bookings= (ArrayList<Booking>) getBookings();
-        for(int i=0;i<bookings.size();i++){
-            Booking b=bookings.get(i);
-            if(b.getID().equals(id)){
+        for(int i=0;i<bookings.size();i++)
+        {
+            Booking b = bookings.get(i);
+            if(b.getID().equals(id))
+            {
                 bookings.remove(i);
                 saveDbApp();
                 return; //ritorno immediatamente perchè non dovrebbero esserci due prenotazioni con medesimo ID
             }
-
-
         }
+        return;
     }
 
     public boolean reservationRespectsTimeContraints(Calendar reservationDate, String restaurantId) {
-        //controllo se la prenotazione è minimo tra un ora e nell'orario di apertura
-        Calendar cal = Calendar.getInstance(); // creates calendar
-        cal.setTime(new Date()); // sets calendar time/date
-        cal.add(Calendar.HOUR_OF_DAY, 1); //add one hour
+//        //controllo se la prenotazione è minimo tra un ora e nell'orario di apertura
+//        Calendar cal = Calendar.getInstance(); // creates calendar
+//        cal.setTime(new Date()); // sets calendar time/date
+//        cal.add(Calendar.HOUR_OF_DAY, 1); //add one hour
+//
+//        RestaurateurProfile profile=getRestaurant(restaurantId).getProfile();
+//
+//        if(reservationDate.after(cal) && timeIsAfter(reservationDate.getTime(),profile.getOpeningHour())&&
+//                timeIsBefore(reservationDate.getTime(),profile.getClosingHour()) ) return true;
+//        return false;
 
-        RestaurateurProfile profile=getRestaurant(restaurantId).getProfile();
-
-        if(reservationDate.after(cal) && timeIsAfter(reservationDate.getTime(),profile.getOpeningHour())&&
-                timeIsBefore(reservationDate.getTime(),profile.getClosingHour()) ) return true;
-        return false;
-
+        return true; //FIXME: la parte commentata va scommentata
 
     }
     private boolean timeIsBefore(Date d1, Date d2) {
@@ -338,6 +345,22 @@ public class RestaurateurJsonManager {
         DateFormat f = new SimpleDateFormat("HH:mm:ss.SSS");
         return f.format(d1).compareTo(f.format(d2)) >= 0;
     }
+
+    public static void deleteReservationByID(List<Booking> mData, String id)
+    {
+        ArrayList<Booking> bookings= (ArrayList<Booking>) mData;
+        for(int i=0; i<bookings.size();i++)
+        {
+            Booking b = bookings.get(i);
+            if(b.getID().equals(id))
+            {
+                bookings.remove(i);
+                return;
+            }
+        }
+        return;
+    }
+
     /**
      * Created by carlocaramia on 09/04/16.
      */
@@ -384,7 +407,7 @@ public class RestaurateurJsonManager {
         public void fillDbApp()
         {
 
-            Date d=new Date();  //Debug date to test if time constraints on reservations work
+            Date d = new Date();  //Debug date to test if time constraints on reservations work
             d.setHours(23);
             d.setMinutes(55);
             //CARICAMENTO DATI RISTORANTI

@@ -1,13 +1,11 @@
-package it.polito.mad.insane.lab3.Adapters;
+package it.polito.mad.insane.lab3.adapters;
 
 import android.widget.ArrayAdapter;
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;

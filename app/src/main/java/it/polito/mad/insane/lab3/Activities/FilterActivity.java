@@ -1,27 +1,21 @@
-package it.polito.mad.insane.lab3.Activities;
+package it.polito.mad.insane.lab3.activities;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import it.polito.mad.insane.lab3.Adapters.MySpinnerAdapterFilter;
+import it.polito.mad.insane.lab3.adapters.MySpinnerAdapterFilter;
 import it.polito.mad.insane.lab3.R;
 
 public class FilterActivity extends AppCompatActivity {

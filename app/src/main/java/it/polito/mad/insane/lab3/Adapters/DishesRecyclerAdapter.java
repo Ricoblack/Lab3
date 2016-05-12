@@ -1,7 +1,6 @@
-package it.polito.mad.insane.lab3.Adapters;
+package it.polito.mad.insane.lab3.adapters;
 
 import android.content.Context;
-import android.media.Image;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,8 +16,8 @@ import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
 
-import it.polito.mad.insane.lab3.Activities.RestaurantProfile;
-import it.polito.mad.insane.lab3.Data.Dish;
+import it.polito.mad.insane.lab3.activities.RestaurantProfile;
+import it.polito.mad.insane.lab3.data.Dish;
 import it.polito.mad.insane.lab3.R;
 
 /**

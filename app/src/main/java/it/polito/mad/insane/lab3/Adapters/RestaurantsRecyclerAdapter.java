@@ -1,4 +1,4 @@
-package it.polito.mad.insane.lab3.Adapters;
+package it.polito.mad.insane.lab3.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +12,10 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import it.polito.mad.insane.lab3.Activities.RestaurantProfile;
-import it.polito.mad.insane.lab3.Data.Restaurant;
+import it.polito.mad.insane.lab3.activities.RestaurantProfile;
+import it.polito.mad.insane.lab3.data.Restaurant;
 import it.polito.mad.insane.lab3.R;
-import it.polito.mad.insane.lab3.DBHandlers.RestaurateurJsonManager;
+import it.polito.mad.insane.lab3.dBHandlers.RestaurateurJsonManager;
 
 /**
  * Created by Federico on 03/05/2016.

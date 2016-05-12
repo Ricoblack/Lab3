@@ -1,11 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Activities.HomeConsumer">
+    tools:context=".activities.HomeConsumer">
     <item
         android:id="@+id/activity_filtro"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_list_white_24dp"
+        android:icon="@drawable/ic_tune_white_24dp"
         android:title="@string/filter"
         app:showAsAction="ifRoom" />
     <item

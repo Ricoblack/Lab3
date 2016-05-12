@@ -15,7 +15,7 @@
  *   limitations under the License.
  *  *****************************************************************************
  */
-package it.polito.mad.insane.lab3.Animations;
+package it.polito.mad.insane.lab3.animations;
 
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;

@@ -1,4 +1,4 @@
-package it.polito.mad.insane.lab3.Activities;
+package it.polito.mad.insane.lab3.activities;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -18,7 +18,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,14 +31,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import it.polito.mad.insane.lab3.Data.Dish;
-import it.polito.mad.insane.lab3.Adapters.DishesRecyclerAdapter;
+import it.polito.mad.insane.lab3.data.Dish;
+import it.polito.mad.insane.lab3.adapters.DishesRecyclerAdapter;
 import it.polito.mad.insane.lab3.R;
-import it.polito.mad.insane.lab3.Data.Restaurant;
-import it.polito.mad.insane.lab3.DBHandlers.RestaurateurJsonManager;
-import it.polito.mad.insane.lab3.Data.RestaurateurProfile;
-import it.polito.mad.insane.lab3.Data.Review;
-import it.polito.mad.insane.lab3.Adapters.ReviewsRecyclerAdapter;
+import it.polito.mad.insane.lab3.data.Restaurant;
+import it.polito.mad.insane.lab3.dBHandlers.RestaurateurJsonManager;
+import it.polito.mad.insane.lab3.data.RestaurateurProfile;
+import it.polito.mad.insane.lab3.data.Review;
+import it.polito.mad.insane.lab3.adapters.ReviewsRecyclerAdapter;
 
 public class RestaurantProfile extends AppCompatActivity {
 

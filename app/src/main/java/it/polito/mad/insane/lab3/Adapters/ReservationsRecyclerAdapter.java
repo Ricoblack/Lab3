@@ -1,4 +1,4 @@
-package it.polito.mad.insane.lab3.Adapters;
+package it.polito.mad.insane.lab3.adapters;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -12,16 +12,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import it.polito.mad.insane.lab3.Activities.MyReservationsActivity;
-import it.polito.mad.insane.lab3.Data.Booking;
+import it.polito.mad.insane.lab3.activities.MyReservationsActivity;
+import it.polito.mad.insane.lab3.data.Booking;
 import it.polito.mad.insane.lab3.R;
-import it.polito.mad.insane.lab3.DBHandlers.RestaurateurJsonManager;
+import it.polito.mad.insane.lab3.dBHandlers.RestaurateurJsonManager;
 
 /**
  * Created by Renato on 10/05/2016.
@@ -40,8 +41,8 @@ public class ReservationsRecyclerAdapter extends RecyclerView.Adapter<Reservatio
 
     @Override
     public BookingsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = this.mInflater.inflate(R.layout.reservation_list_item, parent, false);
 
+        View view = this.mInflater.inflate(R.layout.reservation_list_item, parent, false);
         BookingsViewHolder holder = new BookingsViewHolder(view); // create the holder
         return holder;
     }
@@ -69,10 +70,11 @@ public class ReservationsRecyclerAdapter extends RecyclerView.Adapter<Reservatio
         private View view;
         private ImageView trash;
         private RestaurateurJsonManager manager;
+        private int position;
 
         public BookingsViewHolder(View itemView) {
             super(itemView);
-            this.manager=RestaurateurJsonManager.getInstance(null);
+            this.manager = RestaurateurJsonManager.getInstance(null);
             this.restaurantName = (TextView) itemView.findViewById(R.id.reservation_cardview_restaurant_name);
             this.ID = (TextView) itemView.findViewById(R.id.reservation_cardview_ID);
             this.date = (TextView) itemView.findViewById(R.id.reservation_cardview_date);
@@ -80,22 +82,25 @@ public class ReservationsRecyclerAdapter extends RecyclerView.Adapter<Reservatio
             this.nItems = (TextView) itemView.findViewById(R.id.reservation_cardview_nItems);
             this.totalPrice = (TextView) itemView.findViewById(R.id.reservation_cardview_price);
             this.trash = (ImageView) itemView.findViewById(R.id.delete_reservation);
-            this.view=itemView;
+            this.view = itemView;
 
 
             this.trash.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    //TODO: va gestita l'eliminazione e relativo invalidate della listview (va copiata la cancellazione dell'item dall'adapter dal lab2)
+                public void onClick(View v)
+                {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setTitle(context.getResources().getString(R.string.delete_reservation_alert_title))
                             .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     manager.deleteReservation(ID.getText().toString());
-                                    Intent i = new Intent(context,MyReservationsActivity.class);
-                                    AppCompatActivity act=(AppCompatActivity)context;
-                                    act.startActivity(i);
-                                    act.finish();
+                                    RestaurateurJsonManager.deleteReservationByID(ReservationsRecyclerAdapter.this.mData, ID.getText().toString());
+                                    notifyItemRemoved(position);
+                                    notifyItemRangeRemoved(position, getItemCount());
+//                                    Intent i = new Intent(context, MyReservationsActivity.class);
+//                                    AppCompatActivity act = (AppCompatActivity) context;
+//                                    act.startActivity(i);
+//                                    act.finish();
                                 }
                             })
                             .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -112,6 +117,7 @@ public class ReservationsRecyclerAdapter extends RecyclerView.Adapter<Reservatio
         }
 
         public void setData(Booking current, int position) {
+            this.position = position;
             RestaurateurJsonManager manager = RestaurateurJsonManager.getInstance(context);
             restaurantName.setText(manager.getRestaurant(current.getRestaurantID()).getProfile().getRestaurantName());
             ID.setText(current.getID());

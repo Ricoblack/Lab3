@@ -1,4 +1,4 @@
-package it.polito.mad.insane.lab3.Activities;
+package it.polito.mad.insane.lab3.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.SearchView;
 import android.widget.Spinner;
@@ -24,12 +23,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import it.polito.mad.insane.lab3.Adapters.MySpinnerAdapterHome;
+import it.polito.mad.insane.lab3.adapters.MySpinnerAdapterHome;
 import it.polito.mad.insane.lab3.R;
-import it.polito.mad.insane.lab3.Data.Restaurant;
-import it.polito.mad.insane.lab3.Adapters.RestaurantsRecyclerAdapter;
-import it.polito.mad.insane.lab3.DBHandlers.RestaurateurJsonManager;
-import it.polito.mad.insane.lab3.Animations.SlideInOutLeftItemAnimator;
+import it.polito.mad.insane.lab3.data.Restaurant;
+import it.polito.mad.insane.lab3.adapters.RestaurantsRecyclerAdapter;
+import it.polito.mad.insane.lab3.dBHandlers.RestaurateurJsonManager;
+import it.polito.mad.insane.lab3.animations.SlideInOutLeftItemAnimator;
 
 public class HomeConsumer extends AppCompatActivity {
 

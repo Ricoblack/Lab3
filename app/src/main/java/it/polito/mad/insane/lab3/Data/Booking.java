@@ -1,4 +1,4 @@
-package it.polito.mad.insane.lab3.Data;
+package it.polito.mad.insane.lab3.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;

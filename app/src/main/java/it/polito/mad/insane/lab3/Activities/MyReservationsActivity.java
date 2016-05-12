@@ -1,4 +1,4 @@
-package it.polito.mad.insane.lab3.Activities;
+package it.polito.mad.insane.lab3.activities;
 
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -14,10 +14,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import it.polito.mad.insane.lab3.Adapters.ReservationsRecyclerAdapter;
-import it.polito.mad.insane.lab3.Data.Booking;
+import it.polito.mad.insane.lab3.adapters.ReservationsRecyclerAdapter;
+import it.polito.mad.insane.lab3.data.Booking;
 import it.polito.mad.insane.lab3.R;
-import it.polito.mad.insane.lab3.DBHandlers.RestaurateurJsonManager;
+import it.polito.mad.insane.lab3.dBHandlers.RestaurateurJsonManager;
 
 public class MyReservationsActivity extends AppCompatActivity {
 
@@ -29,7 +29,8 @@ public class MyReservationsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.reservation_recycler_view);
-        if(rv != null){
+        if(rv != null)
+        {
             RestaurateurJsonManager manager = RestaurateurJsonManager.getInstance(this);
             List<Booking> bookingList = manager.getBookings();
             if(!bookingList.isEmpty())
@@ -54,15 +55,15 @@ public class MyReservationsActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId())
+        {
             case android.R.id.home:
-
                 finish();  //FIXME: non basta fare così, se torno indietro riapre l'activity per prenotare con i piatti selezionati ma crasha tutto perchè in memoria non c'è nulla, credo debba essere fixato nell'onresume della RestaurantProfile
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

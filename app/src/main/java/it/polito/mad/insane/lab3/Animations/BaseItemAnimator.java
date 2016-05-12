@@ -1,4 +1,4 @@
-package it.polito.mad.insane.lab3.Animations;
+package it.polito.mad.insane.lab3.animations;
 
 /*
  * This code is cloned from DefaultItemAnimator provided by support library v7-recyclerView
