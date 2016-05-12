@@ -121,7 +121,7 @@ public class ReservationsRecyclerAdapter extends RecyclerView.Adapter<Reservatio
             RestaurateurJsonManager manager = RestaurateurJsonManager.getInstance(context);
             restaurantName.setText(manager.getRestaurant(current.getRestaurantID()).getProfile().getRestaurantName());
             ID.setText(current.getID());
-            nItems.setText(MessageFormat.format("{0} dishes", current.getDishes().size()));
+            nItems.setText(MessageFormat.format("{0} dishes", current.getTotalDishesQty()));
             DecimalFormat df = new DecimalFormat("0.00");
             totalPrice.setText(MessageFormat.format("{0}€", String.valueOf(df.format(current.getTotalPrice()))));
             Calendar calendar = current.getDate_time();

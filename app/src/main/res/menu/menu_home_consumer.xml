@@ -14,7 +14,4 @@
         android:icon="@drawable/ic_shopping_cart_white_24dp"
         android:title="@string/reservation"
         app:showAsAction="ifRoom" />
-
-
-
 </menu>

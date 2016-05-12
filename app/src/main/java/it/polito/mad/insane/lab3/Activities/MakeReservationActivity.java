@@ -64,7 +64,7 @@ public class MakeReservationActivity extends AppCompatActivity {
         setTitle(manager.getRestaurant(restaurantId).getProfile().getRestaurantName());
 
         final List<Dish> dishesToDisplay = new ArrayList<>();
-        ArrayList<Integer> quantitiesToDisplay = new ArrayList<>();
+        final ArrayList<Integer> quantitiesToDisplay = new ArrayList<>();
         totalPrice = 0;
         for(int i=0; i < dishes.size(); i++){
             if(quantities[i] != 0){
@@ -109,7 +109,7 @@ public class MakeReservationActivity extends AppCompatActivity {
                     builder.setTitle(MakeReservationActivity.this.getResources().getString(R.string.alert_title))
                             .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    saveReservation(dishesToDisplay);
+                                    saveReservation(dishesToDisplay,quantitiesToDisplay);
                                 }
                             })
                             .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -151,7 +151,7 @@ public class MakeReservationActivity extends AppCompatActivity {
         totalPrice = 0;
     }
 
-    private void saveReservation(List<Dish> dishesToDisplay) {
+    private void saveReservation(List<Dish> dishesToDisplay, List<Integer> quantitiesToDisplay) {
 
 
         //TODO far fare al manager la modifica del db, così ce lo troviamo pronto per l'online
@@ -159,6 +159,7 @@ public class MakeReservationActivity extends AppCompatActivity {
         Booking b = new Booking();
         b.setDate_time(reservationDate);
         b.setDishes(dishesToDisplay);
+        b.setQuantities(quantitiesToDisplay);
 
         b.setID(String.valueOf(manager.getNextReservationID()));
         b.setRestaurantID(restaurantId);
