@@ -13,7 +13,9 @@ public class Booking implements Serializable,  Comparable<Booking>
 
     private String ID;
     private Calendar date_time;
+    /** N.B. "dishes" and "quantities" have a 1v1 matching! don't reorder/modify individually! **/
     private List<Dish> dishes = new ArrayList<>();
+    private List<Integer> quantities = new ArrayList<>(); // quantity reserved for each dish
     private String note;
     private String restaurantID;
     private double totalPrice;
@@ -71,5 +73,23 @@ public class Booking implements Serializable,  Comparable<Booking>
 
     public void setTotalPrice(double price){
         this.totalPrice = price;
+    }
+
+    public List<Integer> getQuantities() {
+        return quantities;
+    }
+
+    public void setQuantities(List<Integer> quantities) {
+        this.quantities = quantities;
+    }
+
+    public int getTotalDishesQty()
+    {
+        int result = 0;
+
+        for(Integer a: this.quantities)
+            result += a;
+
+        return result;
     }
 }

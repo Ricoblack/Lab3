@@ -18,9 +18,8 @@ import java.util.List;
 import it.polito.mad.insane.lab3.adapters.MySpinnerAdapterFilter;
 import it.polito.mad.insane.lab3.R;
 
-public class FilterActivity extends AppCompatActivity {
-
-    // TODO: usare le shared preferences per salvare i filtri impostati e modificarli
+public class FilterActivity extends AppCompatActivity
+{
 
     static final String PREF_NAME = "myPref";
     private SharedPreferences mPrefs = null;
@@ -85,7 +84,6 @@ public class FilterActivity extends AppCompatActivity {
         if(tSpinner.getSelectedItemPosition()!=0) typeValue=tSpinner.getSelectedItem().toString();
         if(tiSpinner.getSelectedItemPosition()!=0) timeValue=tiSpinner.getSelectedItem().toString();
 
-        //FIXME: questo va fatto con una shared preferences
         this.mPrefs = getSharedPreferences(PREF_NAME,MODE_PRIVATE);
         SharedPreferences.Editor editor = this.mPrefs.edit();
         editor.putString("distanceValue",distanceValue);
@@ -104,6 +102,7 @@ public class FilterActivity extends AppCompatActivity {
         i.putExtra("typeValue",typeValue);
         i.putExtra("timeValue",timeValue);
         startActivity(i);*/
+
         finish();
 
     }

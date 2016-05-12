@@ -198,8 +198,8 @@ public class HomeConsumer extends AppCompatActivity {
         rV.setItemAnimator(ia);
     }
 
-    private void setUpSpinner(){
-        //TODO togliere order by e lasciare solo le due scelte distance e score nello spinner della home page
+    private void setUpSpinner()
+    {
         final Spinner dSpinner = (Spinner) findViewById(R.id.orderSpinner);
         List<String> orderings = new ArrayList<>();
         Resources res = getResources();

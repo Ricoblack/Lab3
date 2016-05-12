@@ -145,10 +145,11 @@ public class MakeReservationActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static void clearStaticVariables(){
-        reservationDate = null;
-        additionalNotes = "";
-        totalPrice = 0;
+    public static void clearStaticVariables()
+    {
+        MakeReservationActivity.reservationDate = null;
+        MakeReservationActivity.additionalNotes = "";
+        MakeReservationActivity.totalPrice = 0;
     }
 
     private void saveReservation(List<Dish> dishesToDisplay, List<Integer> quantitiesToDisplay) {
