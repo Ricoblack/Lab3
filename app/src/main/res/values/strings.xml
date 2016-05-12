@@ -108,4 +108,5 @@
     <string name="filter">Filter</string>
     <string name="reservation">Reservation</string>
     <string name="no_reservation_available">There are no reservations available</string>
+    <string name="title_activity_display_reservation">DisplayReservation</string>
 </resources>

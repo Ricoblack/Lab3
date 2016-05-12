@@ -19,6 +19,7 @@ import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import it.polito.mad.insane.lab3.activities.DisplayReservation;
 import it.polito.mad.insane.lab3.activities.MyReservationsActivity;
 import it.polito.mad.insane.lab3.data.Booking;
 import it.polito.mad.insane.lab3.R;
@@ -71,6 +72,23 @@ public class ReservationsRecyclerAdapter extends RecyclerView.Adapter<Reservatio
         private ImageView trash;
         private RestaurateurJsonManager manager;
         private int position;
+        private Booking currentBooking;
+        private View cardView;
+        private String nameRist;
+
+        private android.view.View.OnClickListener cardViewListener = new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v)
+            {
+                //Toast.makeText(v.getContext(),"Cliccato sulla cardView", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(v.getContext(),DisplayReservation.class);
+                i.putExtra("Booking", BookingsViewHolder.this.currentBooking);
+                i.putExtra("nameRestaurant", nameRist);
+                v.getContext().startActivity(i);
+            }
+        };
 
         public BookingsViewHolder(View itemView) {
             super(itemView);
@@ -83,8 +101,10 @@ public class ReservationsRecyclerAdapter extends RecyclerView.Adapter<Reservatio
             this.totalPrice = (TextView) itemView.findViewById(R.id.reservation_cardview_price);
             this.trash = (ImageView) itemView.findViewById(R.id.delete_reservation);
             this.view = itemView;
+            this.cardView = itemView;
 
 
+            this.cardView.setOnClickListener(cardViewListener);
             this.trash.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v)
@@ -119,6 +139,7 @@ public class ReservationsRecyclerAdapter extends RecyclerView.Adapter<Reservatio
         public void setData(Booking current, int position) {
             this.position = position;
             RestaurateurJsonManager manager = RestaurateurJsonManager.getInstance(context);
+            nameRist = manager.getRestaurant(current.getRestaurantID()).getProfile().getRestaurantName();
             restaurantName.setText(manager.getRestaurant(current.getRestaurantID()).getProfile().getRestaurantName());
             ID.setText(current.getID());
             nItems.setText(MessageFormat.format("{0} dishes", current.getTotalDishesQty()));
@@ -126,10 +147,12 @@ public class ReservationsRecyclerAdapter extends RecyclerView.Adapter<Reservatio
             totalPrice.setText(MessageFormat.format("{0}€", String.valueOf(df.format(current.getTotalPrice()))));
             Calendar calendar = current.getDate_time();
             hour.setText(MessageFormat.format("{0}:{1}", calendar.get(Calendar.HOUR_OF_DAY),
-                    calendar.get(Calendar.MINUTE))); //FIXME: le 22.09 vengono scritte come 22.9 perchè manca la chiamata a pad()
+                    pad(calendar.get(Calendar.MINUTE))));
             date.setText(MessageFormat.format("{0}/{1}/{2}", pad(calendar.get(Calendar.DAY_OF_MONTH)),
                     pad(calendar.get(Calendar.MONTH) + 1), pad(calendar.get(Calendar.YEAR))));
+            currentBooking = current;
         }
+
 
         private String pad(int c) {
             if (c >= 10)

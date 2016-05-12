@@ -12,6 +12,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polito.mad.insane.lab3.activities.DisplayReservation;
 import it.polito.mad.insane.lab3.activities.MakeReservationActivity;
 import it.polito.mad.insane.lab3.data.Dish;
 import it.polito.mad.insane.lab3.R;
@@ -24,13 +25,15 @@ public class DishArrayAdapter extends ArrayAdapter<Dish> {
     private int layoutResourceId;
     private ArrayList<Integer> quantities;
     private List<Dish> data = null;
+    private int currentActivity;
 
-    public DishArrayAdapter(Context context, int layoutResourceId, List<Dish> data, ArrayList<Integer> quantities) {
+    public DishArrayAdapter(Context context, int layoutResourceId, List<Dish> data, ArrayList<Integer> quantities,int currentA) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
         this.quantities = quantities;
+        this.currentActivity = currentA;
     }
 
     @Override
@@ -39,7 +42,13 @@ public class DishArrayAdapter extends ArrayAdapter<Dish> {
         DishHolder holder;
 
         if (row == null) {
-            LayoutInflater inflater = ((MakeReservationActivity) context).getLayoutInflater();
+
+            LayoutInflater inflater = null;
+            if(currentActivity == 0) {
+                inflater = ((MakeReservationActivity) context).getLayoutInflater();
+            }else{
+                inflater = ((DisplayReservation) context).getLayoutInflater();
+            }
             row = inflater.inflate(layoutResourceId, parent, false);
 
             holder = new DishHolder();

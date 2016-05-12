@@ -84,7 +84,7 @@ public class MakeReservationActivity extends AppCompatActivity {
 //            tv.setText(manager.getRestaurant(restaurantId).getProfile().getRestaurantName());
 //        }
 
-        DishArrayAdapter adapter = new DishArrayAdapter(this, R.layout.dish_listview_item, dishesToDisplay, quantitiesToDisplay);
+        DishArrayAdapter adapter = new DishArrayAdapter(this, R.layout.dish_listview_item, dishesToDisplay, quantitiesToDisplay,0);
 
         ListView mylist = (ListView) findViewById(R.id.reservation_dish_list);
         if (mylist != null) {
