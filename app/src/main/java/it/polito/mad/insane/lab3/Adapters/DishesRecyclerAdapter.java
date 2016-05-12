@@ -144,9 +144,10 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
             this.dishPrice.setText(MessageFormat.format("{0}€", String.valueOf(df.format(current.getPrice()))));
             if(current.getAvailability_qty() == 0) {
                 this.dishAvailability.setVisibility(View.VISIBLE);
-                popupsVisibility[position] = View.GONE;
+                popupsVisibility[position] = View.GONE;             // mostrare solo quando non e' disponibile
             }
-                                                                                          // mostrare solo quando non e' disponibile
+
+
 
             this.selectionLayout.setVisibility(popupsVisibility[position]); //layout del popup
             this.separator.setVisibility(popupsVisibility[position]); //layout della linea separatrice
@@ -188,9 +189,9 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
                         reservationQty--; //decremento la quantita' di item della prenotazione
 
                         TextView tv = (TextView) ((RestaurantProfile) context).findViewById(R.id.show_reservation_button);
-                        if (tv != null){ // FIXME aggiustare il layout e conseguentemente questa stampa
+                        if (tv != null){
                             if(reservationQty != 0)
-                                tv.setText(String.format("GO TO CART           %d items - %s€", reservationQty, reservationPrice));
+                                tv.setText(String.format("%d items - %s€", reservationQty, reservationPrice));
                             else
                                 tv.setText(R.string.empty_cart);
                         }
@@ -212,9 +213,9 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
                         reservationQty++; //incremento la quantita' di item della prenotazione
 
                         TextView tv = (TextView) ((RestaurantProfile) context).findViewById(R.id.show_reservation_button);
-                        if (tv != null){ //FIXME come per il minusButton
+                        if (tv != null){
                             if(reservationQty != 0)
-                                tv.setText(String.format("GO TO CART           %d items - %s€", reservationQty, reservationPrice));
+                                tv.setText(String.format("%d items - %s€", reservationQty, reservationPrice));
                             else
                                 tv.setText(R.string.empty_cart);
                         }

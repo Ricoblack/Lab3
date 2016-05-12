@@ -76,6 +76,7 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
         private TextView avgFinalScore;
         private TextView numReview;
         private TextView distance;
+        private int position;
 
         private android.view.View.OnClickListener cardViewListener = new View.OnClickListener()
         {
@@ -108,6 +109,7 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
         }
 
         public void setData(Restaurant current, int position) {
+            this.position = position;
             this.title.setText(current.getProfile().getRestaurantName());
             this.street.setText(current.getProfile().getAddress());
             this.IDrestaurant = current.getRestaurantID();
@@ -116,7 +118,7 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
             DecimalFormat df = new DecimalFormat("0.0");
             this.avgFinalScore.setText(df.format(current.getAvgFinalScore()));
             //TODO capire come cambiarlo a secondo della lingua
-            this.numReview.setText(Integer.toString(current.getReviews().size())+" reviews");
+            this.numReview.setText(Integer.toString(current.getReviews().size())+" review");
             float distance = current.getLocation().distanceTo(manager.getLocation());
             this.distance.setText(String.format("%.0f",distance)+"m");
         }
