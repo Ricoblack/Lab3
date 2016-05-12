@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -43,10 +42,11 @@ public class DisplayReservation extends AppCompatActivity {
         note = (TextView) findViewById(R.id.reservation_additional_notes);
 
         Calendar calendar = currentBooking.getDate_time();
-        time.setText(MessageFormat.format("{0}:{1}", calendar.get(Calendar.HOUR_OF_DAY),
-                calendar.get(Calendar.MINUTE))); //FIXME: le 22.09 vengono scritte come 22.9 perchè manca la chiamata a pad()
+        time.setText(MessageFormat.format("{0}:{1}", pad(calendar.get(Calendar.HOUR_OF_DAY)),
+                pad(calendar.get(Calendar.MINUTE))));
         date.setText(MessageFormat.format("{0}/{1}/{2}", pad(calendar.get(Calendar.DAY_OF_MONTH)),
                 pad(calendar.get(Calendar.MONTH) + 1), pad(calendar.get(Calendar.YEAR))));
+
 
         DishArrayAdapter adapter = new DishArrayAdapter(this, R.layout.dish_listview_item, currentBooking.getDishes(), (ArrayList<Integer>)currentBooking.getQuantities(),1);
 
