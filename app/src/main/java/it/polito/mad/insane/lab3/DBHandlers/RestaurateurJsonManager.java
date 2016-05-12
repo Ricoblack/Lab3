@@ -274,8 +274,8 @@ public class RestaurateurJsonManager {
         return false;
     }
 
-    public List<Restaurant> getOrderedRestaurants(String orderBy) {
-        List<Restaurant> lista = getRestaurants();
+    public List<Restaurant> getOrderedRestaurants(String orderBy, List<Restaurant> listaFiltrata) {
+        List<Restaurant> lista = listaFiltrata;
 
         if(orderBy.toLowerCase().equals("distance")){
             Collections.sort(lista, new Comparator<Restaurant>() {
@@ -348,7 +348,7 @@ public class RestaurateurJsonManager {
 
         private List<Booking> bookings;
 
-        private int currentReservationID;
+        private int currentReservationID=0;
 
         public  DbApp()
         {
@@ -390,9 +390,9 @@ public class RestaurateurJsonManager {
             //CARICAMENTO DATI RISTORANTI
             RestaurateurProfile profile =new RestaurateurProfile("Pizza-Pazza","Corso duca degli abruzzi, 10","PoliTo","Pizza","Venite a provare la pizza più gustosa di Torino",new Date(),d,"Chiusi la domenica","Bancomat","Wifi-free");
             RestaurateurProfile profile2=new RestaurateurProfile("Just Pasta", "Via roma, 55", "UniTo","Pasta","Pasta per tutti i gusti",new Date(),new Date(),"Aperti tutta la settimana","Bancomat,carta","Privo di barriere architettoniche");
-            RestaurateurProfile profile3=new RestaurateurProfile("Pub la locanda", "Via lagrange, 17", "UniTo","Etnico", "L'isola felice dello studente universitario",new Date(),new Date(),"Giropizza il sabato sera","Bancomat","Wifi-free");
-            RestaurateurProfile profile4=new RestaurateurProfile("Ovolollo restaurant", "Via saluzzo 17", "PoliTo","Etnico", "L'isola del miglior ovolollo studentesco",new Date(),new Date(),"Cicchetto di ben venuto il sabato sera","Bancomat","Wifi-free");
-            RestaurateurProfile profile5=new RestaurateurProfile("Origami restaurant", "Piazza Vittorio Veneto, 18/F", "UniTo","Etnico", "Il miglior giapponese di Torino",new Date(),new Date(),"All you can eat a pranzo","Bancomat","Wifi-free");
+            RestaurateurProfile profile3=new RestaurateurProfile("Pub la locanda", "Via lagrange, 17", "UniTo","Ethnic", "L'isola felice dello studente universitario",new Date(),new Date(),"Giropizza il sabato sera","Bancomat","Wifi-free");
+            RestaurateurProfile profile4=new RestaurateurProfile("Ovolollo restaurant", "Via saluzzo 17", "PoliTo","Ethnic", "L'isola del miglior ovolollo studentesco",new Date(),new Date(),"Cicchetto di ben venuto il sabato sera","Bancomat","Wifi-free");
+            RestaurateurProfile profile5=new RestaurateurProfile("Origami restaurant", "Piazza Vittorio Veneto, 18/F", "UniTo","Ethnic", "Il miglior giapponese di Torino",new Date(),new Date(),"All you can eat a pranzo","Bancomat","Wifi-free");
 
             //CARICAMENTO DATI DISHES
             ArrayList<Dish> dishes1=new ArrayList<Dish>();

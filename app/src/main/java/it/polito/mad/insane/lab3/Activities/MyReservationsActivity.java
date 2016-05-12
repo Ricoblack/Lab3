@@ -29,7 +29,6 @@ public class MyReservationsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.reservation_recycler_view);
-
         if(rv != null){
             RestaurateurJsonManager manager = RestaurateurJsonManager.getInstance(this);
             List<Booking> bookingList = manager.getBookings();
@@ -59,6 +58,7 @@ public class MyReservationsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
+
                 finish();  //FIXME: non basta fare così, se torno indietro riapre l'activity per prenotare con i piatti selezionati ma crasha tutto perchè in memoria non c'è nulla, credo debba essere fixato nell'onresume della RestaurantProfile
                 return true;
         }

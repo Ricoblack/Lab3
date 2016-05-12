@@ -179,9 +179,10 @@ public class MakeReservationActivity extends AppCompatActivity {
         MakeReservationActivity.clearStaticVariables();
         RestaurantProfile.clearStaticVariables(); //FIXME non pulisce le variabili dell'altra activity, o almeno cosi' sembra e questo causa l'exception tornando indietro da myBookings
 
+        finish();
         Intent intent = new Intent(MakeReservationActivity.this, MyReservationsActivity.class);
         startActivity(intent);
-        finish();
+
 
     }
 

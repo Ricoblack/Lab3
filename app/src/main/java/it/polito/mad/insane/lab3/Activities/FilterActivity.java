@@ -1,9 +1,11 @@
 package it.polito.mad.insane.lab3.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
@@ -16,6 +18,8 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import it.polito.mad.insane.lab3.Adapters.MySpinnerAdapterFilter;
 import it.polito.mad.insane.lab3.R;
@@ -23,6 +27,9 @@ import it.polito.mad.insane.lab3.R;
 public class FilterActivity extends AppCompatActivity {
 
     // TODO: usare le shared preferences per salvare i filtri impostati e modificarli
+
+    static final String PREF_NAME = "myPref";
+    private SharedPreferences mPrefs = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +40,7 @@ public class FilterActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //set up spinners
-        setUpSpinners();
+        setUpSpinners(true);
 
         //set up on click listeners of the buttons
         AppCompatButton reset= (AppCompatButton) findViewById(R.id.resetButton);
@@ -62,7 +69,8 @@ public class FilterActivity extends AppCompatActivity {
     }
 
     public void onResetPressed(View v){
-        this.setUpSpinners();
+        this.setUpSpinners(false);
+
     }
 
     public void onApplyPressed(View v){
@@ -83,17 +91,30 @@ public class FilterActivity extends AppCompatActivity {
         if(tSpinner.getSelectedItemPosition()!=0) typeValue=tSpinner.getSelectedItem().toString();
         if(tiSpinner.getSelectedItemPosition()!=0) timeValue=tiSpinner.getSelectedItem().toString();
 
-        Intent i = new Intent(this,HomeConsumer.class);
+        //FIXME: questo va fatto con una shared preferences
+        this.mPrefs = getSharedPreferences(PREF_NAME,MODE_PRIVATE);
+        SharedPreferences.Editor editor = this.mPrefs.edit();
+        editor.putString("distanceValue",distanceValue);
+        editor.putString("priceValue",priceValue);
+        editor.putString("typeValue",typeValue);
+        editor.putString("timeValue",timeValue);
+        editor.putInt("distancePos", dSpinner.getSelectedItemPosition());
+        editor.putInt("pricePos",pSpinner.getSelectedItemPosition());
+        editor.putInt("typePos",tSpinner.getSelectedItemPosition());
+        editor.putInt("timePos",tiSpinner.getSelectedItemPosition());
+        editor.apply();
+
+        /*Intent i = new Intent(this,HomeConsumer.class);
         i.putExtra("distanceValue",distanceValue);
         i.putExtra("priceValue",priceValue);
         i.putExtra("typeValue",typeValue);
         i.putExtra("timeValue",timeValue);
-        startActivity(i);
+        startActivity(i);*/
         finish();
 
     }
 
-    private void setUpSpinners() {
+    private void setUpSpinners(boolean loadOldValue) {
 
         final Spinner dSpinner = (Spinner) findViewById(R.id.distance_filter);
         List<String> distances = new ArrayList<>();
@@ -135,6 +156,27 @@ public class FilterActivity extends AppCompatActivity {
                 times,res4);
         tiAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         tiSpinner.setAdapter(tiAdapter);
+
+        if(loadOldValue)
+        {
+            this.mPrefs = getSharedPreferences(PREF_NAME,MODE_PRIVATE);
+            if (mPrefs!=null){
+                //set spinners with previous values
+                dSpinner.setSelection(mPrefs.getInt("distancePos",0));
+                tSpinner.setSelection(mPrefs.getInt("typePos",0));
+                pSpinner.setSelection(mPrefs.getInt("pricePos",0));
+                tiSpinner.setSelection(mPrefs.getInt("timePos",0));
+            }
+        }else
+        {
+            this.mPrefs = getSharedPreferences(PREF_NAME,MODE_PRIVATE);
+            if (mPrefs!=null) {
+                SharedPreferences.Editor editor = this.mPrefs.edit();
+                editor.clear();
+                editor.commit();
+            }
+
+        }
 
     }
 

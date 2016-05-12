@@ -1,6 +1,7 @@
 package it.polito.mad.insane.lab3.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -33,7 +34,8 @@ import it.polito.mad.insane.lab3.Animations.SlideInOutLeftItemAnimator;
 public class HomeConsumer extends AppCompatActivity {
 
     private static RestaurateurJsonManager manager = null;
-
+    static final String PREF_NAME = "myPref";private SharedPreferences mPrefs = null;
+    private List<Restaurant> listaFiltrata;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +51,7 @@ public class HomeConsumer extends AppCompatActivity {
             public boolean onQueryTextSubmit(String newText) {
                 if(newText.equals("")) setUpRestaurantsRecycler(manager.getRestaurants());
                 else {
-                    List<Restaurant> listaFiltrata = manager.getFilteredRestaurants(newText);
+                    listaFiltrata = manager.getFilteredRestaurants(newText);
                     setUpRestaurantsRecycler(listaFiltrata);
                 }
                 return true;
@@ -59,7 +61,7 @@ public class HomeConsumer extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 if(newText.equals("")) setUpRestaurantsRecycler(manager.getRestaurants());
                 else {
-                    List<Restaurant> listaFiltrata = manager.getFilteredRestaurants(newText);
+                    listaFiltrata = manager.getFilteredRestaurants(newText);
                     setUpRestaurantsRecycler(listaFiltrata);
                 }
 
@@ -83,18 +85,25 @@ public class HomeConsumer extends AppCompatActivity {
                     Toast.makeText(v.getContext(),"Seleziona un ordinamento",Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    setUpRestaurantsRecycler(manager.getOrderedRestaurants(dSpinner.getSelectedItem().toString()));
+                    setUpRestaurantsRecycler(manager.getOrderedRestaurants(dSpinner.getSelectedItem().toString(), listaFiltrata));
                 }
             }
         });
-        //TODO: per ora setto il pulsante invisibile
-        applyButton.setVisibility(View.INVISIBLE);
 
-       //set up ordering spinner
-        setUpSpinner();
+        //set up ordering spinner
+        setUpSpinner();  //fixme: succede che quando l'activity  è chiamata con extra devo solo inizializzare lo spinner,altrimenti già ordino per distanza/score
 
-        //check if filtering request happened
-        Intent intent = getIntent();
+        //'clear filter
+        this.mPrefs = getSharedPreferences(PREF_NAME,MODE_PRIVATE);
+        if (mPrefs!=null) {
+            SharedPreferences.Editor editor = this.mPrefs.edit();
+            editor.clear();
+            editor.commit();
+        }
+        // set up clean Recycler
+        setUpRestaurantsRecycler(manager.getRestaurants());
+
+        /*Intent intent = getIntent();
         Bundle extras = intent.getExtras();
 
         if(extras==null){
@@ -113,7 +122,7 @@ public class HomeConsumer extends AppCompatActivity {
             else {
                 setUpRestaurantsRecycler(manager.getRestaurants());
             }
-        }
+        }*/
 
 
         // Fix Portrait Mode
@@ -130,6 +139,28 @@ public class HomeConsumer extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_home_consumer, menu);
         return true;
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        this.mPrefs = getSharedPreferences(PREF_NAME,MODE_PRIVATE);
+        if(this.mPrefs != null)
+        {
+            //If coming from filter activity...
+            listaFiltrata = manager.getAdvancedFilteredRestaurants(this.mPrefs.getString("distanceValue",""),this.mPrefs
+                    .getString("priceValue",""),this.mPrefs.getString("typeValue",""),this.mPrefs.getString("timeValue",""));
+
+            setUpRestaurantsRecycler(listaFiltrata);
+
+
+        }else
+        {
+            //No filtering needed
+            setUpRestaurantsRecycler(manager.getRestaurants());
+        }
+
     }
 
     @Override
@@ -183,9 +214,9 @@ public class HomeConsumer extends AppCompatActivity {
         dSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position==1|| position==2){
-                    setUpRestaurantsRecycler(manager.getOrderedRestaurants(dSpinner.getSelectedItem().toString()));
-                }
+                //if(position==1|| position==2){
+                  //  setUpRestaurantsRecycler(manager.getOrderedRestaurants(dSpinner.getSelectedItem().toString()));
+                //}
             }
 
             @Override
