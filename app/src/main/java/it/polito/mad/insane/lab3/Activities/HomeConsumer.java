@@ -32,8 +32,6 @@ import it.polito.mad.insane.lab3.animations.SlideInOutLeftItemAnimator;
 
 public class HomeConsumer extends AppCompatActivity {
 
-    //FIXME appena avvio l'applicazione lo spinner scrive score ma i ristoranti non sono ordinati in base allo score
-    //FIXME il filtro sull'orario del pranzo non restituisce nessun ristorante valido
 
     private static RestaurateurJsonManager manager = null;
     static final String PREF_NAME = "myPref";private SharedPreferences mPrefs = null;
@@ -93,7 +91,7 @@ public class HomeConsumer extends AppCompatActivity {
         });
 
         //set up ordering spinner
-        setUpSpinner();  //fixme: succede che quando l'activity  è chiamata con extra devo solo inizializzare lo spinner,altrimenti già ordino per distanza/score
+        setUpSpinner();
 
         //'clear filter
         this.mPrefs = getSharedPreferences(PREF_NAME,MODE_PRIVATE);
@@ -162,6 +160,7 @@ public class HomeConsumer extends AppCompatActivity {
             //No filtering needed
             setUpRestaurantsRecycler(manager.getRestaurants());
         }
+        setUpSpinner();
 
     }
 
@@ -239,7 +238,7 @@ public class HomeConsumer extends AppCompatActivity {
         rV.setLayoutManager(mGridLayoutManager);
 
         // Set animation
-        RecyclerView.ItemAnimator ia = new SlideInOutLeftItemAnimator(rV);  // try animator //FIXME: doesn't work, pazienza
+        RecyclerView.ItemAnimator ia = new SlideInOutLeftItemAnimator(rV);  // try animator //FIX-ME: doesn't work, pazienza
         rV.setItemAnimator(ia);
     }
 
@@ -268,7 +267,7 @@ public class HomeConsumer extends AppCompatActivity {
             }
         });
 
-        dSpinner.setSelection(2);
+        //dSpinner.setSelection(2);
 
     }
 }

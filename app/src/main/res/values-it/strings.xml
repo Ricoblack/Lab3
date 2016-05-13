@@ -6,6 +6,8 @@
     </string-array>
 
 
+
+
     <string-array name="distance_array">
         <item> <i>DISTANZA</i> </item>
         <item>100m</item>
@@ -119,4 +121,6 @@
     <string name="dish_not_available">Non disponibile</string>
     <string name="price">Prezzo</string>
     <string name="dishes">piatti</string>
+    <string name="distance">DISTANZA</string>
+    <string name="score">PUNTEGGIO</string>
 </resources>

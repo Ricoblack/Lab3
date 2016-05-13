@@ -169,7 +169,7 @@ public class MakeReservationActivity extends AppCompatActivity {
 
     private void saveReservation(List<Dish> dishesToDisplay, List<Integer> quantitiesToDisplay) {
 
-        //TODO far fare al manager la creazione della booking del db, così ce lo troviamo pronto per l'online
+        //T-ODO far fare al manager la creazione della booking del db, così ce lo troviamo pronto per l'online
         Booking b = new Booking();
         b.setDate_time(reservationDate);
         b.setDishes(dishesToDisplay);

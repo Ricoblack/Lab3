@@ -336,7 +336,7 @@ public class RestaurantProfile extends AppCompatActivity {
 //            TextView tv = (TextView) getActivity().findViewById(R.id.chart_selection);
 //            tv.setVisibility(View.GONE);
             loadProfileData(rootView);
-            //TODO: sistemare la visualizzazione dell'ora nel tab info fragment (carlo)
+
             return rootView;
         }
 
