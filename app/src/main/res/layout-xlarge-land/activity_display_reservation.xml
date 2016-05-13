@@ -48,6 +48,7 @@
                     android:layout_height="wrap_content"
                     android:orientation = "horizontal"
                     card_view:cardCornerRadius="@dimen/radius_cardView"
+                    android:layout_margin="8dp"
                     android:backgroundTint="@color/colorAccent">
 
                     <LinearLayout
