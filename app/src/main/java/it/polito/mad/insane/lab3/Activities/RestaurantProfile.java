@@ -420,9 +420,48 @@ public class RestaurantProfile extends AppCompatActivity {
             RecyclerView.Adapter reviewsAdapter = new ReviewsRecyclerAdapter(getActivity(), reviews);
             if(recyclerView != null){
                 recyclerView.setAdapter(reviewsAdapter);
-                LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(getActivity());
-                mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
-                recyclerView.setLayoutManager(mLinearLayoutManagerVertical);
+                // set Layout Manager
+                if((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE)
+                {
+                    // 10 inches
+                    if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+                    {
+                        // 2 columns
+                        GridLayoutManager mGridLayoutManager = new GridLayoutManager(getActivity(), 2);
+                        recyclerView.setLayoutManager(mGridLayoutManager);
+                    }else
+                    {
+                        // 3 columns
+                        GridLayoutManager mGridLayoutManager = new GridLayoutManager(getActivity(), 3);
+                        recyclerView.setLayoutManager(mGridLayoutManager);
+                    }
+
+                } else if((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE)
+                {
+                    // 7 inches
+                    if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+                    {
+                        // 2 columns
+                        GridLayoutManager mGridLayoutManager = new GridLayoutManager(getActivity(), 2);
+                        recyclerView.setLayoutManager(mGridLayoutManager);
+
+                    }else
+                    {
+                        // 1 column
+                        LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(getActivity());
+                        mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
+                        recyclerView.setLayoutManager(mLinearLayoutManagerVertical);
+                    }
+                }else {
+                    // small and normal screen
+                    // 1 columns
+                    LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(getActivity());
+                    mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
+                    recyclerView.setLayoutManager(mLinearLayoutManagerVertical);
+                }
+
+
+                // set Animator
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
             }
         }
