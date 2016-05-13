@@ -121,6 +121,7 @@ public class ReservationsRecyclerAdapter extends RecyclerView.Adapter<Reservatio
 //                                    AppCompatActivity act = (AppCompatActivity) context;
 //                                    act.startActivity(i);
 //                                    act.finish();
+
                                 }
                             })
                             .setNegativeButton(v.getResources().getString(R.string.cancel_dialog_button), new DialogInterface.OnClickListener() {

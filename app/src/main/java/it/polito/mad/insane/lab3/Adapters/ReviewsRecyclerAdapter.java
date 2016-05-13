@@ -88,11 +88,11 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
             this.expandableText = (TextView) itemView.findViewById(R.id.review_extendable_text);
             this.btnSeeMore = (TextView) itemView.findViewById(R.id.review_btn_see_more);
             this.date = (TextView) itemView.findViewById(R.id.review_date);
-            //TODO: add the userPic instead of the left drawable of userName in the cardView
+            //T-ODO: add the userPic instead of the left drawable of userName in the cardView
         }
 
 
-        // TODO: sincronizzare l'animazione di compressione della cardview in modo che il testo cambi dopo la compressione
+
         public void setData(Review current, int position){
             this.position = position;
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -129,7 +129,7 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
 
             this.expandableText.setText(current.getText());
             this.title.setText(current.getTitle());
-            //TODO: le review sono senza username!
+
 //            this.userName.setText(users.getUser(current.getUserID())); /**da implementare**/
 
             DecimalFormat df = new DecimalFormat("0.0");
