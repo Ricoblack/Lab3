@@ -32,6 +32,9 @@ import it.polito.mad.insane.lab3.animations.SlideInOutLeftItemAnimator;
 
 public class HomeConsumer extends AppCompatActivity {
 
+    //FIXME appena avvio l'applicazione lo spinner scrive score ma i ristoranti non sono ordinati in base allo score
+    //FIXME il filtro sull'orario del pranzo non restituisce nessun ristorante valido
+
     private static RestaurateurJsonManager manager = null;
     static final String PREF_NAME = "myPref";private SharedPreferences mPrefs = null;
     private List<Restaurant> listaFiltrata;
@@ -171,11 +174,11 @@ public class HomeConsumer extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.activity_filtro) {
-            Intent i = new Intent(this,FilterActivity.class);
+            Intent i = new Intent(this, it.polito.mad.insane.lab3.activities.FilterActivity.class);
             startActivity(i);
         }
         if(id == R.id.activity_reservations){
-            Intent i = new Intent(this,MyReservationsActivity.class);
+            Intent i = new Intent(this, it.polito.mad.insane.lab3.activities.MyReservationsActivity.class);
             startActivity(i);
         }
 
