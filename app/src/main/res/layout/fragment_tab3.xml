@@ -76,20 +76,20 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Food"
+                            android:text="@string/food"
                             android:textColor="@color/colorPrimary"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Punctuality"
+                            android:text="@string/punctuality"
                             android:textColor="@color/colorPrimary"
                             />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Location"
+                            android:text="@string/location"
                             android:textColor="@color/colorPrimary"
                             />
 

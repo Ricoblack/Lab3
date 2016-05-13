@@ -411,11 +411,11 @@ public class RestaurateurJsonManager {
             dStart.setHours(7);
             dStart.setMinutes(5);
             //CARICAMENTO DATI RISTORANTI
-            RestaurateurProfile profile =new RestaurateurProfile("Pizza-Pazza","Corso duca degli abruzzi, 10","PoliTo","Pizza","Venite a provare la pizza più gustosa di Torino",dStart,dClose,"Chiusi la domenica","Bancomat","Wifi-free");
-            RestaurateurProfile profile2=new RestaurateurProfile("Just Pasta", "Via roma, 55", "UniTo","Pasta","Pasta per tutti i gusti",dStart,dClose,"Aperti tutta la settimana","Bancomat,carta","Privo di barriere architettoniche");
-            RestaurateurProfile profile3=new RestaurateurProfile("Pub la locanda", "Via lagrange, 17", "UniTo","Ethnic", "L'isola felice dello studente universitario",dStart,dClose,"Giropizza il sabato sera","Bancomat","Wifi-free");
-            RestaurateurProfile profile4=new RestaurateurProfile("Ovolollo restaurant", "Via saluzzo 17", "PoliTo","Ethnic", "L'isola del miglior ovolollo studentesco",dStart,dClose,"Cicchetto di ben venuto il sabato sera","Bancomat","Wifi-free");
-            RestaurateurProfile profile5=new RestaurateurProfile("Origami restaurant", "Piazza Vittorio Veneto, 18/F", "UniTo","Ethnic", "Il miglior giapponese di Torino",dStart,dClose,"All you can eat a pranzo","Bancomat","Wifi-free");
+            RestaurateurProfile profile =new RestaurateurProfile("Pizza-Pazza","Corso Duca Degli Abruzzi, 10","PoliTo","Pizza","Venite a provare la pizza più gustosa di Torino",dStart,dClose,"Chiusi la domenica","Bancomat","Wifi-free");
+            RestaurateurProfile profile2=new RestaurateurProfile("Just Pasta", "Via Roma, 55", "UniTo","Pasta","Pasta per tutti i gusti",dStart,dClose,"Aperti tutta la settimana","Bancomat,carta","Privo di barriere architettoniche");
+            RestaurateurProfile profile3=new RestaurateurProfile("Pub la locanda", "Via Lagrange, 17", "UniTo","Ethnic", "L'isola felice dello studente universitario",dStart,dClose,"Giropizza il sabato sera","Bancomat","Wifi-free");
+            RestaurateurProfile profile4=new RestaurateurProfile("Ovolollo restaurant", "Via Saluzzo, 17", "PoliTo","Ethnic", "L'isola del miglior ovolollo studentesco",dStart,dClose,"Cicchetto di ben venuto il sabato sera","Bancomat","Wifi-free");
+            RestaurateurProfile profile5=new RestaurateurProfile("Origami restaurant", "Piazza Vittorio Veneto, 18F", "UniTo","Ethnic", "Il miglior giapponese di Torino",dStart,dClose,"All you can eat a pranzo","Bancomat","Wifi-free");
 
             //CARICAMENTO DATI DISHES
             ArrayList<Dish> dishes1=new ArrayList<Dish>();

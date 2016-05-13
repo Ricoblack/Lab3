@@ -97,7 +97,7 @@ public class HomeConsumer extends AppCompatActivity {
         if (mPrefs!=null) {
             SharedPreferences.Editor editor = this.mPrefs.edit();
             editor.clear();
-            editor.commit();
+            editor.apply();
         }
         // set up clean Recycler
         setUpRestaurantsRecycler(manager.getRestaurants());
@@ -190,6 +190,48 @@ public class HomeConsumer extends AppCompatActivity {
         RestaurantsRecyclerAdapter adapter = new RestaurantsRecyclerAdapter(this, restaurants);
         rV.setAdapter(adapter);
 
+        // set Layout Manager
+//        if((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE)
+//        {
+//            // 10 inches
+//            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+//            {
+//                // 2 columns
+//                GridLayoutManager mGridLayoutManager = new GridLayoutManager(this,2);
+//                rV.setLayoutManager(mGridLayoutManager);
+//            }else
+//            {
+//                // 1 column, different layout
+//                LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(this);
+//                mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
+//                rV.setLayoutManager(mLinearLayoutManagerVertical);
+//            }
+//
+//        } else if((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE)
+//        {
+//            // 7 inches
+//            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+//            {
+//                // 1 column
+//                LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(this);
+//                mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
+//                rV.setLayoutManager(mLinearLayoutManagerVertical);
+//
+//            }else
+//            {
+//                // 1 column
+//                LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(this);
+//                mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
+//                rV.setLayoutManager(mLinearLayoutManagerVertical);
+//            }
+//        }else {
+//
+//            // small and normal screen
+//            // 1 columns
+//            LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(this);
+//            mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
+//            rV.setLayoutManager(mLinearLayoutManagerVertical);
+//        }
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(this,2);
         rV.setLayoutManager(mGridLayoutManager);
 
@@ -205,8 +247,7 @@ public class HomeConsumer extends AppCompatActivity {
         Resources res = getResources();
         String[] dStrings = res.getStringArray(R.array.order_array);
         Collections.addAll(orderings, dStrings);
-        MySpinnerAdapterHome dAdapter = new MySpinnerAdapterHome(HomeConsumer.this, R.layout.support_simple_spinner_dropdown_item,
-                orderings, res);
+        MySpinnerAdapterHome dAdapter = new MySpinnerAdapterHome(HomeConsumer.this, R.layout.support_simple_spinner_dropdown_item,orderings, res);
         dAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         dSpinner.setAdapter(dAdapter);
 

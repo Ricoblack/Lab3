@@ -61,7 +61,7 @@
                         <TextView
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
-                            android:text="Date :"
+                            android:text="@string/date"
                             android:layout_centerVertical="true"
                             android:textSize="20sp"/>
 
@@ -88,7 +88,7 @@
                         <TextView
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
-                            android:text="Time :"
+                            android:text="@string/time"
                             android:layout_centerVertical="true"
                             android:textSize="20sp"/>
 
@@ -111,7 +111,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="no notes"
+                        android:hint="@string/no_notes"
                         android:textSize="14sp"
                         android:drawableLeft="@drawable/ic_assignment_black_24dp"
                         android:drawablePadding="5dp"/>

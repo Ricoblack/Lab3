@@ -102,7 +102,7 @@ public class MakeReservationActivity extends AppCompatActivity {
                     if(hour.getText().toString().toLowerCase().equals("select") || date.getText().toString().toLowerCase().equals("select")){
                         Toast.makeText(MakeReservationActivity.this, getString(R.string.specify_date_time), Toast.LENGTH_SHORT).show();
                         return;
-                    };
+                    }
                     if(reservationDate == null){
                         Toast.makeText(MakeReservationActivity.this, getString(R.string.specify_date_time), Toast.LENGTH_SHORT).show();
                         return;

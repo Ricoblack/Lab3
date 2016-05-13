@@ -106,7 +106,7 @@
                 <TextView
                     android:id="@+id/dish_availability"
                     android:layout_width="wrap_content"
-                    android:text="Not available"
+                    android:text="@string/dish_not_available"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:textColor="@color/colorPrimary"
@@ -187,7 +187,7 @@
                 android:id="@+id/dish_selected_price"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:text="Price"
+                android:text="@string/price"
                 android:textSize="16sp"
                 android:padding="10dp"
                 android:layout_weight="3"

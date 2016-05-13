@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -58,6 +59,7 @@ public class RestaurantProfile extends AppCompatActivity {
      */
 
     private ViewPager mViewPager;
+    private static FloatingActionButton fab;
     private static RestaurateurJsonManager manager = null;
     private static String restaurantId;
     private static DishesRecyclerAdapter dishesAdapter = null;
@@ -93,13 +95,57 @@ public class RestaurantProfile extends AppCompatActivity {
 
 //        NestedScrollView scrollView = (NestedScrollView) findViewById (R.id.scrollView);
 //        scrollView.setFillViewport (true);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
 
+        /** Create the adapter that will return a fragment for each of the three primary sections of the activity. **/
+
+        // set button
+        fab = (FloatingActionButton) findViewById(R.id.fab_cart);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RestaurantProfile.this, MakeReservationActivity.class);
+                Bundle bundle = new Bundle();
+                if(dishesAdapter.getReservationQty() == 0)
+                    Toast.makeText(RestaurantProfile.this, getResources().getString(R.string.cart_empty_alert), Toast.LENGTH_SHORT).show();
+                else {
+//                                bundle.putParcelableArrayList("reservationList", (ArrayList<? extends Parcelable>) reservationList);
+                    bundle.putIntArray("selectedQuantities", dishesAdapter.getSelectedQuantities());
+                    bundle.putString("ID", restaurantId);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+
+            }
+        });
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener(){
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                switch(position)
+                {
+                    case 0:
+                        fab.setVisibility(View.VISIBLE);
+                        break;
+                    default:
+                        fab.setVisibility(View.GONE);
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         // Give the PagerSlidingTabStrip the ViewPager
         PagerSlidingTabStrip tabsStrip = (PagerSlidingTabStrip) findViewById(R.id.restaurant_tabs);
@@ -149,7 +195,7 @@ public class RestaurantProfile extends AppCompatActivity {
         TextView tv = (TextView) findViewById(R.id.show_reservation_button);
         if (tv != null) {
             if (quantity != 0)
-                tv.setText(String.format("GO TO CART           %d items - %s€", quantity, price));
+                tv.setText(String.format("%d "+getResources().getString(R.string.itemsFormat)+" - %s€", quantity, price));
             else
                 tv.setText(R.string.empty_cart);
         }
@@ -284,11 +330,13 @@ public class RestaurantProfile extends AppCompatActivity {
             }
         }
 
+
         private View infoLayout(LayoutInflater inflater, ViewGroup container) {
             View rootView = inflater.inflate(R.layout.fragment_tab2, container, false);
 //            TextView tv = (TextView) getActivity().findViewById(R.id.chart_selection);
 //            tv.setVisibility(View.GONE);
             loadProfileData(rootView);
+            //TODO: sistemare la visualizzazione dell'ora nel tab info fragment (carlo)
             return rootView;
         }
 
@@ -297,6 +345,7 @@ public class RestaurantProfile extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.fragment_tab1, container, false);
 //            TextView tv = (TextView) getActivity().findViewById(R.id.chart_selection);
 //            tv.setVisibility(View.VISIBLE);
+
             // take the list of dishes form manager
             manager = RestaurateurJsonManager.getInstance(getActivity());
             Restaurant restaurant = manager.getRestaurant(restaurantId);
@@ -304,29 +353,28 @@ public class RestaurantProfile extends AppCompatActivity {
             // set up dishesRecyclerView
             final RecyclerView rv = setupDishesRecyclerView(rootView, restaurant.getDishes());
             TextView tv = (TextView) rootView.findViewById((R.id.show_reservation_button));
-
             if(tv != null) {
                 if(dishesAdapter != null)
                     editShowButton(dishesAdapter.getReservationQty(), dishesAdapter.getReservationPrice(), rootView);
 
-                tv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getActivity(), MakeReservationActivity.class);
-                        if (rv != null) {
-                            Bundle bundle = new Bundle();
-                            if(dishesAdapter.getReservationQty() == 0)
-                                Toast.makeText(getActivity(), "Cart must contain at least one dish", Toast.LENGTH_SHORT).show();
-                            else {
-//                                bundle.putParcelableArrayList("reservationList", (ArrayList<? extends Parcelable>) reservationList);
-                                bundle.putIntArray("selectedQuantities", dishesAdapter.getSelectedQuantities());
-                                bundle.putString("ID", restaurantId);
-                                intent.putExtras(bundle);
-                                startActivity(intent);
-                            }
-                        }
-                    }
-                });
+//                tv.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Intent intent = new Intent(getActivity(), MakeReservationActivity.class);
+//                        if (rv != null) {
+//                            Bundle bundle = new Bundle();
+//                            if(dishesAdapter.getReservationQty() == 0)
+//                                Toast.makeText(getActivity(), "Cart must contain at least one dish", Toast.LENGTH_SHORT).show();
+//                            else {
+////                                bundle.putParcelableArrayList("reservationList", (ArrayList<? extends Parcelable>) reservationList);
+//                                bundle.putIntArray("selectedQuantities", dishesAdapter.getSelectedQuantities());
+//                                bundle.putString("ID", restaurantId);
+//                                intent.putExtras(bundle);
+//                                startActivity(intent);
+//                            }
+//                        }
+//                    }
+//                });
             }
 
             return rootView;
@@ -336,6 +384,7 @@ public class RestaurantProfile extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.fragment_tab3, container, false);
 //            TextView tv = (TextView) getActivity().findViewById(R.id.chart_selection);
 //            tv.setVisibility(View.GONE);
+
 
             manager = RestaurateurJsonManager.getInstance(getActivity());
 
@@ -348,7 +397,7 @@ public class RestaurantProfile extends AppCompatActivity {
             tv.setText(df.format(restaurant.getAvgFinalScore()));
 
             tv = (TextView) rootView.findViewById(R.id.reviews_number);
-            tv.setText(String.format("Based on %d reviews", restaurant.getReviews().size()));
+            tv.setText(String.format(getResources().getString(R.string.reviewsFormat), restaurant.getReviews().size()));
 
             tv = (TextView) rootView.findViewById(R.id.score_1);
             df = new DecimalFormat("0.0");
@@ -446,9 +495,10 @@ public class RestaurantProfile extends AppCompatActivity {
             TextView tv = (TextView) rootView.findViewById(R.id.show_reservation_button);
             if (tv != null) {
                 if(quantity != 0)
-                    tv.setText(String.format("GO TO CART           %d items - %s€", quantity, price));
+                    tv.setText(String.format("%d "+rootView.getResources().getString(R.string.itemsFormat)+" - %s€", quantity, price));
                 else
                     tv.setText(R.string.empty_cart);
+
             }
         }
 
