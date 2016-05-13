@@ -8,7 +8,9 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -25,6 +27,7 @@ import java.util.List;
 
 import it.polito.mad.insane.lab3.adapters.MySpinnerAdapterHome;
 import it.polito.mad.insane.lab3.R;
+import it.polito.mad.insane.lab3.adapters.ReservationsRecyclerAdapter;
 import it.polito.mad.insane.lab3.data.Restaurant;
 import it.polito.mad.insane.lab3.adapters.RestaurantsRecyclerAdapter;
 import it.polito.mad.insane.lab3.dBHandlers.RestaurateurJsonManager;
@@ -188,54 +191,54 @@ public class HomeConsumer extends AppCompatActivity {
     {
         //TODO nel caso in cui l'app venga utilizzati su cell con schermo piccolo utilizzare il linearLayout, nel caso di schermi grandi(10 pollici non 7) utilizzare griglia a 3
         RecyclerView rV = (RecyclerView) findViewById(R.id.RestaurateurRecyclerView);
-
         RestaurantsRecyclerAdapter adapter = new RestaurantsRecyclerAdapter(this, restaurants);
         rV.setAdapter(adapter);
 
         // set Layout Manager
-//        if((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE)
-//        {
-//            // 10 inches
-//            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
-//            {
-//                // 2 columns
-//                GridLayoutManager mGridLayoutManager = new GridLayoutManager(this,2);
-//                rV.setLayoutManager(mGridLayoutManager);
-//            }else
-//            {
-//                // 1 column, different layout
-//                LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(this);
-//                mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
-//                rV.setLayoutManager(mLinearLayoutManagerVertical);
-//            }
-//
-//        } else if((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE)
-//        {
-//            // 7 inches
-//            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-//            {
-//                // 1 column
-//                LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(this);
-//                mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
-//                rV.setLayoutManager(mLinearLayoutManagerVertical);
-//
-//            }else
-//            {
-//                // 1 column
-//                LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(this);
-//                mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
-//                rV.setLayoutManager(mLinearLayoutManagerVertical);
-//            }
-//        }else {
-//
-//            // small and normal screen
-//            // 1 columns
-//            LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(this);
-//            mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
-//            rV.setLayoutManager(mLinearLayoutManagerVertical);
-//        }
-        GridLayoutManager mGridLayoutManager = new GridLayoutManager(this,2);
-        rV.setLayoutManager(mGridLayoutManager);
+        if((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE)
+        {
+            // 10 inches
+            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+            {
+                // 3 columns
+                GridLayoutManager mGridLayoutManager = new GridLayoutManager(this,3);
+                rV.setLayoutManager(mGridLayoutManager);
+            }else
+            {
+                // 5 column
+                GridLayoutManager mGridLayoutManager = new GridLayoutManager(this,5);
+                rV.setLayoutManager(mGridLayoutManager);
+            }
+
+        } else if((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE)
+        {
+            // 7 inches
+            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+            {
+                // 4 column
+                GridLayoutManager mGridLayoutManager = new GridLayoutManager(this,4);
+                rV.setLayoutManager(mGridLayoutManager);
+
+            }else
+            {
+                // 3 column
+                GridLayoutManager mGridLayoutManager = new GridLayoutManager(this,3);
+                rV.setLayoutManager(mGridLayoutManager);
+            }
+        }else if((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL)
+        {
+            // normal screen
+            // 2 columns
+            GridLayoutManager mGridLayoutManager = new GridLayoutManager(this,2);
+            rV.setLayoutManager(mGridLayoutManager);
+        }else if((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL)
+        {
+            // small screen
+            // 1 columns
+            LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(this);
+            mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
+            rV.setLayoutManager(mLinearLayoutManagerVertical);
+        }
 
         // Set animation
         RecyclerView.ItemAnimator ia = new SlideInOutLeftItemAnimator(rV);  // try animator //FIX-ME: doesn't work, pazienza

@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -44,9 +45,47 @@ public class MyReservationsActivity extends AppCompatActivity {
                 reservationMessage.setVisibility(View.GONE);
                 ReservationsRecyclerAdapter adapter = new ReservationsRecyclerAdapter(this, manager.getBookings());
                 rv.setAdapter(adapter);
-                LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(this);
-                mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
-                rv.setLayoutManager(mLinearLayoutManagerVertical);
+
+                if((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE)
+                {
+                    // 10 inches
+                    if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+                    {
+                        // 2 columns
+                        GridLayoutManager mGridLayoutManager = new GridLayoutManager(this,2);
+                        rv.setLayoutManager(mGridLayoutManager);
+                    }else
+                    {
+                        // 3 column
+                        GridLayoutManager mGridLayoutManager = new GridLayoutManager(this,3);
+                        rv.setLayoutManager(mGridLayoutManager);
+                    }
+
+                } else if((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE)
+                {
+                    // 7 inches
+                    if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+                    {
+                        // 2 column
+                        GridLayoutManager mGridLayoutManager = new GridLayoutManager(this,2);
+                        rv.setLayoutManager(mGridLayoutManager);
+
+                    }else
+                    {
+                        // 1 column
+                        LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(this);
+                        mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
+                        rv.setLayoutManager(mLinearLayoutManagerVertical);
+
+                    }
+                }else {
+                    //small and normal
+                    // 1 column
+                    LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(this);
+                    mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
+                    rv.setLayoutManager(mLinearLayoutManagerVertical);
+                }
+
                 rv.setItemAnimator(new DefaultItemAnimator());
             }
         }

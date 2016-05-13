@@ -556,7 +556,7 @@ public class RestaurantProfile extends AppCompatActivity {
                 cal.setTime(date);
                 int hourOfDay = cal.get(Calendar.HOUR_OF_DAY);
                 int minute = cal.get(Calendar.MINUTE);
-                tv.setText(String.format("%d:%d", pad(hourOfDay), pad(minute)));
+                tv.setText(String.format("%s:%s", pad(hourOfDay), pad(minute)));
             }
             tv = (TextView) rootView.findViewById(R.id.closingHour_title);
             if(tv != null){
@@ -565,7 +565,7 @@ public class RestaurantProfile extends AppCompatActivity {
                 cal.setTime(date);
                 int hourOfDay = cal.get(Calendar.HOUR_OF_DAY);
                 int minute = cal.get(Calendar.MINUTE);
-                tv.setText(String.format("%d:%d", pad(hourOfDay), pad(minute)));
+                tv.setText(String.format("%s:%s", pad(hourOfDay), pad(minute)));
             }
         }
 

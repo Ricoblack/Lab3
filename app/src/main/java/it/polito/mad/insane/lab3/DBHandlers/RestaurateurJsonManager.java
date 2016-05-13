@@ -305,13 +305,12 @@ public class RestaurateurJsonManager {
      */
     public void deleteReservation(String id) {
         //delete reservation with ID=id and save db again
-        ArrayList<Booking> bookings= (ArrayList<Booking>) getBookings();
-        for(int i=0;i<bookings.size();i++)
+        //ArrayList<Booking> bookings= (ArrayList<Booking>) dbApp.getBookings();
+        for(int i=0;i<dbApp.getBookings().size();i++)
         {
-            Booking b = bookings.get(i);
+            Booking b = dbApp.getBookings().get(i);
             if(b.getID().equals(id))
             {
-                //FIXME con questo for non cancella la prenotazione, il for serve a reincrementare le quantita' dei piatti
                 for(int j=0; j<b.getDishes().size(); j++) { //prendo i piatti della prenotazione
                     for (Dish d : getRestaurant(b.getRestaurantID()).getDishes()) { //prendo i piatti di tutto il menu' del ristorante
                         if (b.getDishes().get(j).getID().equals(d.getID())) { //se sono uguali...
@@ -320,9 +319,9 @@ public class RestaurateurJsonManager {
                         }
                     }
                 }
-                bookings.remove(i);
-                saveDbApp();
-                return; //ritorno immediatamente perchè non dovrebbero esserci due prenotazioni con medesimo ID
+                dbApp.getBookings().remove(i);
+                this.saveDbApp();
+                return;
             }
         }
         return;
