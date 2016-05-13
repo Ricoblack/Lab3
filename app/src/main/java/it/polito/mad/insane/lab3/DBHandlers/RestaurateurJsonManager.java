@@ -303,7 +303,6 @@ public class RestaurateurJsonManager {
      * @return the object removed
      */
     public void deleteReservation(String id) {
-        //TODO bisogna riaggiungere le quantita' dei dishes della prenotazione nel campo available_quantity dell'oggetto Dish
         //delete reservation with ID=id and save db again
         ArrayList<Booking> bookings= (ArrayList<Booking>) getBookings();
         for(int i=0;i<bookings.size();i++)
@@ -311,6 +310,15 @@ public class RestaurateurJsonManager {
             Booking b = bookings.get(i);
             if(b.getID().equals(id))
             {
+                //FIXME con questo for non cancella la prenotazione, il for serve a reincrementare le quantita' dei piatti
+                for(int j=0; j<b.getDishes().size(); j++) { //prendo i piatti della prenotazione
+                    for (Dish d : getRestaurant(b.getRestaurantID()).getDishes()) { //prendo i piatti di tutto il menu' del ristorante
+                        if (b.getDishes().get(j).getID().equals(d.getID())) { //se sono uguali...
+                            int quantity = d.getAvailability_qty();
+                            d.setAvailability_qty(quantity + b.getQuantities().get(j)); //... aggiorno la quantita' nel menu'
+                        }
+                    }
+                }
                 bookings.remove(i);
                 saveDbApp();
                 return; //ritorno immediatamente perchè non dovrebbero esserci due prenotazioni con medesimo ID

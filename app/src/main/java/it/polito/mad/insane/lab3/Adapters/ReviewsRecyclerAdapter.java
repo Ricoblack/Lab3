@@ -12,6 +12,7 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
         private View cardView;
         private ImageView userPic;
         private TextView userName;
-        private ImageView[] stars;
+        private TextView score;
         private TextView title;
         private TextView expandableText;
         private TextView btnSeeMore;
@@ -82,12 +83,7 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
             this.cardView = itemView;  // non dovrebbe servire
 //            this.userPic = (ImageView) itemView.findViewById(R.id.user_pic);
             this.userName = (TextView) itemView.findViewById(R.id.review_user_name);
-            this.stars = new ImageView[5];
-            this.stars[0] = (ImageView) itemView.findViewById(R.id.star_one);
-            this.stars[1] = (ImageView) itemView.findViewById(R.id.star_two);
-            this.stars[2] = (ImageView) itemView.findViewById(R.id.star_three);
-            this.stars[3] = (ImageView) itemView.findViewById(R.id.star_four);
-            this.stars[4] = (ImageView) itemView.findViewById(R.id.star_five);
+            this.score = (TextView) itemView.findViewById(R.id.review_score);
             this.title = (TextView) itemView.findViewById(R.id.review_title);
             this.expandableText = (TextView) itemView.findViewById(R.id.review_extendable_text);
             this.btnSeeMore = (TextView) itemView.findViewById(R.id.review_btn_see_more);
@@ -133,33 +129,15 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
 
             this.expandableText.setText(current.getText());
             this.title.setText(current.getTitle());
-            //TODO: controllare come e' gestita la cosa nel DB
+            //TODO: le review sono senza username!
 //            this.userName.setText(users.getUser(current.getUserID())); /**da implementare**/
-            String imgPath = current.getPhotoPath();
-            //FIXME capire bene la gestione delle immagini
-            if(imgPath != null)
-                this.userPic.setImageURI(Uri.parse(imgPath));
-            double score = roundToHalf(current.getFinalScore());
-            score = roundToHalf(score/2);
 
-            //TODO: ha senso visualizzare il punteggio con delle stelline se poi il punteggio totale viene indicato con un numero?
-            if (score == 0.0)
-                score = 0.5;
-            for(int i = stars.length; i >= 1; i--){
-                double i2 = (double) i;
-                if (i2 == score)
-                    break;
-                if(i2 - 0.5 == score){
-                    //TODO: immagine mezza stella Federico
-//                        this.stars[i].setImageDrawable(R.drawable.half_star);
-                        break;
-                }
-                this.stars[i-1].setVisibility(View.INVISIBLE);
-            }
+            DecimalFormat df = new DecimalFormat("0.0");
+            this.score.setText(String.valueOf(df.format(current.getFinalScore())));
         }
 
-        public double roundToHalf(double d) {
-            return Math.round(d * 2) / 2.0;
-        }
+//        public double roundToHalf(double d) {
+//            return Math.round(d * 2) / 2.0;
+//        }
     }
 }
