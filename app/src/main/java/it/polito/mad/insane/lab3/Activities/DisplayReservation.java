@@ -24,9 +24,11 @@ public class DisplayReservation extends AppCompatActivity {
     private TextView totalPrice;
     private TextView note;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //FIXME se clicco sui bottoni di data e ora crasha
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_reservation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -61,8 +63,6 @@ public class DisplayReservation extends AppCompatActivity {
         if(currentBooking.getNote() != null){
             note.setText(currentBooking.getNote());
         }
-
-
     }
 
     private String pad(int c) {

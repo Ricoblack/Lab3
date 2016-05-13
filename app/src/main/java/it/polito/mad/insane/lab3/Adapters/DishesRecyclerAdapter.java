@@ -144,6 +144,7 @@ public class DishesRecyclerAdapter extends RecyclerView.Adapter<DishesRecyclerAd
             this.dishPrice.setText(MessageFormat.format("{0}€", String.valueOf(df.format(current.getPrice()))));
             if(current.getAvailability_qty() == 0) {
                 this.dishAvailability.setVisibility(View.VISIBLE);
+                this.expandArrow.setVisibility(View.GONE);
                 popupsVisibility[position] = View.GONE;             // mostrare solo quando non e' disponibile
             }
 

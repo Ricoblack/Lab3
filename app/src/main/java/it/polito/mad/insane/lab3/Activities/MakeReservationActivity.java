@@ -186,7 +186,9 @@ public class MakeReservationActivity extends AppCompatActivity {
         //FIXME non sembra che questa cosa stia funzionando, controllare in debug ---
         for(int i = 0; i < manager.getRestaurant(restaurantId).getDishes().size(); i++){
             int quantity = manager.getRestaurant(restaurantId).getDishes().get(i).getAvailability_qty();
+//            int newQuantity = quantity - quantities[i];
             manager.getRestaurant(restaurantId).getDishes().get(i).setAvailability_qty(quantity - quantities[i]);
+            manager.saveDbApp();
         }
 
         manager.getBookings().add(b);
