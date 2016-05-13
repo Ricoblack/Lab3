@@ -2,7 +2,6 @@ package it.polito.mad.insane.lab3.adapters;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.net.Uri;
 import android.support.v4.widget.TextViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -26,10 +26,12 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
 
     private List<Review> mData; //actual data to be displayed
     private LayoutInflater mInflater;
+    private Context context;
 
     public ReviewsRecyclerAdapter(Context context, List<Review> data){
         this.mData = data;
         this.mInflater = LayoutInflater.from(context);
+        this.context = context;
     }
 
     /**
@@ -77,6 +79,9 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
         private int position;
         private boolean first = true;
         private boolean expandable = true;
+        private ImageView expandArrow;
+        private LinearLayout hiddenScoresLayout;
+        private LinearLayout headerLayout;
 
         public ReviewsViewHolder(View itemView) {
             super(itemView);
@@ -88,6 +93,8 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
             this.expandableText = (TextView) itemView.findViewById(R.id.review_extendable_text);
             this.btnSeeMore = (TextView) itemView.findViewById(R.id.review_btn_see_more);
             this.date = (TextView) itemView.findViewById(R.id.review_date);
+            this.headerLayout = (LinearLayout) itemView.findViewById(R.id.review_header_layout);
+
             //T-ODO: add the userPic instead of the left drawable of userName in the cardView
         }
 
@@ -101,7 +108,7 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
                 @Override
                 public void onGlobalLayout() {
                     if(first){ // here we check if the text is longer than the textview space for the first time. If not, don't need
-                               // the button "see more"
+                        // the button "see more"
                         first = false;
                         if(expandableText.getLineCount() < TextViewCompat.getMaxLines(expandableText))
                             btnSeeMore.setVisibility(View.INVISIBLE);
