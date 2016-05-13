@@ -27,7 +27,7 @@ public class DisplayReservation extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        //FIXME se clicco sui bottoni di data e ora crasha
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_reservation);

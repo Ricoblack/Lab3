@@ -61,7 +61,7 @@ public class ReservationsRecyclerAdapter extends RecyclerView.Adapter<Reservatio
 
     public class BookingsViewHolder extends RecyclerView.ViewHolder {
 
-//        private ImageView restaurantPhoto; //TODO implementare selezione immagini
+//        private ImageView restaurantPhoto; //T-ODO implementare selezione immagini
         private TextView restaurantName;
         private TextView ID;
         private TextView date;
@@ -121,6 +121,7 @@ public class ReservationsRecyclerAdapter extends RecyclerView.Adapter<Reservatio
 //                                    AppCompatActivity act = (AppCompatActivity) context;
 //                                    act.startActivity(i);
 //                                    act.finish();
+
                                 }
                             })
                             .setNegativeButton(v.getResources().getString(R.string.cancel_dialog_button), new DialogInterface.OnClickListener() {

@@ -23,6 +23,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import it.polito.mad.insane.lab3.R;
 import it.polito.mad.insane.lab3.data.Booking;
 import it.polito.mad.insane.lab3.data.Dish;
 import it.polito.mad.insane.lab3.data.Restaurant;
@@ -247,8 +248,8 @@ public class RestaurateurJsonManager {
             e.printStackTrace();
         }
 
-        if(r.getProfile().getOpeningHour().getHours()>=startTimeDate.getHours() &&
-                r.getProfile().getClosingHour().getHours()<=endTimeDate.getHours()) return true;
+        if(r.getProfile().getOpeningHour().getHours()<=startTimeDate.getHours() &&
+                r.getProfile().getClosingHour().getHours()>=endTimeDate.getHours()) return true;
 
         return false;
     }
@@ -274,7 +275,7 @@ public class RestaurateurJsonManager {
     public List<Restaurant> getOrderedRestaurants(String orderBy, List<Restaurant> listaFiltrata) {
         List<Restaurant> lista = listaFiltrata;
 
-        if(orderBy.toLowerCase().equals("distance")){
+        if(orderBy.toLowerCase().equals(myContext.getResources().getString(R.string.distance).toLowerCase())){
             Collections.sort(lista, new Comparator<Restaurant>() {
                 @Override
                 public int compare(Restaurant lhs, Restaurant rhs) {
@@ -282,7 +283,7 @@ public class RestaurateurJsonManager {
                 }
             });
         }
-        else if(orderBy.toLowerCase().equals("score")){
+        else if(orderBy.toLowerCase().equals(myContext.getResources().getString(R.string.score).toLowerCase())){
             Collections.sort(lista, new Comparator<Restaurant>() {
                 @Override
                 public int compare(Restaurant lhs, Restaurant rhs) {
@@ -418,11 +419,12 @@ public class RestaurateurJsonManager {
             Date dStart=new Date();
             dStart.setHours(7);
             dStart.setMinutes(5);
+
             //CARICAMENTO DATI RISTORANTI
             RestaurateurProfile profile =new RestaurateurProfile("Pizza-Pazza","Corso Duca Degli Abruzzi, 10","PoliTo","Pizza","Venite a provare la pizza più gustosa di Torino",dStart,dClose,"Chiusi la domenica","Bancomat","Wifi-free");
             RestaurateurProfile profile2=new RestaurateurProfile("Just Pasta", "Via Roma, 55", "UniTo","Pasta","Pasta per tutti i gusti",dStart,dClose,"Aperti tutta la settimana","Bancomat,carta","Privo di barriere architettoniche");
             RestaurateurProfile profile3=new RestaurateurProfile("Pub la locanda", "Via Lagrange, 17", "UniTo","Ethnic", "L'isola felice dello studente universitario",dStart,dClose,"Giropizza il sabato sera","Bancomat","Wifi-free");
-            RestaurateurProfile profile4=new RestaurateurProfile("Ovolollo restaurant", "Via Saluzzo, 17", "PoliTo","Ethnic", "L'isola del miglior ovolollo studentesco",dStart,dClose,"Cicchetto di ben venuto il sabato sera","Bancomat","Wifi-free");
+            RestaurateurProfile profile4=new RestaurateurProfile("Mangiaquì restaurant", "Via Saluzzo, 17", "PoliTo","Ethnic", "L'isola del miglior ovolollo studentesco",new Date(),new Date(),"Cicchetto di ben venuto il sabato sera","Bancomat","Wifi-free");
             RestaurateurProfile profile5=new RestaurateurProfile("Origami restaurant", "Piazza Vittorio Veneto, 18F", "UniTo","Ethnic", "Il miglior giapponese di Torino",dStart,dClose,"All you can eat a pranzo","Bancomat","Wifi-free");
 
             //CARICAMENTO DATI DISHES

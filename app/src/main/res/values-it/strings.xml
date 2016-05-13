@@ -6,6 +6,8 @@
     </string-array>
 
 
+
+
     <string-array name="distance_array">
         <item> <i>DISTANZA</i> </item>
         <item>100m</item>
@@ -114,9 +116,11 @@
     <string name="punctuality">Puntualità</string>
     <string name="location">Posizione</string>
     <string name="date">Data :</string>
-    <string name="time">Ora :</string>
+    <string name="time">Ora :\u0020\u0020</string>
     <string name="no_notes">Non ci sono note</string>
     <string name="dish_not_available">Non disponibile</string>
     <string name="price">Prezzo</string>
     <string name="dishes">piatti</string>
+    <string name="distance">DISTANZA</string>
+    <string name="score">PUNTEGGIO</string>
 </resources>

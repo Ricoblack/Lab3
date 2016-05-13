@@ -55,10 +55,18 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:padding="5dp">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
                         >
 
 
                         <TextView
+                            android:id="@+id/text_id"
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:text="@string/date"
@@ -71,21 +79,29 @@
                             android:layout_height="wrap_content"
                             android:text="@string/select"
                             android:clickable="false"
-                            android:onClick="showDatePickerDialog"
                             android:background="@color/colorAccent"
                             android:textColor="@color/white"
-                            android:layout_centerHorizontal="true"
-                            android:layout_centerVertical="true"/>
+                            android:layout_toRightOf="@id/text_id"
+                            android:layout_marginLeft="50dp"
+                            />
 
+                    </RelativeLayout>
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/activity_horizontal_margin">
+                        android:padding="5dp">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true">
 
 
                         <TextView
+                            android:id="@+id/text_id2"
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:text="@string/time"
@@ -97,13 +113,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/select"
-                            android:onClick="showTimePickerDialog"
                             android:clickable="false"
                             android:background="@color/colorAccent"
                             android:textColor="@color/white"
-                            android:layout_centerHorizontal="true"
-                            android:layout_centerVertical="true"/>
+                            android:layout_toRightOf="@id/text_id2"
+                            android:layout_marginLeft="50dp"
+                            />
 
+                    </RelativeLayout>
                     </RelativeLayout>
 
                     <TextView
