@@ -239,7 +239,7 @@ public class HomeConsumer extends AppCompatActivity {
         rV.setLayoutManager(mGridLayoutManager);
 
         // Set animation
-        RecyclerView.ItemAnimator ia = new SlideInOutLeftItemAnimator(rV);  // try animator //FIXME: doesn't work
+        RecyclerView.ItemAnimator ia = new SlideInOutLeftItemAnimator(rV);  // try animator //FIXME: doesn't work, pazienza
         rV.setItemAnimator(ia);
     }
 
