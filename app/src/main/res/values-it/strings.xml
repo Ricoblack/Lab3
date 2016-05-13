@@ -118,4 +118,5 @@
     <string name="no_notes">Non ci sono note</string>
     <string name="dish_not_available">Non disponibile</string>
     <string name="price">Prezzo</string>
+    <string name="dishes">piatti</string>
 </resources>

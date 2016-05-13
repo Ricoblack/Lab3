@@ -51,7 +51,7 @@ public class ReservationsRecyclerAdapter extends RecyclerView.Adapter<Reservatio
     @Override
     public void onBindViewHolder(BookingsViewHolder holder, int position) {
         Booking currentObj = this.mData.get(position);
-        holder.setData(currentObj, position);
+        holder.setData(currentObj, position, holder.view);
     }
 
     @Override
@@ -111,7 +111,7 @@ public class ReservationsRecyclerAdapter extends RecyclerView.Adapter<Reservatio
                 {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setTitle(context.getResources().getString(R.string.delete_reservation_alert_title))
-                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            .setPositiveButton(v.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     manager.deleteReservation(ID.getText().toString());
                                     RestaurateurJsonManager.deleteReservationByID(ReservationsRecyclerAdapter.this.mData, ID.getText().toString());
@@ -123,7 +123,7 @@ public class ReservationsRecyclerAdapter extends RecyclerView.Adapter<Reservatio
 //                                    act.finish();
                                 }
                             })
-                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(v.getResources().getString(R.string.cancel_dialog_button), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     dialog.dismiss();
                                 }
@@ -136,13 +136,13 @@ public class ReservationsRecyclerAdapter extends RecyclerView.Adapter<Reservatio
 
         }
 
-        public void setData(Booking current, int position) {
+        public void setData(Booking current, int position, View view) {
             this.position = position;
             RestaurateurJsonManager manager = RestaurateurJsonManager.getInstance(context);
             nameRist = manager.getRestaurant(current.getRestaurantID()).getProfile().getRestaurantName();
             restaurantName.setText(manager.getRestaurant(current.getRestaurantID()).getProfile().getRestaurantName());
             ID.setText(current.getID());
-            nItems.setText(MessageFormat.format("{0} dishes", current.getTotalDishesQty()));
+            nItems.setText(MessageFormat.format("{0} "+view.getResources().getString(R.string.dishes), current.getTotalDishesQty()));
             DecimalFormat df = new DecimalFormat("0.00");
             totalPrice.setText(MessageFormat.format("{0}€", String.valueOf(df.format(current.getTotalPrice()))));
             Calendar calendar = current.getDate_time();
